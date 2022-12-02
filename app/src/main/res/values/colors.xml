@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="bottom_text_selector">#2196F3</color>
+    <color name="gray_30">#303030</color>
+    <color name="grey100">#6B6B6B</color>
+    <color name="c_4b525b_100">#4b525b</color>
+    <color name="buttoncolor">#00ADAD</color>
+    <color name="cadetblue">#5F9EA0</color>
+    <color name="red">#FF0000</color><!--紅色-->
+    <color name="txtcolor">#00ADAD</color>
+    <color name="gray_20">#202020</color>
+    <color name="gray_40">#404040</color>
+    <color name="gray_50">#505050</color>
+    <color name="gray_60">#606060</color>
+    <color name="gray_80">#808080</color>
+    <color name="gray_90">#909090</color>
+    <color name="gray_a0">#a0a0a0</color>
+    <color name="gray_b0">#b0b0b0</color>
+    <color name="gray_c0">#c0c0c0</color>
+    <color name="gray_d0">#d0d0d0</color>
+    <color name="gray_e0">#e0e0e0</color>
+    <color name="gray_f0">#f0f0f0</color>
+    <color name="gray_ff">#ffffff</color>
+    <color name="alpha">#0000</color>
+
+    <color name="normal_gray">#FFDFDFDF</color>
+    <color name="normal_white">#FFFFFFFF</color>
+    <color name="normal_green">#FF62CC74</color>
+    <color name="normal_red">#FFF96650</color>
+    <color name="normal_yellow">#FFFFCC00</color>
+    <color name="circle_background">@color/normal_white</color>
+
+    <color name="circle_title">@color/normal_gray</color>
+    <color name="circle_alert">@color/normal_gray</color>
+    <color name="circle_content">@color/normal_green</color>
+    <color name="circle_unit">@color/normal_green</color>
+
+    <color name="circle_gray">@color/normal_gray</color>
+    <color name="circle_green">@color/normal_green</color>
+    <color name="circle_yellow">@color/normal_yellow</color>
+    <color name="circle_red">@color/normal_red</color>
+    <color name="circle_white">@color/normal_white</color>
+
+    <color name="indicator_center">#FFD8D5D5</color>
+    <color name="indicator_light">#FFEFEFEF</color>
+    <color name="indicator_gray">@color/normal_gray</color>
+
+    <color name="line_alert_color">@color/normal_gray</color>
+    <color name="line_progress_background">@color/normal_gray</color>
+    <color name="line_progress_color">@color/normal_green</color>
+    <color name="line_indicator_text_color">@color/normal_white</color>
+    <color name="line_indicator_background">@color/normal_green</color>
+    <color name="dataButtonColor">#BAE1E3</color>
+
+    <color name="normal_button_outline_color">#b2e6e6</color>
+    <color name="gray_mask">#80001010</color>
+    <color name="c_eeeeee_100">#eeeeee</color>
+    <color name="c_aaaaaa_100">#aaaaaa</color>
+    <color name="slategrey">#708090</color><!--灰石色-->
+    <color name="brown">#A52A2A</color><!--褐色-->
+    <color name="cornflowerblue">#6495ED</color><!--菊蘭色-->
+
+    <color name="c_b21b25_100">#b21b25</color>
+    <color name="c_faf5f5_100">#faf5f5</color>
+    <color name="c_171717_100">#171717</color>
+    <color name="c_c62933_100">#c62933</color>
+    <color name="c_21b7ff_100">#21b7ff</color>
+    <color name="c_2ac3ff_100">#2ac3ff</color>
+    <color name="c_86d238_100">#86d238</color>
+    <color name="c_96da45_100">#96da45</color>
+    <color name="c_ffb800_100">#ffb800</color>
+    <color name="c_ffffb9_100">#FFFFB9</color>
+    <color name="lightGray">#BEBEBE</color>
+    <color name="colorPrimary">#FF5100</color>
+    <color name="colorDarkToast">#000000</color>
+    <color name="colorSeparator">#DCDCDC</color>
+    <color name="background_gradient_start">#000000</color>
+    <color name="background_gradient_end">#DDDDDD</color>
+    <color name="fastlane_background">#0096a6</color>
+    <color name="search_opaque">#ffaa3f</color>
+    <color name="selected_background">#ffaa3f</color>
+    <color name="default_background">#3d3d3d</color>
+    <color name="typeRed">#E70012</color>
+    <color name="orangeButton">#D07C48</color>
+
+
+
+
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="normal_button_height">60dp</dimen>
+    <dimen name="normal_one_button_dimension_ratio">7.5</dimen>
+    <dimen name="normal_two_button_dimension_ratio">3.5</dimen>
+</resources>

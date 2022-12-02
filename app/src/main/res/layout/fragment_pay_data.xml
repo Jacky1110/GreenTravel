@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_xpos1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_ypos1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <Button
+        android:id="@+id/pdBack"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/shape_round_orange_white"
+        android:text="@string/pd_pack"
+        android:textColor="@color/normal_red"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/gl_xpos1"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/pdPay"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/shape_round_orange"
+        android:text="@string/pd_play"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/gl_xpos1" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/pa2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        android:fillViewport="true"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@id/pdBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvPay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/pa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvPay">
+
+                <TextView
+                    android:id="@+id/textView"
+                    style="@style/tvMemberList"
+                    android:text="@string/pdData"
+                    android:textAlignment="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="24dp"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textView">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/white">
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/g33"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.5" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/canUsePoint"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginTop="10dp"
+                                    android:fontFamily="sans-serif-condensed-light"
+                                    android:text="@string/can_Use_Point"
+                                    android:textSize="16dp" />
+
+                                <TextView
+                                    android:id="@+id/viewPoint"
+                                    style="@style/tvMemberList"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:fontFamily="sans-serif-condensed-light"
+                                    android:text=" 0"
+                                    android:textAlignment="textEnd"
+                                    android:textColor="@color/normal_red" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="10dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/usePoint"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:fontFamily="sans-serif-condensed-light"
+                                    android:gravity="center"
+                                    android:text="@string/use_point"
+                                    android:textSize="16dp" />
+
+                                <EditText
+                                    android:id="@+id/etPoint"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="5dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:ems="6"
+                                    android:gravity="left"
+                                    android:hint="請輸入點數"
+                                    android:imeOptions="actionDone"
+                                    android:inputType="number"
+                                    android:text=""
+                                    android:textColor="@color/normal_red" />
+
+                                <Button
+                                    android:id="@+id/btnCheck"
+                                    android:layout_width="60dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/shape_round_blue2"
+                                    android:text="確認"
+                                    android:textColor="@color/white"
+                                    android:visibility="gone" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="24dp"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cardView">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/white">
+
+                        <TextView
+                            android:id="@+id/textView101"
+                            style="@style/tvMemberList"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginTop="16dp"
+                            android:text="@string/pd_11"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Spinner
+                            android:id="@+id/editTextTextPersonName2"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginEnd="24dp"
+                            android:ems="10"
+                            android:entries="@array/pd_001"
+                            android:inputType="textPersonName"
+                            android:visibility="invisible"
+                            app:layout_constraintEnd_toEndOf="@id/textView101"
+                            app:layout_constraintStart_toStartOf="@id/textView101"
+                            app:layout_constraintTop_toBottomOf="@id/textView101" />
+
+                        <CheckBox
+                            android:id="@+id/checkBox3"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:text="@string/pd_14"
+                            app:layout_constraintEnd_toEndOf="@id/editTextTextPersonName2"
+                            app:layout_constraintStart_toStartOf="@id/editTextTextPersonName2"
+                            app:layout_constraintTop_toBottomOf="@id/editTextTextPersonName2" />
+
+                        <TextView
+                            android:id="@+id/textView103"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/pd_15"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="@id/checkBox3"
+                            app:layout_constraintStart_toStartOf="@id/textView101"
+                            app:layout_constraintTop_toBottomOf="@id/checkBox3" />
+
+                        <TextView
+                            android:id="@+id/pdBillC"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="個人電子發票"
+                            android:textColor="@color/c_21b7ff_100"
+                            android:textSize="15sp"
+                            app:layout_constraintEnd_toEndOf="@id/checkBox3"
+                            app:layout_constraintStart_toStartOf="@id/textView103"
+                            app:layout_constraintTop_toBottomOf="@id/textView103" />
+
+                        <TextView
+                            android:id="@+id/pdTittle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:text="@string/pd_21"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="@id/pdBillC"
+                            app:layout_constraintTop_toBottomOf="@id/pdBillC" />
+
+                        <TextView
+                            android:id="@+id/pdBill001"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/pd_22"
+                            app:layout_constraintEnd_toEndOf="@id/pdBillC"
+                            app:layout_constraintStart_toStartOf="@id/pdTittle"
+                            app:layout_constraintTop_toBottomOf="@id/pdTittle" />
+
+                        <EditText
+                            android:id="@+id/pdBill002"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/shape_round_gray"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:textAlignment="center"
+                            app:layout_constraintEnd_toEndOf="@id/pdBill001"
+                            app:layout_constraintStart_toStartOf="@id/pdBill001"
+                            app:layout_constraintTop_toBottomOf="@id/pdBill001" />
+
+                        <TextView
+                            android:id="@+id/pdBill00201"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/pd_24"
+                            app:layout_constraintEnd_toEndOf="@id/pdBill002"
+                            app:layout_constraintStart_toStartOf="@id/pdBill002"
+                            app:layout_constraintTop_toBottomOf="@id/pdBill002" />
+
+                        <TextView
+                            android:id="@+id/pdBill003"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="sans-serif-black"
+                            android:text="@string/pd_25"
+                            app:layout_constraintEnd_toEndOf="@id/pdBill00201"
+                            app:layout_constraintStart_toStartOf="@id/pdBill00201"
+                            app:layout_constraintTop_toBottomOf="@id/pdBill00201" />
+
+                        <EditText
+                            android:id="@+id/pdBill00301"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/shape_round_gray"
+                            android:ems="10"
+                            android:hint="@string/pd_2501"
+                            android:inputType="textPersonName"
+                            android:textAlignment="center"
+                            app:layout_constraintEnd_toEndOf="@+id/pdBill003"
+                            app:layout_constraintStart_toStartOf="@+id/pdBill003"
+                            app:layout_constraintTop_toBottomOf="@+id/pdBill003" />
+
+                        <TextView
+                            android:id="@+id/pdBill00302"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/pd_26"
+                            app:layout_constraintEnd_toEndOf="@+id/pdBill00301"
+                            app:layout_constraintStart_toStartOf="@+id/pdBill00301"
+                            app:layout_constraintTop_toBottomOf="@+id/pdBill00301" />
+
+                        <EditText
+                            android:id="@+id/pdBill00303"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/shape_round_gray"
+                            android:ems="10"
+                            android:hint="@string/pd_2601"
+                            android:inputType="textPersonName"
+                            android:textAlignment="center"
+                            app:layout_constraintEnd_toEndOf="@+id/pdBill00302"
+                            app:layout_constraintStart_toStartOf="@+id/pdBill00302"
+                            app:layout_constraintTop_toBottomOf="@+id/pdBill00302" />
+
+                        <TextView
+                            android:id="@+id/pdBill00304"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/pd_211"
+                            app:layout_constraintEnd_toEndOf="@+id/pdBill00303"
+                            app:layout_constraintStart_toStartOf="@+id/pdBill00303"
+                            app:layout_constraintTop_toBottomOf="@+id/pdBill00303" />
+
+                        <EditText
+                            android:id="@+id/pdBill00305"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/shape_round_gray"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:textAlignment="center"
+                            app:layout_constraintEnd_toEndOf="@+id/pdBill00304"
+                            app:layout_constraintStart_toStartOf="@+id/pdBill00304"
+                            app:layout_constraintTop_toBottomOf="@+id/pdBill00304" />
+
+                        <View
+                            android:id="@+id/view22"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginBottom="32dp"
+                            android:background="#000000"
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/pdBill00305" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/cdTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="100dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/pd_16"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cardView2" />
+
+
+                <TextView
+                    android:id="@+id/cdBonus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="@string/pd_19"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@+id/cdTotal"
+                    app:layout_constraintTop_toBottomOf="@+id/cdTotal" />
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#000000"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cdBonus" />
+
+                <TextView
+                    android:id="@+id/cdAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="32dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="@string/pd_20"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/cdTotal"
+                    app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+                <TextView
+                    android:id="@+id/tvOrderAmount"
+                    style="@style/tvMemberList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="24dp"
+                    android:text="@string/pd_money0"
+                    android:textColor="@color/normal_red"
+                    app:layout_constraintBottom_toBottomOf="@+id/cdTotal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/cdTotal" />
+
+                <TextView
+                    android:id="@+id/tvBounsPoint"
+                    style="@style/tvMemberList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pd_money0"
+                    android:textColor="@color/normal_red"
+                    app:layout_constraintBottom_toBottomOf="@+id/cdBonus"
+                    app:layout_constraintEnd_toEndOf="@+id/tvOrderAmount" />
+
+                <TextView
+                    android:id="@+id/pdM05"
+                    style="@style/tvMemberList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pd_money0"
+                    android:textColor="@color/normal_red"
+                    app:layout_constraintBottom_toBottomOf="@+id/cdAll"
+                    app:layout_constraintEnd_toEndOf="@+id/tvBounsPoint"
+                    app:layout_constraintTop_toTopOf="@+id/cdAll" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <ImageView
+        android:id="@+id/pdNodata"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/icon_nodata" />
+
+    <TextView
+        android:id="@+id/pdNd0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:fontFamily="sans-serif-condensed-light"
+        android:text="尚未加入購物車"
+        android:textColor="@color/buttoncolor"
+        android:textSize="20sp"
+
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

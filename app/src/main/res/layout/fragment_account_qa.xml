@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.account.AccountRuleFragment">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView40"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:text="一.退貨款事宜"
+                android:textColor="@color/gray_60"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView41"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="1.如購買的商品為套票，不接受單退款套票中的某樣商品。\n2.如欲辦理退款，請提供以下資料給客服人員：會員手機號碼/姓名/在'我的票券'中，欲辦理退款的'商品名稱'與'訂單編號'。\n3.辦理退款的前提為，商品QR尚未被核銷，仍留存在票券的'可使用,處。\n4.購買商品時，若有使用點數折抵，辦理退款後，恕無法同步退還點數給您。\n5.可接受辦理退款的日期為'購買日期'後的7天內提出(不含假日)。"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView40" />
+
+            <TextView
+                android:id="@+id/textView42"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:text="二.誤將QR核銷掉"
+                android:textColor="@color/gray_60"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView41" />
+
+            <TextView
+                android:id="@+id/textView43"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:text="1.請描述原因與提供以下資料給客服人員查詢(會員電話與'我的訂單'中的'訂單編號/日期/金額')，使人員重新派發商品給您。"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textView42" />
+
+            <TextView
+                android:id="@+id/textView44"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/gray_60"
+                android:textSize="20sp"
+                android:text="三.使用Rilink商城APP的注意事項"
+                app:layout_constraintTop_toBottomOf="@id/textView43"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/textView45"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1.於該平台購買的商品，不會寄出商品給顧客，須請您至該商品對應之門市核銷QR後，才能獲得此商品。\n2.Rilink i機車總共有兩種APP，分別為Rilink(機車租賃平台)與Rilink Shop(商城、預約維修平台..)，兩款APP的會員資料是相通的，點數也可以同步於兩平台中折抵使用。"
+                android:padding="5dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textView44" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

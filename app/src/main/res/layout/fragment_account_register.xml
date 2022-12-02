@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/Fragment_Account"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.account.AccountRegisterFragment">
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/Fragment_Title_TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/welcome_register"
+        />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <!-- 輸入姓名 -->
+            <TextView
+                android:id="@+id/tv_name_label"
+                style="@style/EditWithLabelView_Label"
+                android:text="@string/name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_input_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_name_label">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_name"
+                    style="@style/EditWithLabelView_Data"
+                    android:hint="@string/name_hint"
+                    android:inputType="text"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- 輸入Email -->
+            <TextView
+                android:id="@+id/tv_birthdaty_label"
+                style="@style/EditWithLabelView_Label"
+                android:text="@string/email"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_input_name" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_input_birthday"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_birthdaty_label">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_birthday"
+                    style="@style/EditWithLabelView_Data"
+                    android:hint="@string/email_hint"
+                    android:inputType="textEmailAddress"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- 輸入手機號碼 -->
+            <TextView
+                android:id="@+id/tv_phone"
+                style="@style/EditWithLabelView_Label"
+                android:text="@string/mobile_number"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_input_birthday" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_input_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_phone">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_phone"
+                    style="@style/EditWithLabelView_Data"
+                    android:hint="@string/mobile_number_hint_for_register"
+                    android:inputType="phone"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- 輸入密碼-->
+            <TextView
+                android:id="@+id/tv_home_number_label"
+                style="@style/EditWithLabelView_Label"
+                android:text="@string/password"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_input_phone" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_input_home_number"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/txtcolor"
+                app:layout_constraintTop_toBottomOf="@+id/tv_home_number_label">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_home_number"
+                    style="@style/EditWithLabelView_Data"
+                    android:maxLength="12"
+                    android:hint="@string/password_hint_for_register"
+                    android:inputType="textPassword"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- 輸入邀請碼 -->
+            <TextView
+                android:id="@+id/tv_email_label"
+                style="@style/EditWithLabelView_Label"
+                android:text="@string/invite_code"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_input_home_number" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_input_email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_email_label">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_email"
+                    style="@style/EditWithLabelView_Data"
+                    android:hint="@string/invite_code_hint"
+                    android:inputType="phone"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- 同意使用條款 -->
+            <CheckBox
+                android:id="@+id/check_agree_rule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:textSize="14sp"
+                android:textColor="@color/gray_20"
+                android:text=""
+                style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+                app:layout_constraintTop_toBottomOf="@+id/layout_input_email"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <!-- 註冊會員按鈕 -->
+            <TextView
+                android:id="@+id/tv_account_rule"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:scrollHorizontally="false"
+                android:text="@string/button_account_rule"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/check_agree_rule"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@id/check_agree_rule"
+                app:layout_constraintTop_toTopOf="@+id/check_agree_rule" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btn_register"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_background_gradient"
+                app:layout_constraintDimensionRatio="@dimen/normal_one_button_dimension_ratio"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/check_agree_rule">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="9dp"
+                    android:layout_marginBottom="9dp"
+                    android:background="@null"
+                    android:drawablePadding="10dp"
+                    android:text="@string/button_register"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

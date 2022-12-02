@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/gray_f0"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.store.HotelIntroduceFragment">
+
+    <ImageView
+        android:id="@+id/hotelPicture"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="@id/guideline5"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <TextView
+        android:id="@+id/hotel_info_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text=""
+        android:textSize="20sp"
+        android:paddingStart="10dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:background="@drawable/shape_round_white"
+        app:layout_constraintStart_toStartOf="@id/hotelPicture"
+        app:layout_constraintEnd_toEndOf="@+id/hotelPicture"
+        app:layout_constraintTop_toBottomOf="@id/hotelPicture" />
+
+    <TextView
+        android:id="@+id/open_time_title_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_round_gray1_title"
+        android:paddingStart="10dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:text="營業時間:"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/hotelPicture"
+        app:layout_constraintStart_toStartOf="@+id/hotelPicture"
+        app:layout_constraintTop_toBottomOf="@+id/hotel_info_textView" />
+
+    <TextView
+        android:id="@+id/openTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="營業時間:DD"
+        android:textSize="20sp"
+        android:elevation="100dp"
+        android:paddingStart="10dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:background="@drawable/shape_round_white_content"
+        app:layout_constraintEnd_toEndOf="@+id/open_time_title_textView"
+        app:layout_constraintStart_toStartOf="@id/open_time_title_textView"
+        app:layout_constraintTop_toBottomOf="@id/open_time_title_textView" />
+
+    <TextView
+        android:id="@+id/hotel_intro_title_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_round_gray1_title"
+        android:paddingStart="10dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:text="店家介紹:"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/openTime"
+        app:layout_constraintStart_toStartOf="@+id/openTime"
+        app:layout_constraintTop_toBottomOf="@+id/openTime" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnReserve"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/hotel_intro_title_textView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/hotelIntroduction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_round_white_content"
+                android:paddingStart="10dp"
+                android:text="旅館簡介"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnReserve"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/shape_round_orange"
+        android:text="預約維修"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

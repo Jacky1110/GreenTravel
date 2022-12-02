@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="bottombar_height">80dp</dimen>
+    <dimen name="bottombar_textsize">12sp</dimen>
+
+    <dimen name="account_main_user_photo_width">100dp</dimen>
+    <dimen name="account_main_user_photo_height">100dp</dimen>
+    <dimen name="account_main_user_photo_corner_radius">50dp</dimen>
+    <dimen name="account_main_username_top_margin">16dp</dimen>
+    <dimen name="account_main_logout_top_margin">20dp</dimen>
+    <dimen name="account_main_username_textsize">18sp</dimen>
+    <dimen name="account_main_point_info_textsize">20sp</dimen>
+    <dimen name="account_listitem_textsize">16sp</dimen>
+    <dimen name="account_listitem_vertical_margin">10dp</dimen>
+    <dimen name="account_listitem_start_margin">16dp</dimen>
+    <dimen name="account_listitem_end_margin">0dp</dimen>
+
+    <dimen name="activity_horizontal_margin">0dp</dimen>
+    <dimen name="activity_vertical_margin">0dp</dimen>
+    <dimen name="fragment_horizontal_margin">16dp</dimen>
+    <dimen name="fragment_vertical_margin">16dp</dimen>
+    <dimen name="fragment_horizontal_padding">16dp</dimen>
+    <dimen name="fragment_vertical_padding">16dp</dimen>
+
+    <dimen name="fragment_account_title_textsize">20sp</dimen>
+    <dimen name="fragment_account_title_top_margin">4dp</dimen>
+    <dimen name="editwithlabel_top_margin">20dp</dimen>
+    <dimen name="editwithlabel_internal_offset_vertical">2dp</dimen>
+    <dimen name="editwithlabel_label_textsize">14sp</dimen>
+    <dimen name="editwithlabel_data_textsize">13sp</dimen>
+    <dimen name="editwithlabel_data_padding_vertical">10dp</dimen>
+    <dimen name="editwithlabel_data_margin_start">0dp</dimen>
+
+    <dimen name="normal_button_height">60dp</dimen>
+    <dimen name="normal_one_button_dimension_ratio">7.5</dimen>
+    <dimen name="normal_two_button_dimension_ratio">3.5</dimen>
+    <dimen name="normal_button_dimension_ratio_2_1">2</dimen>
+    <dimen name="normal_button_horizontal_margin">10dp</dimen>
+    <dimen name="normal_oval_button_radius">30dp</dimen>
+
+
+    <dimen name="bottombar_icon_widht">32dp</dimen>
+    <dimen name="bottombar_icon_height">32dp</dimen>
+
+
+    <dimen name="account_point_internal_vertical_space">20dp</dimen>
+    <dimen name="account_point_icon_width">60dp</dimen>
+    <dimen name="account_point_icon_height">60dp</dimen>
+    <dimen name="account_point_remain_textsize">40sp</dimen>
+    <dimen name="account_point_remain_start_margin">20dp</dimen>
+    <dimen name="account_point_exptime_textsize">16sp</dimen>
+    <dimen name="account_point_exptime_top_margin">20dp</dimen>
+    <dimen name="account_point_record_textsize">20sp</dimen>
+    <dimen name="account_point_note_textsize">12sp</dimen>
+
+    <dimen name="list_nodata_text_top_margin">40dp</dimen>
+
+    <dimen name="itemview_point_type_textsize">16sp</dimen>
+    <dimen name="itemview_point_date_textsize">12sp</dimen>
+    <dimen name="itemview_point_count_textsize">16sp</dimen>
+
+    <dimen name="itemview_trade_record_horizontal_margin">0dp</dimen>
+    <dimen name="itemview_trade_record_vertical_margin">10dp</dimen>
+    <dimen name="itemview_trade_record_horizontal_padding">12dp</dimen>
+    <dimen name="itemview_trade_record_vertical_padding">12dp</dimen>
+
+    <dimen name="home_news_horizontal_margin">16dp</dimen>
+    <dimen name="home_news_vertical_margin">16dp</dimen>
+    <dimen name="home_points_textsize">24sp</dimen>
+
+    <dimen name="scan_barcode_note_vertical_margin">16dp</dimen>
+    <dimen name="scan_barcode_pay_textsize">20sp</dimen>
+    <dimen name="scan_barcode_note_textsize">20sp</dimen>
+
+    <dimen name="recommend_info1_textsize">16sp</dimen>
+    <dimen name="recommend_info2_textsize">18sp</dimen>
+    <dimen name="recommend_info_internal_offset">12dp</dimen>
+    <dimen name="recommend_rule_textsize">14sp</dimen>
+    <dimen name="recommend_rule_top_margin">32dp</dimen>
+    <dimen name="recommend_your_code_textsize">20sp</dimen>
+    <dimen name="recommend_your_code_top_margin">16dp</dimen>
+    <dimen name="recommend_code_top_margin">8dp</dimen>
+    <dimen name="recommend_code_height">48dp</dimen>
+    <dimen name="recommend_code_textsize">20sp</dimen>
+    <dimen name="recommend_code_copy_textsize">16sp</dimen>
+    <dimen name="recommend_code_copy_end_margin">16dp</dimen>
+    <dimen name="recommend_invite_height">48dp</dimen>
+    <dimen name="recommend_invite_corner_radius">24dp</dimen>
+    <dimen name="recommend_invite_textsize">20sp</dimen>
+    <dimen name="recommend_invite_top_margin">20dp</dimen>
+    <dimen name="recommend_invite_list_top_margin">40dp</dimen>
+    <dimen name="recommend_none_message_textsize">20sp</dimen>
+
+    <dimen name="itemview_friend_phone_textsize">14sp</dimen>
+    <dimen name="itemview_friend_date_textsize">12sp</dimen>
+    <dimen name="itemview_friend_award_textsize">14sp</dimen>
+    <dimen name="itemview_friend_data_start_margin">10dp</dimen>
+    <dimen name="itemview_friend_internal_offset">10dp</dimen>
+
+    <dimen name="trade_main_item_height">120dp</dimen>
+    <dimen name="trade_main_item_textsize">20sp</dimen>
+    <dimen name="trade_main_item_top_margin">20dp</dimen>
+    <dimen name="toolbar_height">48dp</dimen>
+    <dimen name="border_line">1dp</dimen>
+
+
+</resources>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:fontFamily="sans-serif-condensed-light"
+                android:text="@string/mo_id"
+                android:textColor="@color/c_4b525b_100"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/moId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:fontFamily="sans-serif-condensed-light"
+                android:text="202105260099"
+                android:textColor="@color/c_4b525b_100"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView15"
+                app:layout_constraintStart_toEndOf="@+id/textView15"
+                app:layout_constraintTop_toTopOf="@+id/textView15" />
+
+            <TextView
+                android:id="@+id/textView151"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:fontFamily="sans-serif-condensed-light"
+                android:text="@string/mo_date"
+                android:textColor="@color/c_4b525b_100"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/textView15"
+                app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+            <TextView
+                android:id="@+id/moDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:fontFamily="sans-serif-condensed-light"
+                android:text="2021-05-26 10:10"
+                android:textColor="@color/c_4b525b_100"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView151"
+                app:layout_constraintStart_toEndOf="@+id/textView151"
+                app:layout_constraintTop_toTopOf="@+id/textView151" />
+
+            <TextView
+                android:id="@+id/textView152"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:fontFamily="sans-serif-condensed-light"
+                android:text="@string/mo_dollar"
+                android:textColor="@color/c_4b525b_100"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/textView151"
+                app:layout_constraintTop_toBottomOf="@+id/textView151" />
+
+            <TextView
+                android:id="@+id/moDollar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:fontFamily="sans-serif-condensed-light"
+                android:text="1000"
+                android:textColor="@color/c_4b525b_100"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView152"
+                app:layout_constraintStart_toEndOf="@+id/textView152"
+                app:layout_constraintTop_toTopOf="@+id/textView152" />
+
+
+            <TextView
+                android:id="@+id/textView154"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:fontFamily="sans-serif-condensed-light"
+                android:text="@string/pay_status"
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/c_4b525b_100"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/textView152"
+                app:layout_constraintTop_toBottomOf="@+id/textView152"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+            <TextView
+                android:id="@+id/moPaySt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:fontFamily="sans-serif-condensed-light"
+                android:text="1"
+                android:textColor="@color/c_4b525b_100"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView154"
+                app:layout_constraintStart_toEndOf="@+id/textView154"
+                app:layout_constraintTop_toTopOf="@+id/textView154" />
+
+            <Button
+                android:id="@+id/moPay"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/shape_round_orange_white"
+                android:text="@string/mo_pay"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/moView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/moView"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/shape_round_orange_white"
+                android:text="@string/mo_view"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/moPay"
+                app:layout_constraintTop_toBottomOf="@+id/moPay" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

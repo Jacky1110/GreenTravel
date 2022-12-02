@@ -1,0 +1,672 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.login.SignupActivity3">
+
+    <ImageView
+        android:id="@+id/ivLogo2"
+        android:layout_width="60dp"
+        android:layout_height="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/big_logo" />
+
+
+    <ImageButton
+        android:id="@+id/btn_go_back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="8dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_clear_black_30dp" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivLogo2"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="32dp">
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="會員資料編輯"
+                android:textSize="21sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/iv_User_Photo"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:elevation="5dp"
+                app:cardCornerRadius="60dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/textView1">
+
+                <ImageView
+                    android:id="@+id/userIV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_nft" />
+
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:text="姓名"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_User_Photo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:text="*"
+                android:textColor="#FF0000"
+                app:layout_constraintStart_toEndOf="@+id/textView2"
+                app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="48dp"
+                android:background="@drawable/shape_capsule_fine"
+                android:ems="10"
+                android:hint="請務必填寫本名"
+                android:inputType="textPersonName"
+                android:paddingStart="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="16dp"
+                android:text="電子郵件"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etName" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:text="*"
+                android:textColor="#FF0000"
+                app:layout_constraintStart_toEndOf="@id/textView3"
+                app:layout_constraintTop_toTopOf="@+id/textView3" />
+
+            <EditText
+                android:id="@+id/etMail"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="48dp"
+                android:background="@drawable/shape_capsule_fine"
+                android:ems="10"
+                android:hint="請填寫您的email"
+                android:inputType="textEmailAddress"
+                android:paddingStart="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="16dp"
+                android:text="手機號碼"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etMail" />
+
+            <TextView
+                android:id="@+id/tvPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="8dp"
+                android:text=""
+                android:textColor="@color/colorPrimary"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="16dp"
+                android:text="密碼"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvPhone" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:text="*"
+                android:textColor="#FF0000"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@id/textView5"
+                app:layout_constraintTop_toTopOf="@+id/textView5" />
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="48dp"
+                android:background="@drawable/shape_capsule_fine"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingStart="16dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="16dp"
+                android:text="請再次輸入密碼"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:text="*"
+                android:textColor="#FF0000"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@id/textView6"
+                app:layout_constraintTop_toTopOf="@+id/textView6" />
+
+            <EditText
+                android:id="@+id/etPassword2"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="48dp"
+                android:background="@drawable/shape_capsule_fine"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingStart="16dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="16dp"
+                android:text="地址"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etPassword2" />
+
+            <LinearLayout
+                android:id="@+id/LyAdd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="48dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView7">
+
+<!--                <EditText-->
+<!--                    android:id="@+id/etAddCity"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="48dp"-->
+<!--                    android:layout_marginEnd="8dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/shape_capsule_fine"-->
+<!--                    android:drawableEnd="@drawable/ic_arrow_drop_down_black_24dp"-->
+<!--                    android:ems="10"-->
+<!--                    android:hint="縣市"-->
+<!--                    android:inputType="text"-->
+<!--                    android:singleLine="true"-->
+<!--                    android:textAlignment="center" />-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_capsule_fine"
+                    >
+                    <Spinner
+                        android:id="@+id/countySpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:textAlignment="center"
+                        android:drawableEnd="@drawable/ic_arrow_drop_down_black_24dp"
+                        android:tooltipText="縣市" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_capsule_fine"
+                    >
+                    <Spinner
+                        android:id="@+id/regionSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:textAlignment="center"
+                        android:tooltipText="鄉鎮市區" />
+                </LinearLayout>
+
+
+
+
+
+
+
+<!--                <EditText-->
+<!--                    android:id="@+id/etAddArea"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="48dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/shape_capsule_fine"-->
+<!--                    android:drawableEnd="@drawable/ic_arrow_drop_down_black_24dp"-->
+<!--                    android:ems="10"-->
+<!--                    android:hint="鄉鎮市區"-->
+<!--                    android:inputType="text"-->
+<!--                    android:singleLine="true"-->
+<!--                    android:textAlignment="center" />-->
+
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/etAdd"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="48dp"
+                android:background="@drawable/shape_capsule_fine"
+                android:ems="10"
+                android:hint="地址"
+                android:inputType="textPersonName"
+                android:paddingStart="16dp"
+                android:singleLine="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.485"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/LyAdd" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="16dp"
+                android:text="生日"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etAdd" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:text="*"
+                android:textColor="#FF0000"
+                app:layout_constraintStart_toEndOf="@id/textView8"
+                app:layout_constraintTop_toTopOf="@+id/textView8" />
+
+            <Button
+                android:id="@+id/etBirthday"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="48dp"
+                android:background="@drawable/shape_capsule_fine"
+                android:hint="選擇"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView8"
+                />
+
+            <!--            <EditText-->
+            <!--                android:id="@+id/etBirthday"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="48dp"-->
+            <!--                android:layout_marginStart="48dp"-->
+            <!--                android:layout_marginTop="8dp"-->
+            <!--                android:layout_marginEnd="48dp"-->
+            <!--                android:background="@drawable/shape_capsule_fine"-->
+            <!--                android:ems="10"-->
+            <!--                android:inputType="date"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toBottomOf="@+id/textView8" />-->
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="16dp"
+                android:text="性別"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etBirthday" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:text="*"
+                android:textColor="#FF0000"
+                app:layout_constraintStart_toEndOf="@id/textView9"
+                app:layout_constraintTop_toTopOf="@+id/textView9" />
+
+            <RadioGroup
+                android:id="@+id/radioGroup2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="48dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView9">
+
+                <RadioButton
+                    android:id="@+id/rBtn_Male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="男"
+                    android:textSize="16dp" />
+
+                <RadioButton
+                    android:id="@+id/rBtn_Female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="女"
+                    android:textSize="16dp" />
+
+            </RadioGroup>
+
+            <CheckBox
+                android:visibility="gone"
+                android:id="@+id/checkBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="24dp"
+                android:text="已閱讀會員條款"
+                android:textSize="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
+
+<!--            <Button-->
+<!--                android:visibility="gone"-->
+<!--                android:id="@+id/link_ReadTerms"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="32dp"-->
+<!--                android:layout_marginStart="8dp"-->
+<!--                android:background="@android:color/transparent"-->
+<!--                android:padding="0dp"-->
+<!--                android:text="會員條款及隱私政策"-->
+<!--                android:textColor="@color/colorPrimary"-->
+<!--                android:textSize="16dp"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/checkBox"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/checkBox" />-->
+
+            <Button
+                android:id="@+id/submitBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="48dp"
+                android:background="@drawable/shape_capsule_line_m_color"
+                android:text="確定"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@style/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    tools:context=".UserInfoActivity">-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/title"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:text="會員資料"-->
+<!--        android:textAlignment="center"-->
+<!--        android:textSize="18sp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    <ImageButton-->
+<!--        android:id="@+id/btnGoBack"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/title"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/title"-->
+<!--        app:srcCompat="@drawable/ic_arrow_back_24dp" />-->
+
+<!--&lt;!&ndash;    <de.hdodenhof.circleimageview.CircleImageView&ndash;&gt;-->
+<!--&lt;!&ndash;        android:id="@+id/iv_User_Photo"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_width="150dp"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_height="150dp"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_marginTop="72dp"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:elevation="5dp"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:scaleType="centerCrop"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:src="@drawable/user_avatarxxhdpi"&ndash;&gt;-->
+<!--&lt;!&ndash;        app:civ_border_color="@android:color/white"&ndash;&gt;-->
+<!--&lt;!&ndash;        app:civ_border_width="2dp"&ndash;&gt;-->
+<!--&lt;!&ndash;        app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
+<!--&lt;!&ndash;        app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+<!--&lt;!&ndash;        app:layout_constraintTop_toTopOf="parent" />&ndash;&gt;-->
+
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:id="@+id/iv_User_Photo"-->
+<!--        android:layout_width="150dp"-->
+<!--        android:layout_height="150dp"-->
+<!--        android:layout_marginTop="72dp"-->
+<!--        android:elevation="5dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:cardCornerRadius="75dp"-->
+<!--        >-->
+<!--        <ImageView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:src="@drawable/user_avatarxxhdpi"-->
+<!--            android:scaleType="centerCrop"-->
+<!--            />-->
+
+
+<!--    </androidx.cardview.widget.CardView>-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/et_userName"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="32dp"-->
+<!--        android:layout_marginTop="32dp"-->
+<!--        android:layout_marginEnd="32dp"-->
+<!--        android:ems="10"-->
+<!--        android:hint="姓名"-->
+<!--        android:inputType="textPersonName"-->
+<!--        android:singleLine="true"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/iv_User_Photo" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/et_userBirthday"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="32dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:layout_marginEnd="32dp"-->
+<!--        android:ems="10"-->
+<!--        android:hint="生日"-->
+<!--        android:inputType="date"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/et_userName" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/et_userPhone"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="32dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:layout_marginEnd="32dp"-->
+<!--        android:ems="10"-->
+<!--        android:hint="電話"-->
+<!--        android:inputType="phone"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/et_userBirthday" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/et_userEmail"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="32dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:layout_marginEnd="32dp"-->
+<!--        android:ems="10"-->
+<!--        android:hint="Email"-->
+<!--        android:inputType="textEmailAddress"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/et_userPhone" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btn_Done"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="32dp"-->
+<!--        android:background="@drawable/shape_capsule_line_m_color"-->
+<!--        android:paddingStart="60dp"-->
+<!--        android:paddingEnd="60dp"-->
+<!--        android:text="確定"-->
+<!--        android:textSize="18sp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/et_userEmail" />-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="70dp"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent">-->
+
+<!--        <Button-->
+<!--            android:id="@+id/btn_ChangePassword"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            android:text="變更密碼"-->
+<!--            android:textColor="@color/colorPrimary" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/btn_Signout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            android:text="登出" />-->
+
+<!--    </LinearLayout>-->
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->

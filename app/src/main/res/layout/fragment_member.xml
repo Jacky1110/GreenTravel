@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.account.MemberFragment">
+    <!--    style="@style/Fragment_Account"-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_avator"
+        android:layout_width="0dp"
+        android:layout_height="350dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="fitStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/background_color" />
+
+        <ImageView
+            android:id="@+id/imgTopShape"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/top_shape" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_user"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="@dimen/account_main_user_photo_corner_radius"
+            app:layout_constraintBottom_toTopOf="@+id/imgTopShape"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:id="@+id/iv_head"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/user_avatarxxhdpi" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:cardCornerRadius="@dimen/account_main_user_photo_corner_radius"
+            app:layout_constraintBottom_toBottomOf="@id/cv_user"
+            app:layout_constraintEnd_toEndOf="@id/cv_user">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="#FF5722"
+                android:src="@drawable/ic_baseline_photo_camera" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tv_User_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:text="Hi~ 歡迎回來"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/cv_user"
+            app:layout_constraintTop_toTopOf="@+id/cv_user" />
+
+        <Button
+            android:id="@+id/btnEditUser"
+            android:layout_width="66dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/shape_capsule_line"
+            android:text="登入"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            app:layout_constraintStart_toStartOf="@+id/tv_User_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_User_name" />
+
+        <!--        item_account-->
+        <!--            android:id="@+id/edZitBtn"-->
+        <Button
+            android:id="@+id/item_account"
+            android:layout_width="66dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/shape_capsule_line"
+            android:text="編輯"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            app:layout_constraintStart_toEndOf="@+id/btnEditUser"
+            app:layout_constraintTop_toBottomOf="@+id/tv_User_name" />
+
+        <ImageButton
+            android:id="@+id/qrCodeBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginBottom="18dp"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/cv_user"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/cv_user"
+            app:srcCompat="@drawable/btn_qrcode" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="0dp"
+            android:layout_height="88dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/R_Point"
+            app:layout_constraintEnd_toStartOf="@+id/R_Point"
+            app:layout_constraintStart_toStartOf="@+id/imgTopShape"
+            app:layout_constraintTop_toTopOf="@+id/R_Point">
+
+            <!--            item_packer-->
+            <!--                android:id="@+id/btnCoupon"-->
+            <LinearLayout
+                android:id="@+id/item_packer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_ticket" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="我的票券"
+                    android:textAlignment="center"
+                    android:textColor="@color/gray_20"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <!--            item_point-->
+            <!--                android:id="@+id/btnCouponGet"-->
+            <LinearLayout
+                android:id="@+id/item_point"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_point_logo" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="點數記錄"
+                    android:textAlignment="center"
+                    android:textColor="@color/gray_20"
+                    android:textSize="15sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/item_fix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="110dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_fix" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="預約維修紀錄"
+                    android:textAlignment="center"
+                    android:textColor="@color/gray_20"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/R_Point"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imgTopShape"
+            app:srcCompat="@drawable/r_point" />
+
+        <TextView
+            android:id="@+id/tv_R_Point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="@android:color/white"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/R_Point"
+            app:layout_constraintEnd_toEndOf="@+id/R_Point"
+            app:layout_constraintStart_toStartOf="@+id/R_Point"
+            app:layout_constraintTop_toTopOf="@+id/R_Point"
+            app:layout_constraintVertical_bias="0.4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="R-Point"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_R_Point"
+            app:layout_constraintStart_toStartOf="@id/tv_R_Point"
+            app:layout_constraintTop_toBottomOf="@+id/tv_R_Point" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_avator">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="60dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_list1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:alpha="0.8"
+                android:background="@color/white">
+
+
+                <RelativeLayout
+                    android:id="@+id/item_record"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintBottom_toTopOf="@+id/item_rule"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/myOrder"
+                        style="@style/AccountMainListItemTextView"
+                        android:text="@string/account_listitem_record" />
+
+                    <ImageView
+                        style="@style/AccountMainListItemImageView"
+                        app:srcCompat="@mipmap/icon_next" />
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="@color/gray_a0"
+                    app:layout_constraintEnd_toEndOf="@+id/item_record"
+                    app:layout_constraintStart_toStartOf="@+id/item_record"
+                    app:layout_constraintTop_toBottomOf="@+id/item_record" />
+
+                <RelativeLayout
+                    android:id="@+id/item_qa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintBottom_toTopOf="@id/item_cs"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/item_record">
+
+                    <TextView
+                        style="@style/AccountMainListItemTextView"
+                        android:text="@string/account_listitem_qa" />
+
+                    <ImageView
+                        style="@style/AccountMainListItemImageView"
+                        android:src="@mipmap/icon_next" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/white" />
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/view4"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="@color/gray_a0"
+                    app:layout_constraintEnd_toEndOf="@+id/item_qa"
+                    app:layout_constraintStart_toStartOf="@+id/item_qa"
+                    app:layout_constraintTop_toBottomOf="@+id/item_qa" />
+
+                <RelativeLayout
+                    android:id="@+id/item_cs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintBottom_toTopOf="@id/item_rule"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/item_qa">
+
+                    <TextView
+                        style="@style/AccountMainListItemTextView"
+                        android:text="@string/account_listitem_cs" />
+
+                    <ImageView
+                        style="@style/AccountMainListItemImageView"
+                        android:src="@mipmap/icon_next" />
+
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/view5"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="@color/gray_a0"
+                    app:layout_constraintEnd_toEndOf="@+id/item_cs"
+                    app:layout_constraintStart_toStartOf="@+id/item_cs"
+                    app:layout_constraintTop_toBottomOf="@+id/item_cs" />
+                <!--                <RelativeLayout-->
+                <!--                    android:id="@+id/item_account"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    app:layout_constraintBottom_toTopOf="@id/item_packer"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@+id/item_record">-->
+
+                <!--                    <TextView-->
+                <!--                        style="@style/AccountMainListItemTextView"-->
+                <!--                        android:text="@string/account_listitem_data" />-->
+
+                <!--                    <ImageView-->
+                <!--                        style="@style/AccountMainListItemImageView"-->
+                <!--                        app:srcCompat="@mipmap/icon_next" />-->
+
+                <!--                    <View-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="2dp"-->
+                <!--                        android:background="@color/white" />-->
+
+                <!--                </RelativeLayout>-->
+
+                <!--                <RelativeLayout-->
+                <!--                    android:id="@+id/item_packer"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="match_parent"-->
+                <!--                    app:layout_constraintBottom_toTopOf="@id/item_point"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@id/item_account">-->
+
+                <!--                    <TextView-->
+                <!--                        style="@style/AccountMainListItemTextView"-->
+                <!--                        android:text="@string/account_listitem_packer" />-->
+
+                <!--                    <ImageView-->
+                <!--                        style="@style/AccountMainListItemImageView"-->
+                <!--                        android:src="@mipmap/icon_next" />-->
+
+                <!--                    <View-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="2dp"-->
+                <!--                        android:layout_alignParentBottom="true"-->
+                <!--                        android:background="@color/white" />-->
+                <!--                </RelativeLayout>-->
+
+                <!--                <RelativeLayout-->
+                <!--                    android:id="@+id/item_point"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    app:layout_constraintBottom_toTopOf="@id/item_rule"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@id/item_point">-->
+
+                <!--                    <TextView-->
+                <!--                        style="@style/AccountMainListItemTextView"-->
+                <!--                        android:text="@string/account_listitem_point" />-->
+
+                <!--                    <ImageView-->
+                <!--                        style="@style/AccountMainListItemImageView"-->
+                <!--                        android:src="@mipmap/icon_next" />-->
+
+                <!--                    <View-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="2dp"-->
+                <!--                        android:layout_alignParentBottom="true"-->
+                <!--                        android:background="@color/white" />-->
+                <!--                </RelativeLayout>-->
+
+                <RelativeLayout
+                    android:id="@+id/item_rule"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/item_cs">
+
+                    <TextView
+                        style="@style/AccountMainListItemTextView"
+                        android:text="@string/account_listitem_rule" />
+
+                    <ImageView
+                        style="@style/AccountMainListItemImageView"
+                        android:src="@mipmap/icon_next" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/white" />
+                </RelativeLayout>
+
+
+                <!--                <RelativeLayout-->
+                <!--                    android:id="@+id/bn_logout"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@id/item_qa">-->
+
+                <!--                    <TextView-->
+                <!--                        style="@style/AccountMainListItemTextView"-->
+                <!--                        android:text="@string/logout"-->
+                <!--                        android:textColor="#ED3434" />-->
+
+                <!--                    <ImageView-->
+                <!--                        style="@style/AccountMainListItemImageView"-->
+                <!--                        android:src="@mipmap/icon_next" />-->
+                <!--                </RelativeLayout>-->
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

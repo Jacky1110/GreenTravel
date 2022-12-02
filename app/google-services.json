@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "76530488734",
+    "project_id": "greentravelapp-eec40",
+    "storage_bucket": "greentravelapp-eec40.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:76530488734:android:7b9b8d9915339b42fb328f",
+        "android_client_info": {
+          "package_name": "com.jotangi.greentravel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "76530488734-sg5o84eag8h9b5fll1u45u7pmu6kqoj8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDe8IYIjTe_1X3W5QQionDOCiMhYE2ufls"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "76530488734-sg5o84eag8h9b5fll1u45u7pmu6kqoj8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

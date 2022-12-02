@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navgation"
+    app:startDestination="@id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.jotangi.greentravel.ui.main.HomeMainFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/navigation_pointStore"
+        android:name="com.jotangi.greentravel.ui.store.StoreTabFragment"
+        android:label="@string/main_point_start"
+        tools:layout="@layout/fragment_account_register" />
+    <fragment
+        android:id="@+id/navigation_member"
+        android:name="com.jotangi.greentravel.ui.account.AccountLoginFragment"
+        android:label="@string/main_member"
+        tools:layout="@layout/fragment_account_login" />
+</navigation>

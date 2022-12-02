@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Fragment_Account"
+    tools:context=".ui.account.AccountRuleFragment"
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_point"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/button_backgroung_normal"
+        app:layout_constraintDimensionRatio="16:9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_v1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5"/>
+
+        <ImageView
+            android:id="@+id/iv_point"
+            android:layout_width="@dimen/account_point_icon_width"
+            android:layout_height="@dimen/account_point_icon_height"
+            android:src="@drawable/ic_point"
+            app:layout_constraintEnd_toStartOf="@+id/gl_v1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.4"
+            />
+        <TextView
+            android:id="@+id/tv_remain_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/account_point_remain_start_margin"
+            android:textSize="@dimen/account_point_remain_textsize"
+            android:textColor="@color/black"
+            android:text="200"
+            app:layout_constraintStart_toEndOf="@+id/gl_v1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.4"/>
+
+        <TextView
+            android:id="@+id/tv_point_exp_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/account_point_exptime_top_margin"
+            android:text="2021-08-18即將到期0點"
+            android:textColor="@color/black"
+            android:textSize="@dimen/account_point_exptime_textsize"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_point" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/account_point_internal_vertical_space"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_point"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <TextView
+            android:id="@+id/tv_rv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/account_point_exptime_top_margin"
+            android:textColor="@color/black"
+            android:textSize="@dimen/account_point_record_textsize"
+            android:text="@string/point_record"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_data"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/account_point_internal_vertical_space"
+            android:layout_marginBottom="@dimen/account_point_internal_vertical_space"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_rv_title"
+            app:layout_constraintBottom_toTopOf="@+id/tv_note"/>
+        <TextView
+            android:id="@+id/tv_no_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/account_point_internal_vertical_space"
+            android:visibility="invisible"
+            android:textColor="@color/gray_80"
+            android:textSize="@dimen/recommend_none_message_textsize"
+            android:text="@string/point_record_not_found"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_rv_title"/>
+        <TextView
+            android:id="@+id/tv_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/account_point_note_textsize"
+            android:text="@string/point_note"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
