@@ -33,9 +33,9 @@ public class ProjBaseFragment extends MyBaseFragment {
     public final static int FUNC_ACCOUNT_MAIN_TO_LOGIN = 328;
     public final static int FUNC_ACCOUNT_MAIN_TO_COUPON_INDEX = 329;
     public final static int FUNC_ACCOUNT_COUPON_TO_COUPON_MAIN = 330;
-    public final static int FUNC_ACCOUNT_COUPON_TO_COUPON_DETAIL = 333;
     public final static int FUNC_ACCOUNT_RECOMMEND_TO_FRIENDS = 331;
     public final static int FUNC_ACCOUNT_RECOMMEND_TO_RULE = 332;
+    public final static int FUNC_ACCOUNT_COUPON_TO_COUPON_DETAIL = 333;
     public final static int FUNC_ACCOUNT_TRADE_TO_RECORD = 341;
     public final static int FUNC_ACCOUNT_TRADE_TO_ORDER = 342;
     public final static int FUNC_ACCOUNT_TRADE_TO_MALL = 342;
@@ -45,6 +45,7 @@ public class ProjBaseFragment extends MyBaseFragment {
     public final static int FUNC_MALL_PAY_TO_MEMBER = 202;
     public final static int FUNC_ACCOUNT_MAIN_TO_MYPAGE = 334;
     public final static int FUNC_ACCOUNT_MAIN_TO_NOUSEPAGE = 335;
+    public final static int FUNC_MEMBER_TO_COUPON = 336;
     protected Integer activityTitleRid = R.string.title_home;
     protected Resources icon = null;
     protected boolean cart= false;

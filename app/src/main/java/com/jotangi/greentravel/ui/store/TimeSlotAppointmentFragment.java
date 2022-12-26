@@ -27,9 +27,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class TimeSlotAppointmentFragment extends ProjConstraintFragment {
 
@@ -39,13 +41,17 @@ public class TimeSlotAppointmentFragment extends ProjConstraintFragment {
     CalendarView calendarView;
     ApiEnqueue apiEnqueue;
     ArrayList<ChooseModel> data = new ArrayList<>();
-    ArrayList<ChooseModel>chooseModelArrayList = new ArrayList<>();
+    ArrayList<ChooseModel> chooseModelArrayList = new ArrayList<>();
     RecyclerView recyclerView;
     ChooseModel model;
     ChooseAdapter adapter;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private SimpleDateFormat simpleDate = new SimpleDateFormat("HH");
     private String time;
+    private Date chTime, chTimeHour;
     private LinearLayoutManager mManager;
+    private Integer hour = 1;
+    private Integer timeHour, nowHour;
 
     private BannerListBean bannerData;
 
@@ -86,13 +92,20 @@ public class TimeSlotAppointmentFragment extends ProjConstraintFragment {
                 calendar.add(Calendar.MONTH, 0);
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 time = simpleDateFormat.format(calendar.getTime());
+                chTime = calendar.getTime();
+                timeHour = calendar.getTime().getHours();
+
+
+                Log.d(TAG, "chTime: " + chTime);
                 Log.d(TAG, "time: " + time);
+                Log.d(TAG, "timeHour: " + timeHour);
 
                 updateTime(time);
 
             }
         });
         handleDay();
+
     }
 
 
@@ -154,18 +167,31 @@ public class TimeSlotAppointmentFragment extends ProjConstraintFragment {
     }
 
     private void updateTime(String time) {
+        Date date = new Date(System.currentTimeMillis());
+        nowHour = Integer.valueOf(simpleDate.format(date));
+        Log.d(TAG, "nowHour: " + nowHour);
 
-        if (chooseModelArrayList == null){
+        if (chTime.getTime() < date.getTime()) {
+            Log.d(TAG, "true: " + true);
+        } else {
+            Log.d(TAG, "false: " + false);
+        }
+
+
+        if (chooseModelArrayList == null) {
             chooseModelArrayList = new ArrayList();
         } else {
             chooseModelArrayList.clear();
         }
+        if (chTime.getTime() > date.getTime() && timeHour + hour > nowHour) {
 
-        for (ChooseModel item : data) {
-            if (item.bookingdate.equals(time)) {
-                chooseModelArrayList.add(item);
+            for (ChooseModel item : data) {
+                if (item.bookingdate.equals(time)) {
+                    chooseModelArrayList.add(item);
+                }
+                Log.d(TAG, "DataBeen.duration: " + DataBeen.duration);
+                Log.d(TAG, "item.time: " + item.time);
             }
-            Log.d(TAG, "DataBeen.duration: " + DataBeen.duration);
         }
 
         adapter.setmData(chooseModelArrayList);

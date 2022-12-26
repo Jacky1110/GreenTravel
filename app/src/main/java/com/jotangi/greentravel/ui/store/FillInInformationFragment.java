@@ -100,6 +100,13 @@ public class FillInInformationFragment extends ProjConstraintFragment {
             return;
         }
 
+        if (DataBeen.phone.length() != 10) {
+            showDialog("", "手機號碼長度錯誤", (dialog1, which) -> {
+                dialog.dismiss();
+            });
+            return;
+        }
+
         if (DataBeen.licensePlate.isEmpty()) {
             showDialog("", "車牌欄位不能空白", (dialog1, which) -> {
                 dialog.dismiss();

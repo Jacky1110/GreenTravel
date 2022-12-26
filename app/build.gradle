@@ -9,13 +9,13 @@ apply plugin: 'kotlin-android'
 android {
     signingConfigs {
         debug {
-            storeFile file('/Users/dinghan/Desktop/Jotangi/Greentravel/keyStore/Untitled')
+            storeFile file('/Users/dinghan/Desktop/Jotangi/GreenShop/keyStore/Untitled')
             storePassword '123456'
             keyPassword '123456'
             keyAlias 'key0'
         }
         release{
-            storeFile file('/Users/dinghan/Desktop/Jotangi/Greentravel/keyStore/Untitled')
+            storeFile file('/Users/dinghan/Desktop/Jotangi/GreenShop/keyStore/Untitled')
             storePassword '123456'
             keyPassword '123456'
             keyAlias 'key0'

@@ -53,20 +53,12 @@ class DynamicTabFragment : ProjConstraintFragment(), AdapterView.OnItemSelectedL
     private lateinit var binding: FragmentDynamicTabBinding
 
     val ProTypeMap = HashMap<Int, String>()
-    val ProTypeMap1 = HashMap<Int, String>()
-    val ProTypeMap2 = HashMap<Int, String>()
-    val ProTypeMap3 = HashMap<Int, String>()
-    val ProListMap = HashMap<Int, String>()
     val listsPL = arrayListOf<Product_list>()
     val lists = arrayListOf<Product_type>()
     val list = arrayListOf<String>()
 
     companion object {
         fun newInstance() = DynamicTabFragment()
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
     }
 
     override fun onCreateView(
@@ -123,10 +115,6 @@ class DynamicTabFragment : ProjConstraintFragment(), AdapterView.OnItemSelectedL
         initSearchViewSetting()
     }
 
-    override fun onResume() {
-        super.onResume()
-
-    }
 
     private fun initSearchViewSetting() {
         binding.searchEditText.addTextChangedListener(object : TextWatcher {
@@ -156,12 +144,11 @@ class DynamicTabFragment : ProjConstraintFragment(), AdapterView.OnItemSelectedL
     private fun initSpinner() {
         val list = mutableListOf<String>()
 
-        val data: Bundle? = arguments
         if (data != null) {
-            productName = data.getString("Name", "")
-            productType = data.getString("type", "")
+            productName = arguments?.getString("Name", "").toString()
+            productType = arguments?.getString("type", "").toString()
             Log.d(TAG, "productType: $productType")
-            if (productName == "i租車" && productType == "Rent") {
+            if (productType == "Rent") {
                 lists.forEachIndexed { index, item ->
                     val typeName = item.producttype_name
 
@@ -173,7 +160,8 @@ class DynamicTabFragment : ProjConstraintFragment(), AdapterView.OnItemSelectedL
                         ProTypeMap[index] = it
                     }
                 }
-            } else if (productName == "改裝精品配件" && productType == "SC001") {
+            }
+            if (productType == "SC001") {
                 lists.forEachIndexed { index, item ->
                     val typeName = item.producttype_name
 
@@ -208,18 +196,22 @@ class DynamicTabFragment : ProjConstraintFragment(), AdapterView.OnItemSelectedL
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        listsPL.clear()
+//        listsPL.clear()
         ProTypeMap[position]?.let { it1 ->
             if (ticketId == it1) {
                 GetTicket()
-            } else if (productType == "Rent") {
-                binding.productTypeSpinner.setSelection(1)
+            } else {
                 GetProList(it1)
+            }
+            if (productType == "Rent") {
+//                binding.productTypeSpinner.setSelection(1)
+                GetProList(productType)
             } else if (productType == "SC001") {
-                binding.productTypeSpinner.setSelection(2)
+//                binding.productTypeSpinner.setSelection(2)
+                GetProList(productType)
+            } else {
                 GetProList(it1)
-            }else{
-                GetProList(it1)
+                binding.productTypeSpinner.selectedItemPosition
             }
             saveBundle(it1)
 

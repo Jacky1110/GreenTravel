@@ -39,6 +39,7 @@ import com.jotangi.greentravel.CropHeadImageActivity;
 import com.jotangi.greentravel.MallPayFragment;
 import com.jotangi.greentravel.MyBaseFragment;
 import com.jotangi.greentravel.NoticeFragment;
+import com.jotangi.greentravel.PagerStore.CouponListFragment;
 import com.jotangi.greentravel.PayDataFragment;
 import com.jotangi.greentravel.ui.account.PointFragment;
 import com.jotangi.greentravel.ProjBaseFragment;
@@ -543,8 +544,16 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
             case ProjBaseFragment.FUNC_MEMBER_TO_CUSTOMER:
                 switchMemberToCustomer(funcno, data);
                 break;
+            case ProjBaseFragment.FUNC_MEMBER_TO_COUPON:
+                switchMemberToCoupon(funcno, data);
+                break;
         }
 
+    }
+
+    private void switchMemberToCoupon(int funcno, Object data) {
+        CouponListFragment fragment = CouponListFragment.newInstance();
+        switchFragment(fragment, funcno);
     }
 
     private void switchMemberToCustomer(int funcno, Object data) {

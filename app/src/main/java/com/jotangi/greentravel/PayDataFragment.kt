@@ -270,8 +270,6 @@ class PayDataFragment : ProjConstraintFragment() {
     }
 
 
-    var invoice_type: String? = null
-
     /*立即付款的api*/
     private fun Pay() {
         orderPay = orderAmountTrue - subPoint

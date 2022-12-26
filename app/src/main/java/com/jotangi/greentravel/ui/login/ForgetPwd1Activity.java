@@ -105,7 +105,7 @@ public class ForgetPwd1Activity extends BaseActivity implements View.OnClickList
                         AppUtility.showMyDialog(ForgetPwd1Activity.this, message, "確認", "", new AppUtility.OnBtnClickListener() {
                             @Override
                             public void onCheck() {
-                                finish();
+//                                finish();
                             }
 
                             @Override

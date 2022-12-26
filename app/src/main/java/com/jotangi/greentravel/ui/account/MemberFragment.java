@@ -70,11 +70,8 @@ public class MemberFragment extends ProjConstraintFragment {
     private RelativeLayout bnRecord;
     private LinearLayout bnPoint, bnPacker, btnFix;
     private RelativeLayout bnUserRule;
-    private RelativeLayout bnRecommend;
-    private RelativeLayout bnCoupon;
     private RelativeLayout bnQA;
     private RelativeLayout bnCS;
-    private RelativeLayout bnLogout;
     private CardView vwUserCard;
     private ImageView vwHeadImage;
     private ApiEnqueue apiEnqueue;
@@ -153,13 +150,13 @@ public class MemberFragment extends ProjConstraintFragment {
         bnPacker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if (fragmentListener != null) {
-//                    fragmentListener.onAction(FUNC_ACCOUNT_COUPON_TO_COUPON_MAIN, null);
-//                }
+                if (fragmentListener != null) {
+                    fragmentListener.onAction(FUNC_MEMBER_TO_COUPON, null);
+                }
 
-                Intent intent = new Intent(requireActivity(), CouponMainActivity.class);
-                startActivity(intent);
-                requireActivity();
+//                Intent intent = new Intent(requireActivity(), CouponMainActivity.class);
+//                startActivity(intent);
+//                requireActivity();
             }
         });
 

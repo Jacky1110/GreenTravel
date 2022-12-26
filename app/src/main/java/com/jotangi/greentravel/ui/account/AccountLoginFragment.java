@@ -216,7 +216,7 @@ public class AccountLoginFragment extends Fragment {
             requireActivity().finish();
 
         } else {
-            Toast.makeText(getActivity(), "請重新輸入", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), "請重新輸入", Toast.LENGTH_SHORT).show();
         }
     }
 
