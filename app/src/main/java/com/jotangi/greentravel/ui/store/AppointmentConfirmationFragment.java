@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.jotangi.greentravel.Api.ApiEnqueue;
@@ -29,6 +30,8 @@ public class AppointmentConfirmationFragment extends ProjConstraintFragment {
     private String bookingdate;
 
     private AlertDialog dialog = null;
+
+    private ProgressBar progressBar;
 
     private ApiEnqueue apiEnqueue;
     private TextView txtServicePoint, txtName, txtPhone, txtCar, txtCarSize, txtType, txtVehicle, txtTime;
@@ -78,6 +81,7 @@ public class AppointmentConfirmationFragment extends ProjConstraintFragment {
     protected void initViews() {
         super.initViews();
         apiEnqueue = new ApiEnqueue();
+        progressBar = rootView.findViewById(R.id.progressBar);
         txtServicePoint = rootView.findViewById(R.id.tv_servicePoint);
         txtServicePoint.setText("預約服務地點: " + DataBeen.storeName);
         txtName = rootView.findViewById(R.id.tvname);
@@ -106,11 +110,14 @@ public class AppointmentConfirmationFragment extends ProjConstraintFragment {
 
     private void handleAllData() {
 
-        apiEnqueue.bookingFixmotor(bookingdate, duration,new ApiEnqueue.resultListener() {
+        progressBar.setVisibility(View.VISIBLE);
+        apiEnqueue.bookingFixmotor(bookingdate, duration, new ApiEnqueue.resultListener() {
             @Override
             public void onSuccess(String message) {
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                requireActivity().runOnUiThread(new Runnable() {
+                    @Override
                     public void run() {
+                        progressBar.setVisibility(View.GONE);
                         showDialog("", "預約成功", (dialog1, which) ->
                         {
                             fragmentListener.onAction(FUNC_APP_STORETAB, null);
@@ -123,15 +130,17 @@ public class AppointmentConfirmationFragment extends ProjConstraintFragment {
 
             @Override
             public void onFailure(String message) {
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    public void run() {
-                        showDialog("時段已額滿", "請重新預約", (dialog1, which) ->
-                        {
-                            fragmentListener.onAction(FUNC_APP_STORETAB, null);
-                            dialog.dismiss();
-                        });
-                    }
-                });
+               requireActivity().runOnUiThread(new Runnable() {
+                   @Override
+                   public void run() {
+                       progressBar.setVisibility(View.GONE);
+                       showDialog("時段已額滿", "請重新預約", (dialog1, which) ->
+                       {
+                           fragmentListener.onAction(FUNC_APP_STORETAB, null);
+                           dialog.dismiss();
+                       });
+                   }
+               });
             }
         });
 

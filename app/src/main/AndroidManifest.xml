@@ -34,9 +34,6 @@
             android:name=".CouponActivity"
             android:exported="false" />
         <activity
-            android:name=".PagerStore.CouponMainActivity"
-            android:exported="false" />
-        <activity
             android:name=".AccountRuleActivity"
             android:exported="false" />
         <activity

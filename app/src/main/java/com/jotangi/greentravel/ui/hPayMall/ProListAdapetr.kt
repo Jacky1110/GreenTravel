@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.squareup.picasso.Picasso
 import com.jotangi.greentravel.Api.ApiUrl
 
@@ -50,8 +51,7 @@ class ProListAdapter :
             product_no = data?.product_no.toString()
             product_picture = data?.product_picture.toString()
 
-
-            Picasso.get().load(ProUrl +"ticketec/"+ data?.product_picture).into(pic)
+            Glide.with(itemView).load(ProUrl +"ticketec/"+ data?.product_picture).into(pic)
             itemView.setOnClickListener {
                 data?.let { it1 -> WatchItemClick.invoke(it1) }
             }

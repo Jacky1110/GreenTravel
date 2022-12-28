@@ -15,10 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import android.widget.CalendarView;
+import android.widget.ProgressBar;
 
 import com.jotangi.greentravel.Api.ApiEnqueue;
 import com.jotangi.greentravel.BannerListBean;
-import com.jotangi.greentravel.DataBeen;
 import com.jotangi.greentravel.ui.hPayMall.MemberBean;
 import com.jotangi.greentravel.ProjConstraintFragment;
 import com.jotangi.greentravel.R;
@@ -27,7 +27,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -52,6 +51,8 @@ public class TimeSlotAppointmentFragment extends ProjConstraintFragment {
     private LinearLayoutManager mManager;
     private Integer hour = 1;
     private Integer timeHour, nowHour;
+    private ProgressBar progressBar;
+
 
     private BannerListBean bannerData;
 
@@ -76,6 +77,7 @@ public class TimeSlotAppointmentFragment extends ProjConstraintFragment {
 
         apiEnqueue = new ApiEnqueue();
 
+        progressBar = rootView.findViewById(R.id.progressBar);
         recyclerView = rootView.findViewById(R.id.rec_time);
         adapter = new ChooseAdapter();
         recyclerView.setAdapter(adapter);
@@ -92,20 +94,14 @@ public class TimeSlotAppointmentFragment extends ProjConstraintFragment {
                 calendar.add(Calendar.MONTH, 0);
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 time = simpleDateFormat.format(calendar.getTime());
-                chTime = calendar.getTime();
-                timeHour = calendar.getTime().getHours();
 
-
-                Log.d(TAG, "chTime: " + chTime);
                 Log.d(TAG, "time: " + time);
-                Log.d(TAG, "timeHour: " + timeHour);
 
                 updateTime(time);
 
             }
         });
         handleDay();
-
     }
 
 
@@ -115,23 +111,18 @@ public class TimeSlotAppointmentFragment extends ProjConstraintFragment {
         activityTitleRid = R.string.time;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        handleDay();
-    }
-
     private void handleDay() {
 
         String storeId = MemberBean.store_id;
-
+        Log.d(TAG, "storeId: " + storeId);
+        progressBar.setVisibility(View.VISIBLE);
         apiEnqueue.fixmotorInfo(storeId, new ApiEnqueue.resultListener() {
             @Override
             public void onSuccess(String message) {
                 requireActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
+                        progressBar.setVisibility(View.GONE);
                         data = new ArrayList();
 
                         try {
@@ -146,9 +137,14 @@ public class TimeSlotAppointmentFragment extends ProjConstraintFragment {
                                 Log.d(TAG, "model.time: " + model.time);
                                 model.quota = jsonObject.getString("quota");
                                 model.used = jsonObject.getString("used");
-                                data.add(model);
-                            }
+//
+                                processList(
+                                        jsonObject.getString("bookingdate")
+                                                + " " +
+                                                jsonObject.getString("duration"));
 
+
+                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -159,41 +155,49 @@ public class TimeSlotAppointmentFragment extends ProjConstraintFragment {
 
             @Override
             public void onFailure(String message) {
-
+                progressBar.setVisibility(View.GONE);
             }
 
         });
 
     }
 
-    private void updateTime(String time) {
-        Date date = new Date(System.currentTimeMillis());
-        nowHour = Integer.valueOf(simpleDate.format(date));
-        Log.d(TAG, "nowHour: " + nowHour);
+    private void processList(String da) {
+        Log.d(TAG, "da: " + da);
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, 1);
+        long benchmark = calendar.getTimeInMillis() + 1;
+        Log.d(TAG, "benchmark: " + benchmark);
 
-        if (chTime.getTime() < date.getTime()) {
-            Log.d(TAG, "true: " + true);
-        } else {
-            Log.d(TAG, "false: " + false);
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            Date date = sdf.parse(da);
+            calendar.setTime(date);
+
+            if (benchmark < calendar.getTimeInMillis()) {
+                data.add(model);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
+
+    }
+
+    private void updateTime(String time) {
 
         if (chooseModelArrayList == null) {
             chooseModelArrayList = new ArrayList();
         } else {
             chooseModelArrayList.clear();
         }
-        if (chTime.getTime() > date.getTime() && timeHour + hour > nowHour) {
 
-            for (ChooseModel item : data) {
-                if (item.bookingdate.equals(time)) {
-                    chooseModelArrayList.add(item);
-                }
-                Log.d(TAG, "DataBeen.duration: " + DataBeen.duration);
-                Log.d(TAG, "item.time: " + item.time);
+        for (ChooseModel item : data) {
+            if (item.bookingdate.equals(time)) {
+                Log.d(TAG, "item.bookingdate: " + item.bookingdate);
+                chooseModelArrayList.add(item);
             }
         }
-
         adapter.setmData(chooseModelArrayList);
     }
 

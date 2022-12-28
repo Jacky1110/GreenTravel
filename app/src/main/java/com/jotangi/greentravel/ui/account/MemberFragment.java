@@ -31,7 +31,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
@@ -41,7 +40,6 @@ import com.jotangi.greentravel.AppUtility;
 import com.jotangi.greentravel.Api.ApiUrl;
 import com.jotangi.greentravel.LoginMainActivity;
 import com.jotangi.greentravel.ui.hPayMall.MemberBean;
-import com.jotangi.greentravel.PagerStore.CouponMainActivity;
 import com.jotangi.greentravel.ProjConstraintFragment;
 import com.jotangi.greentravel.R;
 import com.jotangi.greentravel.Utils.Utility;
