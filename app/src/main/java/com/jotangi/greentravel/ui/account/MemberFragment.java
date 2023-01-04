@@ -95,6 +95,7 @@ public class MemberFragment extends ProjConstraintFragment {
     @Override
     public void onResume() {
         super.onResume();
+        setBnv(3);
         handleData();
 //        updateHeadPhoto();
     }

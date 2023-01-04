@@ -46,10 +46,6 @@ class StoreTabFragment : ProjConstraintFragment(), AdapterView.OnItemSelectedLis
         fun newInstance() = StoreTabFragment()
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -136,7 +132,11 @@ class StoreTabFragment : ProjConstraintFragment(), AdapterView.OnItemSelectedLis
     override fun onStart() {
         super.onStart()
         activityTitleRid = R.string.title_store
+    }
 
+    override fun onResume() {
+        super.onResume()
+        setBnv(2)
     }
 
     override fun onDestroyView() {

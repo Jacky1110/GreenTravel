@@ -5,19 +5,35 @@
     android:id="@+id/mobile_navgation"
     app:startDestination="@id/navigation_home">
 
+
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/homeMainFragment"
         android:name="com.jotangi.greentravel.ui.main.HomeMainFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeMainFragment_to_dynamicTabFragment2"
+            app:destination="@id/dynamicTabFragment2" />
+        <action
+            android:id="@+id/action_homeMainFragment_to_memberFragment"
+            app:destination="@id/memberFragment" />
+        <action
+            android:id="@+id/action_homeMainFragment_to_storeTabFragment"
+            app:destination="@id/storeTabFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/navigation_pointStore"
+        android:id="@+id/dynamicTabFragment2"
+        android:name="com.jotangi.greentravel.ui.hPayMall.DynamicTabFragment"
+        android:label="DynamicTabFragment"
+        tools:layout="@layout/fragment_dynamic_tab"/>
+    <fragment
+        android:id="@+id/memberFragment"
+        android:name="com.jotangi.greentravel.ui.account.MemberFragment"
+        android:label="fragment_member"
+        tools:layout="@layout/fragment_member" />
+    <fragment
+        android:id="@+id/storeTabFragment"
         android:name="com.jotangi.greentravel.ui.store.StoreTabFragment"
-        android:label="@string/main_point_start"
-        tools:layout="@layout/fragment_account_register" />
-    <fragment
-        android:id="@+id/navigation_member"
-        android:name="com.jotangi.greentravel.ui.account.AccountLoginFragment"
-        android:label="@string/main_member"
-        tools:layout="@layout/fragment_account_login" />
+        android:label="StoreTabFragment"
+        tools:layout="@layout/fragment_store_type"/>
 </navigation>

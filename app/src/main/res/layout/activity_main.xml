@@ -131,7 +131,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment_activity_main"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/rg_bottombar"
         app:layout_constraintStart_toStartOf="parent"
@@ -145,11 +145,12 @@
         android:layout_height="@dimen/bottombar_height"
         android:background="#F6F5F5"
         android:orientation="horizontal"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-<!--        "@drawable/icon_main"-->
-<!--        "@android:color/transparent"-->
+        <!--        "@drawable/icon_main"-->
+        <!--        "@android:color/transparent"-->
         <RadioButton
             android:id="@+id/bn_home"
             android:layout_width="0dp"
@@ -219,5 +220,17 @@
             android:textColor="@color/bottombar_text_selector"
             android:textSize="@dimen/bottombar_textsize" />
     </RadioGroup>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:itemIconTint="@color/bottombar_text_selector"
+        app:itemTextColor="@color/bottombar_text_selector"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/botton_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

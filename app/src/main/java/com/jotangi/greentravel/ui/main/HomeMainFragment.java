@@ -66,7 +66,7 @@ public class HomeMainFragment extends ProjConstraintFragment implements View.OnC
     ));
     private HomePageAdapter.ItemClickListener click = (view, position) -> {
         Log.d(TAG, "position: " + position);
-
+        setBnv(1);
         FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.nav_host_fragment_activity_main,
                 PagerCommodityFragment.newInstance(
@@ -96,6 +96,7 @@ public class HomeMainFragment extends ProjConstraintFragment implements View.OnC
     public void onStart() {
         super.onStart();
         activityTitleRid = R.string.account_listitem_front;
+        setBnv(0);
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -316,6 +317,7 @@ public class HomeMainFragment extends ProjConstraintFragment implements View.OnC
                 startActivity(intent);
                 break;
             case R.id.v_FixCar:
+                setBnv(2);
                 StoreTabFragment fragment1 = new StoreTabFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString("Name", "購車維修保養");
@@ -326,6 +328,7 @@ public class HomeMainFragment extends ProjConstraintFragment implements View.OnC
                 transaction.commit();
                 break;
             case R.id.v_CarLease:
+                setBnv(1);
                 DynamicTabFragment fragment2 = new DynamicTabFragment();
                 Bundle args = new Bundle();
                 args.putString("Name", "i租車");
@@ -342,6 +345,7 @@ public class HomeMainFragment extends ProjConstraintFragment implements View.OnC
 //                startActivity(intent);
                 break;
             case R.id.v_Boutique:
+                setBnv(1);
                 DynamicTabFragment fragment3 = new DynamicTabFragment();
                 Bundle arg = new Bundle();
                 arg.putString("Name", "改裝精品配件");
