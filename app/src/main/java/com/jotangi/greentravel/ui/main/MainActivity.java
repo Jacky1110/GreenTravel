@@ -19,7 +19,6 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
-import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -41,7 +40,6 @@ import com.jotangi.greentravel.MyBaseFragment;
 import com.jotangi.greentravel.NoticeFragment;
 import com.jotangi.greentravel.PagerStore.CouponListFragment;
 import com.jotangi.greentravel.PayDataFragment;
-import com.jotangi.greentravel.ui.account.PointFragment;
 import com.jotangi.greentravel.ProjBaseFragment;
 import com.jotangi.greentravel.ProjSharePreference;
 import com.jotangi.greentravel.R;
@@ -52,6 +50,7 @@ import com.jotangi.greentravel.ui.account.AccountQAFragment;
 import com.jotangi.greentravel.ui.account.AccountRegisterFragment;
 import com.jotangi.greentravel.ui.account.AccountRuleFragment;
 import com.jotangi.greentravel.ui.account.MemberFragment;
+import com.jotangi.greentravel.ui.account.PointFragment;
 import com.jotangi.greentravel.ui.account.accountOrder.AccountMallRecordFragment;
 import com.jotangi.greentravel.ui.hPayMall.CDetailFragment;
 import com.jotangi.greentravel.ui.hPayMall.DynamicTabFragment;
@@ -81,7 +80,6 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
             StoreTabFragment.class.getSimpleName(),
     };
     private final String[] FRAGMENT_ACCOUNT_GROUP_ARRAY = {
-
             MemberFragment.class.getSimpleName(),
             AccountRegisterFragment.class.getSimpleName(),
             AccountDataFragment.class.getSimpleName(),
@@ -146,14 +144,19 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
     private RadioGroup bottomBar;
     private RadioButton rbHome, rbPointStore, rbBusiness, rbMember;
 
+    private Bundle bundle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        bundle = this.getIntent().getExtras();
         initObserver();
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
+
         setContentView(R.layout.activity_main);
 
         if (!allPermissionsGranted()) {
@@ -200,10 +203,22 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
 
         displayIntentData();
         updateCar();
+        checkBundle();
+    }
+
+    private void checkBundle() {
+        if (bundle != null) {
+            String destination = bundle.getString("destination_to");
+
+            if (destination.equals("store_list")) {
+                rbBusiness.setChecked(true);
+            } else if (destination.equals("my_coupon_list")) {
+                rbMember.setChecked((true));
+            }
+        }
     }
 
     private void handleFragment() {
-
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragment_Home = new HomeMainFragment();
@@ -215,6 +230,7 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+
         Log.d(TAG, "onNewIntent");
         setIntent(intent);
         displayIntentData();
@@ -234,11 +250,13 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
 
         SharedPreferences isGetLogin = getSharedPreferences("loginInfo", MODE_PRIVATE);
         boolean loginresult = isGetLogin.getBoolean("isLogin", false);
+
         if (loginresult) {
             MemberBean.member_id = isGetLogin.getString("account", "");
             MemberBean.member_pwd = isGetLogin.getString("password", "");
             getpaymenturl();
         }
+
         Log.d(TAG, "islogin:" + (islogin ? "true" : "false"));
         if (islogin && loginresult) {
             Intent intent = getIntent();
@@ -249,12 +267,14 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
             Log.d(TAG, "data=" + data);
             String strdata = intent.getDataString();
             Log.d(TAG, "strdata=" + strdata);
+
             if (data != null) {
                 String scheme = data.getScheme(); // "http"
                 Log.d(TAG, "scheme=" + scheme);
                 String host = data.getHost(); // "twitter.com"
                 Log.d(TAG, "host=" + host);
                 List<String> params = data.getPathSegments();
+
                 if (params != null) {
                     for (int i = 0; i < params.size(); i++) {
                         Log.d(TAG, "p" + i + "=" + params.get(i));
@@ -285,7 +305,6 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
 
             switchToHomeMainFragment(ProjBaseFragment.FUNC_MAIN_TO_HOME, null);
             updateBottomBarByFragmentTag(HomeMainFragment.class.getSimpleName());
-
         }
     }
 
@@ -298,16 +317,14 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
 
     private void updateCar() {
         runOnUiThread(() -> {
-
             Log.d(TAG, "MemberBean.btnCart " + MemberBean.isShoppingCarPoint);
+
             if (MemberBean.isShoppingCarPoint) {
                 btncart.setBackgroundResource(R.drawable.ic_shopping_cart_point);
             } else {
                 btncart.setBackgroundResource(R.drawable.ic_shopping_cart);
             }
-
         });
-
     }
 
     @Override
@@ -326,42 +343,6 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
             Log.d(TAG, "fragmentName: " + fragmentName);
             super.onBackPressed();
         }
-
-
-//        if (fco1 == 1 || Objects.equals(tag2, AccountLoginFragment.class.getSimpleName())) {
-//            new AlertDialog.Builder(this).setTitle("提示")
-//                    .setIconAttribute(android.R.attr.alertDialogIcon)
-//                    .setMessage("確認要離開綠悠遊嗎? ")
-//                    .setPositiveButton("確定", new DialogInterface.OnClickListener() {
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            finishAffinity();
-//                        }
-//                    })
-//                    .setNegativeButton("取消", null)
-//                    .create().show();
-//            return;
-//        }else {
-//            getSupportFragmentManager().popBackStack();
-//        }
-//        super.onBackPressed();
-//        int fco = getSupportFragmentManager().getBackStackEntryCount();
-//        String tag = getSupportFragmentManager().getBackStackEntryAt(fco - 1).getName();
-//
-//        if (fco == 0) {
-//            finishAffinity();
-//            return;
-//        } else if (tag.equals("")) {
-//            updateBackButton();
-//
-//        } else {
-//            updateBackButton();
-//        }
-//
-//        Log.d(TAG, "onBackPressed(), stack count=" + fco + "\n tag=\n" + tag);
-//        updateBottomBarByFragmentTag(tag);
-//
-//
-//        super.onBackPressed();
     }
 
     private void updateBottomBarByFragmentTag(String tag) {
@@ -672,6 +653,10 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
     private void switchToHomeFragment(int funcno, Object data) {
         MemberFragment fragment = MemberFragment.newInstance();
 
+        if (bundle != null) {
+            fragment.setArguments(bundle);
+        }
+
         switchFragment(fragment, funcno);
     }
 
@@ -732,6 +717,11 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
 
     private void switchToBusiness(int funcno, Object data) {
         StoreTabFragment fragment = StoreTabFragment.Companion.newInstance();
+
+        if (bundle != null) {
+            fragment.setArguments(bundle);
+        }
+
         switchFragment(fragment, funcno);
     }
 

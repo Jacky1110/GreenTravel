@@ -1,6 +1,9 @@
 package com.jotangi.greentravel.ui.store
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,13 +20,13 @@ import com.jotangi.greentravel.R
 import com.jotangi.greentravel.Store_List
 import com.jotangi.greentravel.Store_type
 import com.jotangi.greentravel.databinding.FragmentStoreTypeBinding
+import com.jotangi.greentravel.ui.account.AccountLoginFragment
 import com.jotangi.greentravel.ui.hPayMall.MemberBean
 import com.jotangi.jotangi2022.ApiConUtils
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
-import kotlin.concurrent.schedule
 
 class StoreTabFragment : ProjConstraintFragment(), AdapterView.OnItemSelectedListener {
     private lateinit var binding: FragmentStoreTypeBinding
@@ -40,6 +43,7 @@ class StoreTabFragment : ProjConstraintFragment(), AdapterView.OnItemSelectedLis
     val list = arrayListOf<String>()
 
     lateinit var sid: String
+    private var bundle: Bundle? = null
 
     companion object {
         const val TAG = "StoreTabFragment"
@@ -67,7 +71,9 @@ class StoreTabFragment : ProjConstraintFragment(), AdapterView.OnItemSelectedLis
         }
 
         /*確保登入後才能查詢上方動態列表*/
-        if (istrue != true) {
+        if (!istrue) {
+            bundle = requireActivity().intent.extras
+
             if (lists.isNotEmpty()) {
                 lists.clear()
             }
@@ -77,34 +83,6 @@ class StoreTabFragment : ProjConstraintFragment(), AdapterView.OnItemSelectedLis
             handleSpinner()
         }
 
-//        Timer().schedule(500) {
-//            requireActivity().runOnUiThread {
-//                binding.rY.apply {
-//                    storeListAdapter = StoreListAdapter(listsPL)
-////                    layoutManager = LinearLayoutManager(context)
-//                    layoutManager = GridLayoutManager(context, 2)
-//                    adapter = storeListAdapter
-//                }
-//
-//                binding?.dyT1.apply {
-//                    getTabAt(0)?.select()
-//                    //GetProList ("c1")->query Api:product_list
-//                    listsPL.clear()
-//
-//                    val set: Set<Int> = ProTypeMap.keys
-//                    val it: Iterator<Int> = set.iterator()
-//                    while (it.hasNext()) {
-//                        val key: Int = it.next()
-//                        val value: String? = ProTypeMap[key]
-//                        value?.let { it1 ->
-//                            GetStoreList(it1)
-//                        }
-//                    }
-//
-//                    istrue == false
-//                }
-//            }
-//        }
         return root
     }
 
@@ -137,12 +115,48 @@ class StoreTabFragment : ProjConstraintFragment(), AdapterView.OnItemSelectedLis
         super.onStart()
         activityTitleRid = R.string.title_store
 
+        val isSame = checkAccountSame()
+        if (isSame == false) {
+            showDialog("提醒", "請注意！此登入帳號與 Rilink 為不相同使用者")
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+
         binding == null
         MemberBean.channel_id = 4
+    }
+
+    private fun checkAccountSame(): Boolean? {
+        val pref: SharedPreferences? = requireActivity().getSharedPreferences(
+            AccountLoginFragment.REG_PREF_NAME,
+            Context.MODE_PRIVATE
+        )
+        return pref?.getBoolean(AccountLoginFragment.KEY_IS_ACCOUNT_SAME, false)
+    }
+
+    private fun showDialog(title: String, message: String) {
+        val dialog = AlertDialog.Builder(requireContext()).create()
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.setTitle(title)
+        dialog.setMessage(message)
+        dialog.setButton(
+            AlertDialog.BUTTON_POSITIVE,
+            "確認"
+        ) { dialog1: DialogInterface?, which: Int ->
+            val pref = requireActivity().getSharedPreferences(
+                AccountLoginFragment.REG_PREF_NAME,
+                Context.MODE_PRIVATE
+            )
+
+            pref.edit()
+                .putBoolean(
+                    AccountLoginFragment.KEY_IS_ACCOUNT_SAME,
+                    true
+                ).commit()
+        }
+        dialog.show()
     }
 
     private fun initSpinner() {

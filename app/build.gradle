@@ -9,13 +9,15 @@ apply plugin: 'kotlin-android'
 android {
     signingConfigs {
         debug {
-            storeFile file('/Users/dinghan/Desktop/Jotangi/GreenShop/keyStore/Untitled')
+//            storeFile file('/Users/dinghan/Desktop/Jotangi/GreenShop/keyStore/Untitled')
+            storeFile file('/Users/jtg_harley/Project/2022_0620_綠悠遊/99. Source Code/商城/rilink_shop/keyStore/Untitled')
             storePassword '123456'
             keyPassword '123456'
             keyAlias 'key0'
         }
         release{
-            storeFile file('/Users/dinghan/Desktop/Jotangi/GreenShop/keyStore/Untitled')
+//            storeFile file('/Users/dinghan/Desktop/Jotangi/GreenShop/keyStore/Untitled')
+            storeFile file('/Users/jtg_harley/Project/2022_0620_綠悠遊/99. Source Code/商城/rilink_shop/keyStore/Untitled')
             storePassword '123456'
             keyPassword '123456'
             keyAlias 'key0'
@@ -31,9 +33,9 @@ android {
     defaultConfig {
         applicationId "com.jotangi.greentravel"
         minSdk 24
-        targetSdk 30
-        versionCode 6
-        versionName "1.0.5"
+        targetSdk 31
+        versionCode 7
+        versionName "1.0.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

@@ -75,6 +75,7 @@ public class MemberFragment extends ProjConstraintFragment {
     private ApiEnqueue apiEnqueue;
     private Bitmap tempImage;
     private SharedPreferences pref;
+    private Bundle bundle;
 
     public static MemberFragment newInstance() {
         MemberFragment fragment = new MemberFragment();
@@ -84,6 +85,8 @@ public class MemberFragment extends ProjConstraintFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        bundle = getActivity().getIntent().getExtras();
     }
 
     @Override
@@ -148,10 +151,7 @@ public class MemberFragment extends ProjConstraintFragment {
         bnPacker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (fragmentListener != null) {
-                    fragmentListener.onAction(FUNC_MEMBER_TO_COUPON, null);
-                }
-
+                navigateToCoupon();
 //                Intent intent = new Intent(requireActivity(), CouponMainActivity.class);
 //                startActivity(intent);
 //                requireActivity();
@@ -271,8 +271,24 @@ public class MemberFragment extends ProjConstraintFragment {
         memberInfor();
         handleData();
 
+        checkBundle();
     }
 
+    private void checkBundle() {
+        if (bundle != null) {
+            String destination = bundle.getString("destination_to");
+
+            if (destination.equals("my_coupon_list")) {
+                navigateToCoupon();
+            }
+        }
+    }
+
+    private void navigateToCoupon() {
+        if (fragmentListener != null) {
+            fragmentListener.onAction(FUNC_MEMBER_TO_COUPON, null);
+        }
+    }
 
     private void setImage() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
