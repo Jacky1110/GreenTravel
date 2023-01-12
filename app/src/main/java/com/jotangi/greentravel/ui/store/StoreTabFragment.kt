@@ -50,10 +50,6 @@ class StoreTabFragment : ProjConstraintFragment(), AdapterView.OnItemSelectedLis
         fun newInstance() = StoreTabFragment()
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -119,6 +115,11 @@ class StoreTabFragment : ProjConstraintFragment(), AdapterView.OnItemSelectedLis
         if (isSame == false) {
             showDialog("提醒", "請注意！此登入帳號與 Rilink 為不相同使用者")
         }
+    }
+    override fun onResume() {
+        super.onResume()
+
+        setBnv(2)
     }
 
     override fun onDestroyView() {

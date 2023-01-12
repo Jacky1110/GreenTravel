@@ -15,6 +15,7 @@ import android.widget.AdapterView
 import android.widget.Spinner
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.jotangi.greentravel.*
@@ -70,7 +71,6 @@ class DynamicTabFragment : ProjConstraintFragment(), AdapterView.OnItemSelectedL
         binding = FragmentDynamicTabBinding.inflate(inflater, container, false)
 
         val root: View? = binding.root
-
         return root
     }
 
@@ -97,6 +97,7 @@ class DynamicTabFragment : ProjConstraintFragment(), AdapterView.OnItemSelectedL
         handleSpinner()
     }
 
+
     private fun handleSpinner() {
         binding.productTypeSpinner.apply {
             spinnerAdapter = ArrayAdapter(
@@ -116,8 +117,12 @@ class DynamicTabFragment : ProjConstraintFragment(), AdapterView.OnItemSelectedL
     override fun onStart() {
         super.onStart()
         activityTitleRid = R.string.title_mall
-
         initSearchViewSetting()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setBnv(1)
     }
 
 

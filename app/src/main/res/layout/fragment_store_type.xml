@@ -20,7 +20,7 @@
         android:id="@+id/store_type_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:background="@drawable/spinner_right_icon"
         app:layout_constraintStart_toEndOf="@+id/store_service_type_textView"
         app:layout_constraintTop_toTopOf="@+id/store_service_type_textView" />
 

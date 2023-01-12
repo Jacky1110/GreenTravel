@@ -1,11 +1,14 @@
 package com.jotangi.greentravel;
 
 import android.content.res.Resources;
+import android.view.Menu;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jotangi.greentravel.ui.main.MainActivity;
 
 
 public class ProjBaseFragment extends MyBaseFragment {
+    public static MainActivity mainActivity;
     public final static int MAIN_FUNC_HOME = 1;
     public final static int MAIN_FUNC_MALL = 2;
     public final static int MAIN_FUNC_ACCOUNT = 3;
@@ -13,7 +16,7 @@ public class ProjBaseFragment extends MyBaseFragment {
     public final static int FUNC_MAIN_TO_HOME = 1;
     public final static int FUNC_MAIN_TO_MALL = 2;
     public final static int FUNC_MAIN_TO_BUSINESS = 3;
-    public final static int FUNC_MAIN_TO_ACCOUNT= 4;
+    public final static int FUNC_MAIN_TO_ACCOUNT = 4;
     public final static int FUNC_FRAGMENT_RESUME = 5;
     public final static int FUNC_FRAGMENT_change = 6;
     public final static int FUNC_MAIN_TO_ACCOUNT_TRADE = 7;
@@ -48,7 +51,7 @@ public class ProjBaseFragment extends MyBaseFragment {
     public final static int FUNC_MEMBER_TO_COUPON = 336;
     protected Integer activityTitleRid = R.string.title_home;
     protected Resources icon = null;
-    protected boolean cart= false;
+    protected boolean cart = false;
     /*商城切換*/
     public final static int fraProductDetail = 020;
     public final static int fraPayData = 021;
@@ -57,11 +60,11 @@ public class ProjBaseFragment extends MyBaseFragment {
     public final static int fraDymaticTab = 024;
     public final static int fraInfoToCustom = 025;
     public final static int fraMallRecord = 026;
-    public final static int fraMallDetail= 027;
-    public final static int fraPay =02701;
+    public final static int fraMallDetail = 027;
+    public final static int fraPay = 02701;
 
     /*商家切換*/
-    public final static int fraStoreTab =31;
+    public final static int fraStoreTab = 31;
     public final static int fraStoreDetail = 032;
 
     //預約修車切換
@@ -82,8 +85,8 @@ public class ProjBaseFragment extends MyBaseFragment {
     @Override
     protected void initViews() {
         super.initViews();
-        MainActivity activity = (MainActivity)getActivity();
-        if (activity != null) {
+        mainActivity = (MainActivity) getActivity();
+        if (mainActivity != null) {
 
         }
     }
@@ -97,4 +100,9 @@ public class ProjBaseFragment extends MyBaseFragment {
 
     }
 
+    public static void setBnv(int index) {
+        BottomNavigationView view = mainActivity.findViewById(R.id.bottomNavigation);
+        Menu menu = view.getMenu();
+        menu.getItem(index).setChecked(true);
+    }
 }

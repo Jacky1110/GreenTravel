@@ -17,6 +17,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
@@ -25,12 +26,14 @@ import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jotangi.greentravel.AccountCustomerFragment;
 import com.jotangi.greentravel.Api.ApiUrl;
 import com.jotangi.greentravel.CarFixFragment;
@@ -143,6 +146,7 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
     private TextView toolbarTitle;
     private RadioGroup bottomBar;
     private RadioButton rbHome, rbPointStore, rbBusiness, rbMember;
+    private BottomNavigationView bottomNavigationView;
 
     private Bundle bundle;
 
@@ -172,6 +176,15 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
         Log.d(TAG, "densitydpi=" + dm.densityDpi);
         Log.d(TAG, "scaledensity=" + dm.scaledDensity);
 
+
+        initView();
+        addBottomBarListeners();
+        handleFragment();
+        displayIntentData();
+        updateCar();
+    }
+
+    private void initView() {
         toolbarTitle = findViewById(R.id.tv_toolbar_title);
         btncart = findViewById(R.id.btn_car);
         btncart.setOnClickListener(view -> {
@@ -194,12 +207,45 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
         rbBusiness = findViewById(R.id.bn_business);
         rbMember = findViewById(R.id.bn_member);
 
-        addBottomBarListeners();
-        handleFragment();
-
         bottomBar = findViewById(R.id.rg_bottombar);
         bottomBar.setOnCheckedChangeListener((radioGroup, checkedId) ->
                 Log.d(TAG, "bottombar::onCheckedChanged(), checkedID=" + checkedId));
+
+        bottomNavigationView = findViewById(R.id.bottomNavigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    HomeMainFragment homeMainFragment = new HomeMainFragment();
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.nav_host_fragment_activity_main, homeMainFragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                    break;
+                case R.id.navigation_pointStore:
+                    DynamicTabFragment dynamicTabFragment = new DynamicTabFragment();
+                    FragmentTransaction transaction1 = getSupportFragmentManager().beginTransaction();
+                    transaction1.replace(R.id.nav_host_fragment_activity_main, dynamicTabFragment);
+                    transaction1.addToBackStack(null);
+                    transaction1.commit();
+                    break;
+                case R.id.navigation_business:
+                    StoreTabFragment storeTabFragment = new StoreTabFragment();
+                    FragmentTransaction transaction2 = getSupportFragmentManager().beginTransaction();
+                    transaction2.replace(R.id.nav_host_fragment_activity_main, storeTabFragment);
+                    transaction2.addToBackStack(null);
+                    transaction2.commit();
+                    break;
+                case R.id.navigation_member:
+                    MemberFragment memberFragment = new MemberFragment();
+                    FragmentTransaction transaction3 = getSupportFragmentManager().beginTransaction();
+                    transaction3.replace(R.id.nav_host_fragment_activity_main, memberFragment);
+                    transaction3.addToBackStack(null);
+                    transaction3.commit();
+                    break;
+            }
+
+            return true;
+        });
 
         displayIntentData();
         updateCar();
@@ -220,6 +266,7 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
 
     private void handleFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
+
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragment_Home = new HomeMainFragment();
         fragmentTransaction.add(R.id.nav_host_fragment_activity_main, fragment_Home);
@@ -397,14 +444,10 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
     public void onAction(int funcno, Object data) {
         switch (funcno) {
             case ProjBaseFragment.FUNC_FRAGMENT_RESUME:
-
                 updateActivityTitle(Integer.valueOf(data.toString()));
-
                 break;
             case ProjBaseFragment.FUNC_FRAGMENT_change:
-
                 updateCar();
-
                 break;
             case ProjBaseFragment.FUNC_HOME_TO_SCAN:
                 switchToHomeScanFragment(funcno, data);
