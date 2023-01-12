@@ -1,24 +1,17 @@
 package com.jotangi.greentravel;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import com.jotangi.greentravel.ui.hPayMall.MemberBean;
-import com.jotangi.greentravel.ui.login.SignupActivity2;
-import com.jotangi.greentravel.ui.main.MainActivity;
-import com.jotangi.greentravel.ui.storeManager.StoreManager;
 
-import java.util.List;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
+import com.jotangi.greentravel.ui.storeManager.StoreManager;
 
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -34,35 +27,34 @@ public class WelcomeActivity extends AppCompatActivity {
 
         getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.colorDarkToast));
         handler.postDelayed(runnable, 1250);
-
-//        String url = "rilinkshop://payment?url=";
-//        Intent in = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-//        in.setPackage("com.jotangi.greentravel");
-//        startActivity(in);
-
-//        String url = "rilinkshop://payment?url=";
-//        WebView view = new WebView(this);
-//        view.loadUrl(url);
-
     }
 
     Handler handler = new Handler();
+
     Runnable runnable = () ->
     {
         SharedPreferences isGetLogin = getSharedPreferences("loginInfo", MODE_PRIVATE);
         boolean loginresult = isGetLogin.getBoolean("isLogin", false);
+        Bundle bundle = this.getIntent().getExtras();
+        Intent intent = new Intent(
+                this,
+                LoginMainActivity.class
+        );
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
         if (loginresult) {
             MemberBean.store_acc = isGetLogin.getString("storeAccount", "");
-            MemberBean.member_id = isGetLogin.getString("account","");
+            MemberBean.member_id = isGetLogin.getString("account", "");
             if (MemberBean.store_acc != null && MemberBean.store_acc.length() == 8) {
                 startActivity(new Intent(this, StoreManager.class));
                 finish();
-            }else if (MemberBean.member_id != null && MemberBean.member_id.length() == 10){
-                startActivity(new Intent(this, LoginMainActivity.class));
+            } else if (MemberBean.member_id != null && MemberBean.member_id.length() == 10) {
+                startActivity(intent);
                 finish();
             }
         } else {
-            startActivity(new Intent(this, LoginMainActivity.class));
+            startActivity(intent);
             finish();
         }
     };

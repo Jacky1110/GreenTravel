@@ -62,22 +62,27 @@ public class LoginMainActivity extends AppCompatActivity {
         }
     }
 
-
     private void initData() {
+        AccountLoginFragment accountLoginFragment= new AccountLoginFragment();
+        Bundle bundle = this.getIntent().getExtras();
+
+        if (bundle != null) {
+            accountLoginFragment.setArguments(bundle);
+        }
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.framelayout, new AccountLoginFragment());
+        transaction.add(
+                R.id.framelayout,
+                accountLoginFragment
+        );
         transaction.commit();
-
     }
-
 
     private void init() {
         tabLayout = findViewById(R.id.tab);
-
     }
 
     private void initHandler() {
-
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -98,7 +103,6 @@ public class LoginMainActivity extends AppCompatActivity {
     }
 
     private void fragmentChange(int position) {
-
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if (0 == position) {
             transaction.replace(R.id.framelayout, new AccountLoginFragment());

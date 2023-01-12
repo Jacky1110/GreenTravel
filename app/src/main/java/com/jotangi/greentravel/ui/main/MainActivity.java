@@ -1,20 +1,28 @@
 package com.jotangi.greentravel.ui.main;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -36,6 +44,7 @@ import com.jotangi.greentravel.ProjSharePreference;
 import com.jotangi.greentravel.R;
 import com.jotangi.greentravel.ui.account.AccountDataFragment;
 import com.jotangi.greentravel.ui.account.AccountForgetPasswordFragment;
+import com.jotangi.greentravel.ui.account.AccountPointFragment;
 import com.jotangi.greentravel.ui.account.AccountQAFragment;
 import com.jotangi.greentravel.ui.account.AccountRegisterFragment;
 import com.jotangi.greentravel.ui.account.AccountRuleFragment;
@@ -57,24 +66,98 @@ import com.jotangi.jotangi2022.ApiConUtils;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements MyBaseFragment.FragmentListener {
     private static final int PERMISSION_REQUESTS = 1;
     protected final String TAG = this.getClass().getSimpleName();
+    private final String[] FRAGMENT_HOME_GROUP_ARRAY = {
+            HomeMainFragment.class.getSimpleName(),
+    };
+    private final String[] FRAGMENT_BUSINESS_GROUP_ARRAY = {
+            HotelIntroduceFragment.class.getSimpleName(),
+            StoreTabFragment.class.getSimpleName(),
+    };
+    private final String[] FRAGMENT_ACCOUNT_GROUP_ARRAY = {
+            MemberFragment.class.getSimpleName(),
+            AccountRegisterFragment.class.getSimpleName(),
+            AccountDataFragment.class.getSimpleName(),
+            AccountForgetPasswordFragment.class.getSimpleName(),
+            AccountPointFragment.class.getSimpleName(),
+            AccountQAFragment.class.getSimpleName(),
+            AccountRuleFragment.class.getSimpleName()
+
+    };
+    private final String[] FRAGMENT_MALL_GROUP_ARRAY = {
+//            DymaticTabFragment.class.getSimpleName(),
+            CDetailFragment.class.getSimpleName()
+    };
+    ActivityResultLauncher<Intent> getUserHeadLuncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                Log.d(TAG, "onActivityResult");
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    Intent data = result.getData();
+                    if (data != null) {
+                        String path = data.getStringExtra("path");
+                        Bitmap bitmap = BitmapFactory.decodeFile(path);
+                        if (bitmap != null) {
+
+                        }
+                    }
+                }
+            }
+    );
+
+    private final CompoundButton.OnCheckedChangeListener rbHomeCheckChangedListener = (compoundButton, isChecked) -> {
+        Log.d(TAG, "rbHome.onCheckedChanged(), " + (isChecked ? "checked" : "unchecked"));
+        if (isChecked) {
+            switchToHomeMainFragment(ProjBaseFragment.FUNC_MAIN_TO_HOME, null);
+        }
+    };
+
+    private final CompoundButton.OnCheckedChangeListener rbMallCheckChangedListener = (compoundButton, isChecked) -> {
+        Log.d(TAG, "rbMall.onCheckedChanged(), " + (isChecked ? "checked" : "unchecked"));
+        if (isChecked) {
+            //切換商城
+            switchToMall(ProjBaseFragment.FUNC_MAIN_TO_MALL, null);
+        }
+    };
+
+    private final CompoundButton.OnCheckedChangeListener rbBusinessCheckChangedListener = (compoundButton, isChecked) -> {
+        Log.d(TAG, "rbBusiness.onCheckedChanged() " + (isChecked ? "checked" : "unchecked"));
+        if (isChecked) {
+            switchToBusiness(ProjBaseFragment.FUNC_MAIN_TO_BUSINESS, null);
+        }
+    };
+
+    private final CompoundButton.OnCheckedChangeListener rbAccountCheckChangedListener = (compoundButton, isChecked) -> {
+        Log.d(TAG, "rbAccount.onCheckedChanged() " + (isChecked ? "checked" : "unchecked"));
+        if (isChecked) {
+            switchToHomeFragment(ProjBaseFragment.FUNC_MAIN_TO_ACCOUNT, null);
+        }
+    };
 
     private HomeMainFragment fragment_Home;
     private ImageButton btnback, btncart, btnNotice;
     private TextView toolbarTitle;
+    private RadioGroup bottomBar;
+    private RadioButton rbHome, rbPointStore, rbBusiness, rbMember;
     private BottomNavigationView bottomNavigationView;
+    private Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        bundle = this.getIntent().getExtras();
+        initObserver();
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
+
         setContentView(R.layout.activity_main);
 
         if (!allPermissionsGranted()) {
@@ -150,12 +233,27 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
 
             return true;
         });
+
+        displayIntentData();
+        updateCar();
+        checkBundle();
     }
 
+    private void checkBundle() {
+        if (bundle != null) {
+            String destination = bundle.getString("destination_to");
+
+            if (destination.equals("store_list")) {
+                rbBusiness.setChecked(true);
+            } else if (destination.equals("my_coupon_list")) {
+                rbMember.setChecked((true));
+            }
+        }
+    }
 
     private void handleFragment() {
-
         FragmentManager fragmentManager = getSupportFragmentManager();
+
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragment_Home = new HomeMainFragment();
         fragmentTransaction.add(R.id.nav_host_fragment_activity_main, fragment_Home);
@@ -166,6 +264,7 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+
         Log.d(TAG, "onNewIntent");
         setIntent(intent);
         displayIntentData();
@@ -176,8 +275,9 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
 
         SharedPreferences isGetLogin = getSharedPreferences("loginInfo", MODE_PRIVATE);
         boolean loginresult = isGetLogin.getBoolean("isLogin", false);
+
         if (loginresult) {
-            MemberBean.member_id = isGetLogin.getString("account", "");
+            MemberBean.member_id = isGetLogin.getString("account2", "");
             MemberBean.member_pwd = isGetLogin.getString("password", "");
 //            try {
 //                if (MemberBean.member_id == null) {
@@ -196,6 +296,7 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
 //            }
 //            getpaymenturl();
         }
+
         Log.d(TAG, "islogin:" + (islogin ? "true" : "false"));
         if (islogin && loginresult) {
             Intent intent = getIntent();
@@ -203,12 +304,14 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
             Uri data = intent.getData();
             String strdata = intent.getDataString();
             Log.d(TAG, "strdata=" + strdata);
+
             if (data != null) {
                 String scheme = data.getScheme(); // "http"
                 Log.d(TAG, "scheme=" + scheme);
                 String host = data.getHost(); // "twitter.com"
                 Log.d(TAG, "host=" + host);
                 List<String> params = data.getPathSegments();
+
                 if (params != null) {
                     for (int i = 0; i < params.size(); i++) {
                         Log.d(TAG, "p" + i + "=" + params.get(i));
@@ -238,21 +341,21 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
             checkCart();
 
             switchToHomeMainFragment(ProjBaseFragment.FUNC_MAIN_TO_HOME, null);
+
+            updateBottomBarByFragmentTag(HomeMainFragment.class.getSimpleName());
         }
     }
 
     private void updateCar() {
         runOnUiThread(() -> {
-
             Log.d(TAG, "MemberBean.btnCart " + MemberBean.isShoppingCarPoint);
+
             if (MemberBean.isShoppingCarPoint) {
                 btncart.setBackgroundResource(R.drawable.ic_shopping_cart_point);
             } else {
                 btncart.setBackgroundResource(R.drawable.ic_shopping_cart);
             }
-
         });
-
     }
 
     @Override
@@ -273,6 +376,50 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
         }
     }
 
+    private void updateBottomBarByFragmentTag(String tag) {
+        int rgcheckedid = bottomBar.getCheckedRadioButtonId();
+        Log.d(TAG, "updateBottomBarByFragmentTag: " + rgcheckedid);
+        if (Arrays.asList(FRAGMENT_HOME_GROUP_ARRAY).contains(tag)) {
+            if (rgcheckedid != R.id.bn_home) {
+                removeBottomBarListeners();
+                bottomBar.check(R.id.bn_home);
+                addBottomBarListeners();
+            }
+        } else if (Arrays.asList(FRAGMENT_BUSINESS_GROUP_ARRAY).contains(tag)) {
+            if (rgcheckedid != R.id.bn_business) {
+                removeBottomBarListeners();
+                bottomBar.check(R.id.bn_business);
+                addBottomBarListeners();
+            }
+        } else if (Arrays.asList(FRAGMENT_ACCOUNT_GROUP_ARRAY).contains(tag)) {
+            if (rgcheckedid != R.id.bn_member) {
+                removeBottomBarListeners();
+                bottomBar.check(R.id.bn_member);
+                addBottomBarListeners();
+            }
+        } else if (Arrays.asList(FRAGMENT_MALL_GROUP_ARRAY).contains(tag)) {
+            if (rgcheckedid != R.id.bn_pointStore) {
+                removeBottomBarListeners();
+                bottomBar.check(R.id.bn_pointStore);
+                addBottomBarListeners();
+            }
+        }
+    }
+
+    private void removeBottomBarListeners() {
+        rbHome.setOnCheckedChangeListener(null);
+        rbPointStore.setOnCheckedChangeListener(null);
+        rbBusiness.setOnCheckedChangeListener(null);
+        rbMember.setOnCheckedChangeListener(null);
+    }
+
+    private void addBottomBarListeners() {
+        rbHome.setOnCheckedChangeListener(rbHomeCheckChangedListener);
+        rbPointStore.setOnCheckedChangeListener(rbMallCheckChangedListener);
+        rbBusiness.setOnCheckedChangeListener(rbBusinessCheckChangedListener);
+        rbMember.setOnCheckedChangeListener(rbAccountCheckChangedListener);
+    }
+
     private void updateActivityTitle(Integer rid) {
         toolbarTitle.setText(rid);
     }
@@ -281,14 +428,10 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
     public void onAction(int funcno, Object data) {
         switch (funcno) {
             case ProjBaseFragment.FUNC_FRAGMENT_RESUME:
-
                 updateActivityTitle(Integer.valueOf(data.toString()));
-
                 break;
             case ProjBaseFragment.FUNC_FRAGMENT_change:
-
                 updateCar();
-
                 break;
             case ProjBaseFragment.FUNC_LOGIN_TO_FORGET_PASSWORD:
                 switchToAccountForgetFragment(funcno, data);
@@ -490,6 +633,10 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
     private void switchToHomeFragment(int funcno, Object data) {
         MemberFragment fragment = MemberFragment.newInstance();
 
+        if (bundle != null) {
+            fragment.setArguments(bundle);
+        }
+
         switchFragment(fragment, funcno);
     }
 
@@ -541,6 +688,11 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
 
     private void switchToBusiness(int funcno, Object data) {
         StoreTabFragment fragment = StoreTabFragment.Companion.newInstance();
+
+        if (bundle != null) {
+            fragment.setArguments(bundle);
+        }
+
         switchFragment(fragment, funcno);
     }
 
@@ -651,5 +803,9 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
                 }
             });
         }
+    }
+
+    private void initObserver() {
+
     }
 }
