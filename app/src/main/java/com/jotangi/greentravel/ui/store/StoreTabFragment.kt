@@ -134,7 +134,7 @@ class StoreTabFragment : ProjConstraintFragment(), AdapterView.OnItemSelectedLis
             AccountLoginFragment.REG_PREF_NAME,
             Context.MODE_PRIVATE
         )
-        return pref?.getBoolean(AccountLoginFragment.KEY_IS_ACCOUNT_SAME, false)
+        return pref?.getBoolean(AccountLoginFragment.KEY_IS_ACCOUNT_SAME, true)
     }
 
     private fun showDialog(title: String, message: String) {
