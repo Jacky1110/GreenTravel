@@ -207,7 +207,7 @@ public class AccountLoginFragment extends Fragment {
     private void handleLoin() {
         pref = requireActivity().getSharedPreferences(REG_PREF_NAME, MODE_PRIVATE);
         boolean signed = pref.getBoolean(KEY_IS_LOGIN, false);
-        if (signed == true) {
+        if (signed) {
             MemberBean.member_id = pref.getString(KEY_ACCOUNT, acc);
             MemberBean.member_pwd = pref.getString(KEY_PASSWORD, pwd);
 

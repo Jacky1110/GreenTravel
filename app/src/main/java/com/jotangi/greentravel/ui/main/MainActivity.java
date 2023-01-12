@@ -1,33 +1,20 @@
 package com.jotangi.greentravel.ui.main;
 
-import static com.jotangi.greentravel.ui.account.AccountLoginFragment.getpaymenturl;
-
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.MenuItem;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
-import android.widget.ProgressBar;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -38,23 +25,22 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jotangi.greentravel.AccountCustomerFragment;
 import com.jotangi.greentravel.Api.ApiUrl;
 import com.jotangi.greentravel.CarFixFragment;
-import com.jotangi.greentravel.CropHeadImageActivity;
+import com.jotangi.greentravel.LoginMainActivity;
 import com.jotangi.greentravel.MallPayFragment;
 import com.jotangi.greentravel.MyBaseFragment;
 import com.jotangi.greentravel.NoticeFragment;
 import com.jotangi.greentravel.PagerStore.CouponListFragment;
 import com.jotangi.greentravel.PayDataFragment;
-import com.jotangi.greentravel.ui.account.PointFragment;
 import com.jotangi.greentravel.ProjBaseFragment;
 import com.jotangi.greentravel.ProjSharePreference;
 import com.jotangi.greentravel.R;
 import com.jotangi.greentravel.ui.account.AccountDataFragment;
 import com.jotangi.greentravel.ui.account.AccountForgetPasswordFragment;
-import com.jotangi.greentravel.ui.account.AccountPointFragment;
 import com.jotangi.greentravel.ui.account.AccountQAFragment;
 import com.jotangi.greentravel.ui.account.AccountRegisterFragment;
 import com.jotangi.greentravel.ui.account.AccountRuleFragment;
 import com.jotangi.greentravel.ui.account.MemberFragment;
+import com.jotangi.greentravel.ui.account.PointFragment;
 import com.jotangi.greentravel.ui.account.accountOrder.AccountMallRecordFragment;
 import com.jotangi.greentravel.ui.hPayMall.CDetailFragment;
 import com.jotangi.greentravel.ui.hPayMall.DynamicTabFragment;
@@ -65,95 +51,26 @@ import com.jotangi.greentravel.ui.store.FillInInformationFragment;
 import com.jotangi.greentravel.ui.store.HotelIntroduceFragment;
 import com.jotangi.greentravel.ui.store.StoreTabFragment;
 import com.jotangi.greentravel.ui.store.TimeSlotAppointmentFragment;
+import com.jotangi.greentravel.ui.storeManager.StoreManager;
 import com.jotangi.jotangi2022.ApiConUtils;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements MyBaseFragment.FragmentListener {
     private static final int PERMISSION_REQUESTS = 1;
     protected final String TAG = this.getClass().getSimpleName();
-    private final String[] FRAGMENT_HOME_GROUP_ARRAY = {
-            HomeMainFragment.class.getSimpleName(),
-    };
-    private final String[] FRAGMENT_BUSINESS_GROUP_ARRAY = {
-            HotelIntroduceFragment.class.getSimpleName(),
-            StoreTabFragment.class.getSimpleName(),
-    };
-    private final String[] FRAGMENT_ACCOUNT_GROUP_ARRAY = {
 
-            MemberFragment.class.getSimpleName(),
-            AccountRegisterFragment.class.getSimpleName(),
-            AccountDataFragment.class.getSimpleName(),
-            AccountForgetPasswordFragment.class.getSimpleName(),
-            AccountPointFragment.class.getSimpleName(),
-            AccountQAFragment.class.getSimpleName(),
-            AccountRuleFragment.class.getSimpleName()
-
-    };
-    private final String[] FRAGMENT_MALL_GROUP_ARRAY = {
-//            DymaticTabFragment.class.getSimpleName(),
-            CDetailFragment.class.getSimpleName()
-    };
-    ActivityResultLauncher<Intent> getUserHeadLuncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                Log.d(TAG, "onActivityResult");
-                if (result.getResultCode() == Activity.RESULT_OK) {
-                    Intent data = result.getData();
-                    if (data != null) {
-                        String path = data.getStringExtra("path");
-                        Bitmap bitmap = BitmapFactory.decodeFile(path);
-                        if (bitmap != null) {
-
-                        }
-                    }
-                }
-            });
-    private MyBaseFragment currFragment;
-    private int mainFuncNo;
-    private final CompoundButton.OnCheckedChangeListener rbHomeCheckChangedListener = (compoundButton, isChecked) -> {
-        Log.d(TAG, "rbHome.onCheckedChanged(), " + (isChecked ? "checked" : "unchecked"));
-        if (isChecked) {
-            switchToHomeMainFragment(ProjBaseFragment.FUNC_MAIN_TO_HOME, null);
-        }
-    };
-
-    private final CompoundButton.OnCheckedChangeListener rbMallCheckChangedListener = (compoundButton, isChecked) -> {
-        Log.d(TAG, "rbMall.onCheckedChanged(), " + (isChecked ? "checked" : "unchecked"));
-        if (isChecked) {
-            //切換商城
-            switchToMall(ProjBaseFragment.FUNC_MAIN_TO_MALL, null);
-        }
-    };
-
-    private final CompoundButton.OnCheckedChangeListener rbBusinessCheckChangedListener = (compoundButton, isChecked) -> {
-        Log.d(TAG, "rbBusiness.onCheckedChanged() " + (isChecked ? "checked" : "unchecked"));
-        if (isChecked) {
-            switchToBusiness(ProjBaseFragment.FUNC_MAIN_TO_BUSINESS, null);
-        }
-    };
-
-    private final CompoundButton.OnCheckedChangeListener rbAccountCheckChangedListener = (compoundButton, isChecked) -> {
-        Log.d(TAG, "rbAccount.onCheckedChanged() " + (isChecked ? "checked" : "unchecked"));
-        if (isChecked) {
-            switchToHomeFragment(ProjBaseFragment.FUNC_MAIN_TO_ACCOUNT, null);
-        }
-    };
     private HomeMainFragment fragment_Home;
     private ImageButton btnback, btncart, btnNotice;
     private TextView toolbarTitle;
-    private RadioGroup bottomBar;
-    private RadioButton rbHome, rbPointStore, rbBusiness, rbMember;
     private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initObserver();
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
@@ -175,7 +92,6 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
 
 
         initView();
-        addBottomBarListeners();
         handleFragment();
         displayIntentData();
         updateCar();
@@ -198,15 +114,6 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
         });
         btnback = findViewById(R.id.btn_back);
         btnback.setOnClickListener(view -> onBackPressed());
-
-        rbHome = findViewById(R.id.bn_home);
-        rbPointStore = findViewById(R.id.bn_pointStore);
-        rbBusiness = findViewById(R.id.bn_business);
-        rbMember = findViewById(R.id.bn_member);
-
-        bottomBar = findViewById(R.id.rg_bottombar);
-        bottomBar.setOnCheckedChangeListener((radioGroup, checkedId) ->
-                Log.d(TAG, "bottombar::onCheckedChanged(), checkedID=" + checkedId));
 
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
@@ -264,15 +171,6 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
         displayIntentData();
     }
 
-    private void checkLoginStateToEnableBottomBar() {
-        boolean enabled = ProjSharePreference.getLoginState(MainActivity.this);
-        bottomBar.setEnabled(enabled);
-        findViewById(R.id.bn_home).setEnabled(enabled);
-        findViewById(R.id.bn_pointStore).setEnabled(enabled);
-        findViewById(R.id.bn_business).setEnabled(enabled);
-        findViewById(R.id.bn_member).setEnabled(enabled);
-    }
-
     private void displayIntentData() {
         boolean islogin = ProjSharePreference.getLoginState(this);
 
@@ -281,16 +179,28 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
         if (loginresult) {
             MemberBean.member_id = isGetLogin.getString("account", "");
             MemberBean.member_pwd = isGetLogin.getString("password", "");
-            getpaymenturl();
+//            try {
+//                if (MemberBean.member_id == null) {
+//                    Intent intent = new Intent(this, LoginMainActivity.class);
+//                    startActivity(intent);
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//            if (MemberBean.member_id.length() == 10) {
+//                Intent intent = new Intent(this, LoginMainActivity.class);
+//                startActivity(intent);
+//            } else if (MemberBean.store_acc.length() == 8) {
+//                Intent intent = new Intent(this, StoreManager.class);
+//                startActivity(intent);
+//            }
+//            getpaymenturl();
         }
         Log.d(TAG, "islogin:" + (islogin ? "true" : "false"));
         if (islogin && loginresult) {
             Intent intent = getIntent();
-            Log.d(TAG, "intent=" + intent.toString());
             String action = intent.getAction();
-            Log.d(TAG, "action=" + action);
             Uri data = intent.getData();
-            Log.d(TAG, "data=" + data);
             String strdata = intent.getDataString();
             Log.d(TAG, "strdata=" + strdata);
             if (data != null) {
@@ -328,16 +238,7 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
             checkCart();
 
             switchToHomeMainFragment(ProjBaseFragment.FUNC_MAIN_TO_HOME, null);
-            updateBottomBarByFragmentTag(HomeMainFragment.class.getSimpleName());
-
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        checkLoginStateToEnableBottomBar();
     }
 
     private void updateCar() {
@@ -370,86 +271,6 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
             Log.d(TAG, "fragmentName: " + fragmentName);
             super.onBackPressed();
         }
-
-
-//        if (fco1 == 1 || Objects.equals(tag2, AccountLoginFragment.class.getSimpleName())) {
-//            new AlertDialog.Builder(this).setTitle("提示")
-//                    .setIconAttribute(android.R.attr.alertDialogIcon)
-//                    .setMessage("確認要離開綠悠遊嗎? ")
-//                    .setPositiveButton("確定", new DialogInterface.OnClickListener() {
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            finishAffinity();
-//                        }
-//                    })
-//                    .setNegativeButton("取消", null)
-//                    .create().show();
-//            return;
-//        }else {
-//            getSupportFragmentManager().popBackStack();
-//        }
-//        super.onBackPressed();
-//        int fco = getSupportFragmentManager().getBackStackEntryCount();
-//        String tag = getSupportFragmentManager().getBackStackEntryAt(fco - 1).getName();
-//
-//        if (fco == 0) {
-//            finishAffinity();
-//            return;
-//        } else if (tag.equals("")) {
-//            updateBackButton();
-//
-//        } else {
-//            updateBackButton();
-//        }
-//
-//        Log.d(TAG, "onBackPressed(), stack count=" + fco + "\n tag=\n" + tag);
-//        updateBottomBarByFragmentTag(tag);
-//
-//
-//        super.onBackPressed();
-    }
-
-    private void updateBottomBarByFragmentTag(String tag) {
-        int rgcheckedid = bottomBar.getCheckedRadioButtonId();
-        Log.d(TAG, "updateBottomBarByFragmentTag: " + rgcheckedid);
-        if (Arrays.asList(FRAGMENT_HOME_GROUP_ARRAY).contains(tag)) {
-            if (rgcheckedid != R.id.bn_home) {
-                removeBottomBarListeners();
-                bottomBar.check(R.id.bn_home);
-                addBottomBarListeners();
-            }
-        } else if (Arrays.asList(FRAGMENT_BUSINESS_GROUP_ARRAY).contains(tag)) {
-            if (rgcheckedid != R.id.bn_business) {
-                removeBottomBarListeners();
-                bottomBar.check(R.id.bn_business);
-                addBottomBarListeners();
-            }
-        } else if (Arrays.asList(FRAGMENT_ACCOUNT_GROUP_ARRAY).contains(tag)) {
-            if (rgcheckedid != R.id.bn_member) {
-                removeBottomBarListeners();
-                bottomBar.check(R.id.bn_member);
-                addBottomBarListeners();
-            }
-        } else if (Arrays.asList(FRAGMENT_MALL_GROUP_ARRAY).contains(tag)) {
-            if (rgcheckedid != R.id.bn_pointStore) {
-                removeBottomBarListeners();
-                bottomBar.check(R.id.bn_pointStore);
-                addBottomBarListeners();
-            }
-        }
-    }
-
-    private void removeBottomBarListeners() {
-        rbHome.setOnCheckedChangeListener(null);
-        rbPointStore.setOnCheckedChangeListener(null);
-        rbBusiness.setOnCheckedChangeListener(null);
-        rbMember.setOnCheckedChangeListener(null);
-    }
-
-    private void addBottomBarListeners() {
-        rbHome.setOnCheckedChangeListener(rbHomeCheckChangedListener);
-        rbPointStore.setOnCheckedChangeListener(rbMallCheckChangedListener);
-        rbBusiness.setOnCheckedChangeListener(rbBusinessCheckChangedListener);
-        rbMember.setOnCheckedChangeListener(rbAccountCheckChangedListener);
     }
 
     private void updateActivityTitle(Integer rid) {
@@ -469,12 +290,6 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
                 updateCar();
 
                 break;
-            case ProjBaseFragment.FUNC_HOME_TO_SCAN:
-                switchToHomeScanFragment(funcno, data);
-                break;
-            case ProjBaseFragment.FUNC_SCAN_TO_WEBPAY:
-                switchToHomeWebPayFragment(funcno, data);
-                break;
             case ProjBaseFragment.FUNC_LOGIN_TO_FORGET_PASSWORD:
                 switchToAccountForgetFragment(funcno, data);
                 break;
@@ -485,7 +300,6 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
                 switchToAccountRuleFragment(funcno, data);
                 break;
             case ProjBaseFragment.FUNC_LOGIN_TO_ACCOUNT_MAIN: {
-                checkLoginStateToEnableBottomBar();
                 switchToHomeFragment(funcno, data);
                 break;
             }
@@ -500,10 +314,6 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
             case ProjBaseFragment.FUNC_REGISTER_TO_RULE:
                 switchToAccountRuleFragment(funcno, data);
                 break;
-            case ProjBaseFragment.FUNC_ACCOUNT_MAIN_TO_LOGIN: {
-                checkLoginStateToEnableBottomBar();
-                break;
-            }
             case ProjBaseFragment.FUNC_ACCOUNT_MAIN_TO_DATA:
                 switchToAccountDataFragment(funcno, data);
                 break;
@@ -516,29 +326,14 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
             case ProjBaseFragment.FUNC_ACCOUNT_MAIN_TO_USERRULE:
                 switchToAccountRuleFragment(funcno, data);
                 break;
-            case ProjBaseFragment.FUNC_ACCOUNT_COUPON_TO_COUPON_MAIN:
-                switchToCouponMain(funcno, data);
-                break;
             case ProjBaseFragment.FUNC_ACCOUNT_MAIN_TO_QA:
                 switchToAccountQAFragment(funcno, data);
-                break;
-            case ProjBaseFragment.FUNC_ACCOUNT_MAIN_USER_HEAD_CLICKED:
-                getUserHeadImage();
-                break;
-            case ProjBaseFragment.FUNC_ACCOUNT_RECOMMEND_TO_FRIENDS:
-                switchToAccountInviteFriendsFragment(funcno, data);
                 break;
             case ProjBaseFragment.FUNC_ACCOUNT_RECOMMEND_TO_RULE:
                 switchToAccountRuleFragment(funcno, data);
                 break;
-            case ProjBaseFragment.FUNC_ACCOUNT_TRADE_TO_RECORD:
-                switchToStoreDetail(funcno, data);
-                break;
             case ProjBaseFragment.FUNC_ACCOUNT_TRADE_TO_ORDER:
                 switchToAccountTradeOrderFragment(funcno, data);
-                break;
-            case ProjBaseFragment.FUNC_ACCOUNT_COUPON_TO_COUPON_DETAIL:
-                switchToCouponDetailFragment(funcno, data);
                 break;
             case ProjBaseFragment.fraProductDetail:
                 fraProDe(funcno, data);
@@ -551,9 +346,6 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
                 break;
             case ProjBaseFragment.fraDymaticTab:
                 fraDyTab(funcno, data);
-                break;
-            case ProjBaseFragment.fraInfoToCustom:
-                fraInfo(funcno, data);
                 break;
             case ProjBaseFragment.fraMallDetail:
                 fraMallOderDetail(funcno, data);
@@ -655,9 +447,6 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
         switchFragment(fragment, funcno);
     }
 
-    private void fraInfo(int funcno, Object data) {
-    }
-
     private void fraDyTab(int funcno, Object data) {
         DynamicTabFragment fragment = DynamicTabFragment.Companion.newInstance();
         switchFragment(fragment, funcno);
@@ -678,29 +467,14 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
         switchFragment(fragment, funcno);
     }
 
-    private void switchToCouponDetailFragment(int funcno, Object data) {
-
-    }
-
     private void switchToAccountTradeOrderFragment(int funcno, Object data) {
         AccountMallRecordFragment fragment = AccountMallRecordFragment.Companion.newInstance();
         switchFragment(fragment, funcno);
     }
 
-    private void switchToStoreDetail(int funcno, Object data) {
-    }
-
-    private void switchToAccountInviteFriendsFragment(int funcno, Object data) {
-    }
-
     private void switchToAccountQAFragment(int funcno, Object data) {
         AccountQAFragment fragment = AccountQAFragment.newInstance();
         switchFragment(fragment, funcno);
-    }
-
-    private void switchToCouponMain(int funcno, Object data) {
-//        MainCouponFragment fragment = MainCouponFragment.newInstance();
-//        switchFragment(fragment, funcno);
     }
 
     private void switchToAccountPointFragment(int funcno, Object data) {
@@ -734,12 +508,6 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
         switchFragment(fragment, funcno);
     }
 
-    private void switchToHomeWebPayFragment(int funcno, Object data) {
-    }
-
-    private void switchToHomeScanFragment(int funcno, Object data) {
-    }
-
     private void switchToMallDetail(int funcno, Object data) {
         CDetailFragment fragment = CDetailFragment.Companion.newInstance();
         switchFragment(fragment, funcno);
@@ -758,9 +526,6 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
         transaction.addToBackStack(fragment.getClass().getSimpleName());
         // commit 執行
         transaction.commit();
-        mainFuncNo = funcno;
-        currFragment = fragment;
-
     }
 
     private void switchToHomeMainFragment(int funcno, Object data) {
@@ -828,11 +593,6 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
         return false;
     }
 
-    private void getUserHeadImage() {
-        Intent intent = new Intent(MainActivity.this, CropHeadImageActivity.class);
-        getUserHeadLuncher.launch(intent);
-    }
-
     private void getRuntimePermissions() {
         List<String> allNeededPermissions = new ArrayList<>();
         for (String permission : getRequiredPermissions()) {
@@ -891,9 +651,5 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
                 }
             });
         }
-    }
-
-    private void initObserver() {
-
     }
 }

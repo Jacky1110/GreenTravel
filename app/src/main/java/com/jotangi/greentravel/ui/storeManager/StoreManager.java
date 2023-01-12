@@ -9,19 +9,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jotangi.greentravel.Api.ApiEnqueue;
 import com.jotangi.greentravel.CameraQRcode;
+import com.jotangi.greentravel.LoginMainActivity;
 import com.jotangi.greentravel.R;
+import com.jotangi.greentravel.ui.hPayMall.MemberBean;
 
 public class StoreManager extends AppCompatActivity {
     private String TAG = getClass().getSimpleName() + "(TAG)";
 
     private ApiEnqueue apiEnqueue;
     private Button logoutBT;
+    private TextView managerName;
     private ImageView qrcodeIV;
     private SharedPreferences pref;
     private final int REDULT = 12;
@@ -46,7 +51,7 @@ public class StoreManager extends AppCompatActivity {
     private void init() {
         logoutBT = findViewById(R.id.bt_logout);
         qrcodeIV = findViewById(R.id.imageView);
-
+        managerName = findViewById(R.id.tv_na);
     }
 
     private void initHandler() {
@@ -58,7 +63,7 @@ public class StoreManager extends AppCompatActivity {
                 SharedPreferences.Editor editor = pref.edit();
                 editor.clear();
                 editor.commit();
-                Intent intent = new Intent(this, AppCompatActivity.class);
+                Intent intent = new Intent(this, LoginMainActivity.class);
                 startActivity(intent);
                 finish();
             });
@@ -69,6 +74,10 @@ public class StoreManager extends AppCompatActivity {
             startActivityForResult(intent, REDULT);
 
         });
+
+        pref = getSharedPreferences("storeName", MODE_PRIVATE);
+        MemberBean.store_manager_name = pref.getString("name", "");
+        managerName.setText(MemberBean.store_manager_name);
     }
 
     @Override

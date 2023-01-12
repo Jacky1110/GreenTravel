@@ -76,11 +76,6 @@ class AccountMallRecordFragment : ProjConstraintFragment() {
         activityTitleRid = R.string.title_myorder
     }
 
-    override fun onResume() {
-        super.onResume()
-
-
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -115,8 +110,6 @@ class AccountMallRecordFragment : ProjConstraintFragment() {
                                 val status = jsonObject.getString("status")
                                 val code = jsonObject.getString("code")
                                 val responseMessage = jsonObject.getString("responseMessage")
-                                Log.e("Mall's 細節BBBB", "ecorder_list $jsonString" + "\n\r" + status)
-
                                 when {
                                     (Arrays.asList<String>(*errCode).contains(code)) -> {
                                         CustomDaialog.showNormal(
@@ -198,10 +191,6 @@ class AccountMallRecordFragment : ProjConstraintFragment() {
                                     }
                                     ListAdapter.payClick = {
                                         orderNo = it.order_no.toString()
-//                                        val uri: Uri = Uri.parse(ApiUrl.payUrl + it.order_no.toString()) //要跳轉的網址
-//                                        val intent = Intent(Intent.ACTION_VIEW, uri)
-//                                        intent.setData(uri)
-//                                        startActivity(intent)
 
                                         val fra = MallPayFragment.newInstance()
                                         val data = Bundle()

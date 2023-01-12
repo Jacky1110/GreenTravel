@@ -43,6 +43,8 @@ public class MemberBean {
     public static String store_acc;
     // 店長密碼
     public static String store_pwd;
+    // 店長店名
+    public static String store_manager_name;
     // 掃描到的QRcode資料
     public static String qrconfirm;
 

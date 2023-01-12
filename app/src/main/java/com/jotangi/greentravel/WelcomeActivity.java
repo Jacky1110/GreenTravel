@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,8 +13,10 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.jotangi.greentravel.ui.hPayMall.MemberBean;
 import com.jotangi.greentravel.ui.login.SignupActivity2;
 import com.jotangi.greentravel.ui.main.MainActivity;
+import com.jotangi.greentravel.ui.storeManager.StoreManager;
 
 import java.util.List;
 
@@ -46,7 +49,21 @@ public class WelcomeActivity extends AppCompatActivity {
     Handler handler = new Handler();
     Runnable runnable = () ->
     {
-        startActivity(new Intent(this, LoginMainActivity.class));
-        finish();
+        SharedPreferences isGetLogin = getSharedPreferences("loginInfo", MODE_PRIVATE);
+        boolean loginresult = isGetLogin.getBoolean("isLogin", false);
+        if (loginresult) {
+            MemberBean.store_acc = isGetLogin.getString("storeAccount", "");
+            MemberBean.member_id = isGetLogin.getString("account","");
+            if (MemberBean.store_acc != null && MemberBean.store_acc.length() == 8) {
+                startActivity(new Intent(this, StoreManager.class));
+                finish();
+            }else if (MemberBean.member_id != null && MemberBean.member_id.length() == 10){
+                startActivity(new Intent(this, LoginMainActivity.class));
+                finish();
+            }
+        } else {
+            startActivity(new Intent(this, LoginMainActivity.class));
+            finish();
+        }
     };
 }

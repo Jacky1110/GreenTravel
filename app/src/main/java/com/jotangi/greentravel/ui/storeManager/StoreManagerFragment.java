@@ -44,8 +44,8 @@ public class StoreManagerFragment extends Fragment {
 
     public final static String REG_PREF_NAME = "loginInfo";
     public final static String KEY_IS_LOGIN = "isLogin";
-    public final static String KEY_ACCOUNT = "account";
-    public final static String KEY_PASSWORD = "password";
+    public final static String KEY_ACCOUNT = "storeAccount";
+    public final static String KEY_PASSWORD = "storePassword";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -134,7 +134,24 @@ public class StoreManagerFragment extends Fragment {
         apiEnqueue.storeAdminLogin(storeAcc, storePwd, storeId, new ApiEnqueue.resultListener() {
 
             @Override
-            public void onSuccess(String message) {
+            public void onSuccess(String data) {
+                requireActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            JSONObject jsonObject = new JSONObject(data);
+                            MemberBean.store_manager_name = jsonObject.getString("store_name");
+                            pref = requireActivity().getSharedPreferences("storeName", MODE_PRIVATE);
+                            pref.edit()
+                                    .putString("name", MemberBean.store_manager_name)
+                                    .apply();
+                            Log.d(TAG, "store_manager_name: " + MemberBean.store_manager_name);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
                 ProjSharePreference.setLoginState(getActivity(), true);
                 savaLoginStatus(true, storeAcc, storePwd, storeId);
                 MemberBean.store_acc = storeAcc;
@@ -178,7 +195,7 @@ public class StoreManagerFragment extends Fragment {
             requireActivity().finish();
 
         } else {
-            Toast.makeText(getActivity(), "請重新輸入", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), "請重新輸入", Toast.LENGTH_SHORT).show();
         }
     }
 }
