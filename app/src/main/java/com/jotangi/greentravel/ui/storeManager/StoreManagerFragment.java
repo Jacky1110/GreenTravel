@@ -46,6 +46,7 @@ public class StoreManagerFragment extends Fragment {
     public final static String KEY_IS_LOGIN = "isLogin";
     public final static String KEY_ACCOUNT = "storeAccount";
     public final static String KEY_PASSWORD = "storePassword";
+    public final static String KEY_STOREID = "storeId";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -180,6 +181,7 @@ public class StoreManagerFragment extends Fragment {
                 .putBoolean(KEY_IS_LOGIN, status)
                 .putString(KEY_ACCOUNT, storeAcc)
                 .putString(KEY_PASSWORD, storePwd)
+                .putString(KEY_STOREID, storeId)
                 .commit();
     }
 
@@ -189,6 +191,7 @@ public class StoreManagerFragment extends Fragment {
         if (signed == true) {
             MemberBean.store_acc = pref.getString(KEY_ACCOUNT, storeAcc);
             MemberBean.store_pwd = pref.getString(KEY_PASSWORD, storePwd);
+            MemberBean.store_id = pref.getString(KEY_STOREID, storeId);
 
             Intent intent = new Intent(requireActivity(), StoreManager.class);
             startActivity(intent);

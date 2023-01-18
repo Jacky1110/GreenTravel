@@ -67,7 +67,12 @@ public class ApiEnqueue {
     private final String TASK_FIX_MOTOR_LIST = "TASK_FIX_MOTOR_LIST";
     public final String TASK_FIX_MOTOR_CANCEL = "TASK_FIX_MOTOR_CANCEL";
     public final String TASK_BANNER_LIST = "TASK_BANNER_LIST";
-    private final String TASK_PRODUCT_TYPE = "TASK_PRODUCT_TYPE";
+    public final String TASK_MEMBER_SET_TOKEN = "TASK_MEMBER_SET_TOKEN";
+    public final String TASK_PUSHMSG_GET_HISTORY = "TASK_PUSHMSG_GET_HISTORY";
+    public final String TASK_STOREADMIN_ISNOTIFY = "TASK_STOREADMIN_ISNOTIFY";
+    public final String TASK_STOREADMIN_SETNOTIFY = "TASK_STOREADMIN_SETNOTIFY";
+    public final String TASK_STOREADMIN_GET_NOTIFYHISTORY = "TASK_STOREADMIN_GET_NOTIFYHISTORY";
+    public final String TASK_PRODUCT_TYPE = "TASK_PRODUCT_TYPE";
     public final String TASK_PRODUCT_LIST = "TASK_PRODUCT_LIST";
 
 
@@ -543,6 +548,7 @@ public class ApiEnqueue {
                 .add("store_acc", storeAcc)
                 .add("store_pwd", storePwd)
                 .add("store_id", storeId)
+                .add("notification_token", MemberBean.NOTIFICATION_TOKEN)
                 .build();
         Log.d(TAG, "storeAcc: " + storeAcc);
         Log.d(TAG, "storePwd: " + storePwd);
@@ -813,6 +819,105 @@ public class ApiEnqueue {
         runOkHttps(url, formBody);
     }
 
+    // 39.設定會員推播token
+
+    public void memberSetToken(resultListener listen) {
+
+        runTask = TASK_MEMBER_SET_TOKEN;
+
+        listener = listen;
+
+        String url = ApiUrl.API_URL + ApiUrl.member_set_token;
+
+        FormBody formBody = new FormBody.Builder()
+                .add("member_id", MemberBean.member_id)
+                .add("member_pwd", MemberBean.member_pwd)
+                .add("notify_token", MemberBean.NOTIFICATION_TOKEN)
+                .build();
+
+        Log.d(TAG, "member_id: " + MemberBean.member_id);
+        Log.d(TAG, "member_pwd: " + MemberBean.member_pwd);
+        Log.d(TAG, "notify_token: " + MemberBean.NOTIFICATION_TOKEN);
+
+
+        runOkHttps(url, formBody);
+    }
+
+    // 41.取得會員推播歷史資料
+    public void pushmsgGetHistory(resultListener listen) {
+
+        runTask = TASK_PUSHMSG_GET_HISTORY;
+
+        listener = listen;
+
+        String url = ApiUrl.API_URL + ApiUrl.pushmsg_get_history;
+
+        FormBody formBody = new FormBody.Builder()
+                .add("member_id", MemberBean.member_id)
+                .add("member_pwd", MemberBean.member_pwd)
+                .build();
+
+        runOkHttps(url, formBody);
+    }
+
+    // 42.商城店長app取得推播歷史資料
+
+    public void storeadminGetNotifyHistory(resultListener listen) {
+
+        runTask = TASK_STOREADMIN_GET_NOTIFYHISTORY;
+
+        listener = listen;
+
+        String url = ApiUrl.API_URL + ApiUrl.storeadmin_get_notify_history;
+
+        FormBody formBody = new FormBody.Builder()
+                .add("store_acc", MemberBean.store_acc)
+                .add("store_pwd", MemberBean.store_acc)
+                .add("store_id", MemberBean.store_id)
+                .build();
+
+        runOkHttps(url, formBody);
+    }
+
+    // 44.商城店長app是否推播?
+    public void storeadminIsnotify(resultListener listen) {
+
+        runTask = TASK_STOREADMIN_ISNOTIFY;
+
+        listener = listen;
+
+        String url = ApiUrl.API_URL + ApiUrl.storeadmin_isnotify;
+
+        FormBody formBody = new FormBody.Builder()
+                .add("store_acc", MemberBean.store_acc)
+                .add("store_pwd", MemberBean.store_acc)
+                .add("store_id", MemberBean.store_id)
+                .build();
+
+        runOkHttps(url, formBody);
+    }
+
+
+    // 45.商城店長app設定推播狀態
+    public void storeadminSetNotify(String isnotify, resultListener listen) {
+
+        runTask = TASK_STOREADMIN_SETNOTIFY;
+
+        listener = listen;
+
+        String url = ApiUrl.API_URL + ApiUrl.storeadmin_set_notify;
+
+        FormBody formBody = new FormBody.Builder()
+                .add("store_acc", MemberBean.store_acc)
+                .add("store_pwd", MemberBean.store_acc)
+                .add("store_id", MemberBean.store_id)
+                .add("isnotify", isnotify)
+                .build();
+
+        runOkHttps(url, formBody);
+    }
+
+
     private void runOkHttps(String url, RequestBody requestBody) {
         Request request = new Request.Builder().url(url).post(requestBody).build();
 
@@ -1019,11 +1124,30 @@ public class ApiEnqueue {
             case TASK_BANNER_LIST:
                 taskBannerList(body);
                 break;
+            case TASK_MEMBER_SET_TOKEN:
+                taskMemberSetToken(body);
+                break;
+            case TASK_PUSHMSG_GET_HISTORY:
+                taskPushmsgGetHistory(body);
+                break;
+            // 42.商城店長app取得推播歷史資料
+            case TASK_STOREADMIN_GET_NOTIFYHISTORY:
+                taskStoreadminGetNotifyhistory(body);
+                break;
+            // 44.商城店長app是否推播?
+            case TASK_STOREADMIN_ISNOTIFY:
+                taskStoreadminIsnotify(body);
+                break;
+            // 45.商城店長app設定推播狀態
+            case TASK_STOREADMIN_SETNOTIFY:
+                taskStoreadminSetnotify(body);
+                break;
 
         }
 
 
     }
+
 
     // 1.使用者登入
     private void taskMembrLogin(String body, String task) {
@@ -1487,6 +1611,85 @@ public class ApiEnqueue {
     // 37.新增取得banner資訊
     private void taskBannerList(String body) {
         listener.onSuccess(body);
+    }
+
+    // 39.設定會員推播token
+    private void taskMemberSetToken(String body) {
+
+        try {
+            JSONObject jsonObject = new JSONObject(body);
+            String code = jsonObject.getString("code");
+            Log.d(TAG, "code123: " + code);
+            String responseMessage = jsonObject.getString("responseMessage");
+            if ("0x0200".equals(code)) {
+                listener.onSuccess(responseMessage);
+            } else {
+                listener.onSuccess(responseMessage);
+            }
+        } catch (JSONException e) {
+
+            e.printStackTrace();
+        }
+    }
+
+    // 41.取得會員推播歷史資料
+    private void taskPushmsgGetHistory(String body) {
+        listener.onSuccess(body);
+    }
+
+    // 42.商城店長app取得推播歷史資料
+    private void taskStoreadminGetNotifyhistory(String body) {
+        try {
+            JSONObject jsonObject = new JSONObject(body);
+            String code = jsonObject.getString("code");
+            Log.d(TAG, "code: " + code);
+            String data = jsonObject.getString("data");
+            if ("0x0200".equals(code)) {
+                listener.onSuccess(data);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    // 44.商城店長app是否推播?
+    private void taskStoreadminIsnotify(String body) {
+        try {
+            JSONObject jsonObject = new JSONObject(body);
+            String code = jsonObject.getString("code");
+            Log.d(TAG, "code: " + code);
+            String data = jsonObject.getString("data");
+            Log.d(TAG, "data: " + data);
+            String responseMessage = jsonObject.getString("responseMessage");
+            if ("0x0200".equals(code)) {
+                listener.onSuccess(data);
+            } else {
+                listener.onSuccess(responseMessage);
+            }
+        } catch (JSONException e) {
+
+            e.printStackTrace();
+        }
+    }
+
+    // 45.商城店長app設定推播狀態
+    private void taskStoreadminSetnotify(String body) {
+
+        try {
+            JSONObject jsonObject = new JSONObject(body);
+            String code = jsonObject.getString("code");
+            String responseMessage = jsonObject.getString("responseMessage");
+            if ("0x0200".equals(code)) {
+                listener.onSuccess(responseMessage);
+            } else {
+                listener.onSuccess(responseMessage);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }
 

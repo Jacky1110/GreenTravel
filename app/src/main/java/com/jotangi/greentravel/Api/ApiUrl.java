@@ -1,12 +1,12 @@
 package com.jotangi.greentravel.Api;
 
 public class ApiUrl {
-    public static final String API_URL = "https://rilink.com.tw/"; //正式機
-//    public static final String API_URL = "https://rilink.jotangi.com.tw:11074/"; // 測試機
-//    public static final String payUrl = "http://211.20.181.125:11073/ticketec/ecpay/ecpayindex.php?orderid="; //測試
-    public static final String payUrl = "https://rilink.com.tw/ticketec/ecpay/ecpayindex.php?orderid="; //正式
-    public static final String API_URL2 = "https://rilink.com.tw/api/v1"; // 正式
-//    public static final String API_URL2 = "https://rilink.jotangi.com.tw:11074/api/v1"; // 測試
+//    public static final String API_URL = "https://rilink.com.tw/"; //正式機
+        public static final String API_URL = "https://rilink.jotangi.com.tw:11074/"; // 測試機
+    public static final String payUrl = "https://rilink.jotangi.com.tw:11074/ticketec/ecpay/ecpayindex.php?orderid="; //測試
+//    public static final String payUrl = "https://rilink.com.tw/ticketec/ecpay/ecpayindex.php?orderid="; //正式
+//    public static final String API_URL2 = "https://rilink.com.tw/api/v1"; // 正式
+        public static final String API_URL2 = "https://rilink.jotangi.com.tw:11074/api/v1"; // 測試
     public static final String MEMBER_IMG_URL = API_URL2 + "/personimages/";
 
     //會員密碼變更
@@ -20,7 +20,7 @@ public class ApiUrl {
     //	取得會員資料
     public static String user_getdata = "ticketec/api/user_getdata.php";
     // 4.商城商品類別
-    public  static String product_type = "ticketec/api/product_type.php";
+    public static String product_type = "ticketec/api/product_type.php";
     // 5.商城商品列表
     public static String product_list = "ticketec/api/product_list.php";
     // 6.商城套票列表
@@ -93,7 +93,14 @@ public class ApiUrl {
     public static final String member_clear_token = "ticketec/api/member_clear_token.php";
     // 41.	取得會員推播歷史資料
     public static final String pushmsg_get_history = "ticketec/api/pushmsg_get_history.php";
-
+    //42.	商城店長登出
+    public static final String storeadmin_logout = "ticketec/api/storeadmin_logout.php";
+    //43.	商城店長app取得推播歷史資料
+    public static final String storeadmin_get_notify_history = "ticketec/api/storeadmin_get_notify_history.php";
+    //44.	商城店長app是否推播?
+    public static final String storeadmin_isnotify = "ticketec/api/storeadmin_isnotify.php";
+    //45.	商城店長app設定推播狀態
+    public static final String storeadmin_set_notify = "ticketec/api/storeadmin_set_notify.php";
 
 
 
@@ -101,7 +108,6 @@ public class ApiUrl {
 
     public static String get_payment_url;
 
-    public static String store_info;
 
 
 }

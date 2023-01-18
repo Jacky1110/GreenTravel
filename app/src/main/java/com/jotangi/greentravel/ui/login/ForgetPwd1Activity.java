@@ -60,7 +60,7 @@ public class ForgetPwd1Activity extends BaseActivity implements View.OnClickList
 
         final String account = et_Phone.getText().toString().trim();
 
-        if (account.equals("")) {
+        if (account.isEmpty()) {
             String message = "請先輸入10碼手機號碼。";
             makeToastTextAndShow(message,3500);
             return;

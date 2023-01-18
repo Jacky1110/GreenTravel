@@ -155,6 +155,7 @@ public class AccountLoginFragment extends Fragment {
                         MemberBean.member_pwd = pwd;
 
                         if (MemberBean.member_id != null && MemberBean.member_pwd != null) {
+                            getTokenApi();
                             memberInfor();
                         } else {
                             CustomDaialog.showNormal(requireActivity(), "", "登入失敗", "確定", new CustomDaialog.OnBtnClickListener() {
@@ -177,6 +178,25 @@ public class AccountLoginFragment extends Fragment {
                 Utility.endLoading(message);
             }
         });
+    }
+
+    private void getTokenApi() {
+        apiEnqueue.memberSetToken(new ApiEnqueue.resultListener() {
+            @Override
+            public void onSuccess(String message) {
+                requireActivity().runOnUiThread(() -> {
+
+                    Log.d(TAG, "message: " + message);
+                });
+            }
+
+            @Override
+            public void onFailure(String message) {
+
+                Log.d(TAG, "message: " + message);
+            }
+        });
+
     }
 
     private void savaLoginStatus(boolean status, String acc, String pwd) {

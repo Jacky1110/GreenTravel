@@ -17,13 +17,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GreenTravel">
+
+        <activity
+            android:name=".ui.storeManager.StoreManagerMessageActivity"
+            android:exported="false"></activity>
         <activity
             android:name=".ui.storeManager.StoreManagerSettingActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+            android:exported="false"></activity>
 
         <service
             android:name=".MyMessagingService"

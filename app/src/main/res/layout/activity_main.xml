@@ -120,7 +120,6 @@
             android:background="@color/white"
             android:padding="2dp"
             android:scaleType="centerCrop"
-            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline51"
             app:layout_constraintStart_toStartOf="@+id/guideline41"
