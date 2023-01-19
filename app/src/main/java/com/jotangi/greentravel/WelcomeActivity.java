@@ -81,10 +81,10 @@ public class WelcomeActivity extends AppCompatActivity {
             MemberBean.store_pwd = isGetLogin.getString("storePassword", "");
             MemberBean.store_id = isGetLogin.getString("storeId", "");
             MemberBean.member_id = isGetLogin.getString("account", "");
-            if (MemberBean.store_acc != null && MemberBean.store_acc.length() == 8 || MemberBean.store_acc.length() == 5) {
+            if (!MemberBean.store_acc.equals("") && MemberBean.store_acc.length() != 10) {
                 startActivity(new Intent(this, StoreManager.class));
                 finish();
-            } else if (MemberBean.member_id != null && MemberBean.member_id.length() == 10) {
+            } else if (!MemberBean.member_id.equals("") && MemberBean.member_id.length() == 10) {
                 startActivity(intent);
                 finish();
             }

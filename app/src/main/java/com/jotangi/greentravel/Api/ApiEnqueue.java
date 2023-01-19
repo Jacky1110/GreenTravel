@@ -872,7 +872,7 @@ public class ApiEnqueue {
 
         FormBody formBody = new FormBody.Builder()
                 .add("store_acc", MemberBean.store_acc)
-                .add("store_pwd", MemberBean.store_acc)
+                .add("store_pwd", MemberBean.store_pwd)
                 .add("store_id", MemberBean.store_id)
                 .build();
 
@@ -890,7 +890,7 @@ public class ApiEnqueue {
 
         FormBody formBody = new FormBody.Builder()
                 .add("store_acc", MemberBean.store_acc)
-                .add("store_pwd", MemberBean.store_acc)
+                .add("store_pwd", MemberBean.store_pwd)
                 .add("store_id", MemberBean.store_id)
                 .build();
 
@@ -909,7 +909,7 @@ public class ApiEnqueue {
 
         FormBody formBody = new FormBody.Builder()
                 .add("store_acc", MemberBean.store_acc)
-                .add("store_pwd", MemberBean.store_acc)
+                .add("store_pwd", MemberBean.store_pwd)
                 .add("store_id", MemberBean.store_id)
                 .add("isnotify", isnotify)
                 .build();
