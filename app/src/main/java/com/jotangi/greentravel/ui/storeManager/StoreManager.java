@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ public class StoreManager extends AppCompatActivity {
     private Button logoutBT;
     private TextView managerName;
     private ImageView qrcodeIV;
+    private ImageButton settingButton, newsButton;
     private SharedPreferences pref;
     private final int REDULT = 12;
 
@@ -52,6 +54,8 @@ public class StoreManager extends AppCompatActivity {
         logoutBT = findViewById(R.id.bt_logout);
         qrcodeIV = findViewById(R.id.imageView);
         managerName = findViewById(R.id.tv_na);
+        newsButton = findViewById(R.id.ib_news);
+        settingButton = findViewById(R.id.ib_setting);
     }
 
     private void initHandler() {
@@ -75,9 +79,19 @@ public class StoreManager extends AppCompatActivity {
 
         });
 
+        settingButton.setOnClickListener(view -> {
+            startActivity(new Intent(this, StoreManagerSettingActivity.class));
+        });
+
+        newsButton.setOnClickListener(view -> {
+            startActivity(new Intent(this, StoreManagerMessageActivity.class));
+        });
+
+
         pref = getSharedPreferences("storeName", MODE_PRIVATE);
         MemberBean.store_manager_name = pref.getString("name", "");
         managerName.setText(MemberBean.store_manager_name);
+
     }
 
     @Override

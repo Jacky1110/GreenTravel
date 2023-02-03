@@ -24,6 +24,8 @@ public class MemberBean {
     public static String imgtitle;
     //
     public static String product;
+    //
+    public static String NOTIFICATION_TOKEN;
 
     // 購物車Icon
     public static boolean isShoppingCarPoint;

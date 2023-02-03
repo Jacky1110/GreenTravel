@@ -4,21 +4,22 @@ import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.app.Service
 import android.content.Context
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.os.Build
-import android.os.IBinder
 import android.os.PowerManager
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.jotangi.greentravel.ui.main.MainActivity
 import kotlin.random.Random
 
+
 class MyMessagingService : FirebaseMessagingService() {
+
+    private val CHANNEL_ID = "Coder"
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
@@ -34,60 +35,51 @@ class MyMessagingService : FirebaseMessagingService() {
             notificationManager.createNotificationChannel(channel)
         }
 
+        //檢查手機版本是否支援通知；若支援則新增"頻道"
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                CHANNEL_ID, "DemoCode", NotificationManager.IMPORTANCE_DEFAULT
+            )
+            val manager = getSystemService(
+                NotificationManager::class.java
+            )!!
+            manager.createNotificationChannel(channel)
+        }
+
+        val s = remoteMessage.data
+
+
         //點擊跳轉畫面
-        val i = Intent(this, MainActivity::class.java)
-//        if (remoteMessage.notification?.clickAction?.equals("salonsRecord") == true) {
-//            i.putExtra("notification", "salonsRecord")
-//        } else if (remoteMessage.notification?.clickAction?.equals("industryRecord") == true) {
-//            i.putExtra("notification", "industryRecord")
-//        }
-//        else if(){
-//
-//        }else if (){
-//        i.putExtra("notification", "industryReserve")}
-//        if (remoteMessage.notification?.body?.contains("預約者") == true) {
-//            i.putExtra("notification", "industryReserve")
-//        }
-////        if (remoteMessage.notification?.body?.contains("店家") == true) {
-////            i.putExtra("notification", "industryRecord")
-////        }
+        val intent = Intent(this, WelcomeActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        intent.putExtra("data", s["key_1"])
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(
+            this, 0, intent, PendingIntent.FLAG_IMMUTABLE
+        )
+
         Log.d("豪豪", "onMessageReceived1: " + (remoteMessage.notification?.title))
         Log.d("豪豪", "onMessageReceived2: " + (remoteMessage.notification?.body))
-        val pendingIntent =
-////            PendingIntent.getActivity(
-////                this,
-////                0,
-////                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK),
-////                PendingIntent.FLAG_CANCEL_CURRENT
-////            )
-            PendingIntent.getActivity(
-                this,
-                0,
-                Intent(
-                    this,
-                    MainActivity::class.java
-                ).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK),
-                PendingIntent.FLAG_CANCEL_CURRENT
-            )
-//        val intent = Intent(this, MainActivity::class.java).apply {
-//            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//        }
-//        val pendingIntent:PendingIntent = PendingIntent.getActivity(this,0,intent,0)
 
-        //通知欄
-        val notification = NotificationCompat.Builder(this, "msg")
-            .setContentTitle(remoteMessage.notification?.title)
-            .setContentText(remoteMessage.notification?.body)
-//            .setContentTitle(remoteMessage.data["title"]) //Data收到
-//            .setContentText(remoteMessage.data["msg"]) //Data收到
-            .setWhen(System.currentTimeMillis())
-            .setSmallIcon(R.mipmap.ic_launcher_round)
-            .setLargeIcon(BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher_round))
-            .setAutoCancel(true)
-            .setContentIntent(pendingIntent)
-            .build()
 
-        notificationManager.notify(Random.nextInt(5), notification)
+        /**建置通知欄位的內容 */
+        val builder: NotificationCompat.Builder =
+            NotificationCompat.Builder(this@MyMessagingService, CHANNEL_ID)
+                .setSmallIcon(R.drawable.icon_app)
+                .setContentTitle(remoteMessage.notification?.title)
+                .setContentText(remoteMessage.notification?.body)
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setContentIntent(pendingIntent)
+
+
+        /**發出通知 */
+        val notificationManagerCompat: NotificationManagerCompat =
+            NotificationManagerCompat.from(this@MyMessagingService)
+        notificationManagerCompat.notify(Random.nextInt(5), builder.build())
+
+//        notificationManager.notify(Random.nextInt(5), notification)
 
     }
 

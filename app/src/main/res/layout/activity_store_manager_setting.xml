@@ -21,6 +21,7 @@
             android:layout_height="40dp"
             android:layout_centerVertical="true"
             android:background="@android:color/transparent"
+            android:visibility="invisible"
             app:srcCompat="@drawable/ic_arrow_back_ios" />
 
         <TextView

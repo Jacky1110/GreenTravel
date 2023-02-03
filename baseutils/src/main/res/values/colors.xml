@@ -5,4 +5,8 @@
 
     <color name="txtcolor">#00ADAD</color>
     <color name="darktxtcolor">#008080</color>
+    <color name="colorPrimaryDark">#000000</color>
+
+    <color name="colorBlue">#2096F4</color>
+
 </resources>
