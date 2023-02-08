@@ -36,13 +36,13 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 
 import com.jotangi.greentravel.Api.ApiEnqueue;
-import com.jotangi.greentravel.AppUtility;
 import com.jotangi.greentravel.Api.ApiUrl;
+import com.jotangi.greentravel.AppUtility;
 import com.jotangi.greentravel.LoginMainActivity;
-import com.jotangi.greentravel.ui.hPayMall.MemberBean;
 import com.jotangi.greentravel.ProjConstraintFragment;
 import com.jotangi.greentravel.R;
 import com.jotangi.greentravel.Utils.Utility;
+import com.jotangi.greentravel.ui.hPayMall.MemberBean;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -61,6 +61,7 @@ public class MemberFragment extends ProjConstraintFragment {
     private static final int REQUEST_CAMERA = 332;
     private static final int REQUEST_EXTERNAL_STORAGE = 333;
     private static final int REQUEST_SELECT_VIDEO = 334;
+    public final static String KEY_IS_FIRST = "isFirst";
     private String TAG = getClass().getSimpleName() + "(TAG)";
     private Button bnAccountData;
     private Button loginOutButton;
@@ -76,6 +77,7 @@ public class MemberFragment extends ProjConstraintFragment {
     private Bitmap tempImage;
     private SharedPreferences pref;
     private Bundle bundle;
+    private boolean isFromRilink = false, isFirst = false;
 
     public static MemberFragment newInstance() {
         MemberFragment fragment = new MemberFragment();
@@ -86,12 +88,19 @@ public class MemberFragment extends ProjConstraintFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        pref = requireActivity().getSharedPreferences(REG_PREF_NAME, MODE_PRIVATE);
         bundle = getActivity().getIntent().getExtras();
+
+        if (bundle != null) {
+            isFirst = pref.getBoolean(KEY_IS_FIRST, true);
+            isFromRilink = bundle.getBoolean("from_rilink_rent", false);
+        }
     }
 
     @Override
     public void onStart() {
         super.onStart();
+
         activityTitleRid = R.string.main_member;
     }
 
@@ -116,7 +125,7 @@ public class MemberFragment extends ProjConstraintFragment {
         super.initViews();
 
         loginOutButton = rootView.findViewById(R.id.btnEditUser);
-        pref = requireActivity().getSharedPreferences(REG_PREF_NAME, MODE_PRIVATE);
+
         boolean isLogin = pref.getBoolean(KEY_IS_LOGIN, false);
         if (isLogin) {
             loginOutButton.setText(getString(R.string.logout));
@@ -280,7 +289,11 @@ public class MemberFragment extends ProjConstraintFragment {
             String destination = bundle.getString("destination_to");
 
             if (destination.equals("my_coupon_list")) {
-                navigateToCoupon();
+                if (isFromRilink && isFirst) {
+                    pref.edit().putBoolean(KEY_IS_FIRST, false).commit();
+
+                    navigateToCoupon();
+                }
             }
         }
     }

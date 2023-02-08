@@ -4,7 +4,6 @@ plugins {
     id 'kotlin-android'
     id 'com.google.gms.google-services'
 }
-apply plugin: 'kotlin-android'
 
 android {
     signingConfigs {
@@ -16,8 +15,8 @@ android {
             keyAlias 'key0'
         }
         release{
-            storeFile file('/Users/dinghan/Desktop/Jotangi/GreenShop/keyStore/Untitled')
-//            storeFile file('/Users/jtg_harley/Project/2022_0620_綠悠遊/99. Source Code/商城/rilink_shop/keyStore/Untitled')
+//            storeFile file('/Users/dinghan/Desktop/Jotangi/GreenShop/keyStore/Untitled')
+            storeFile file('/Users/jtg_harley/Project/2022_0620_綠悠遊/99. Source Code/商城/rilink_shop/keyStore/Untitled')
             storePassword '123456'
             keyPassword '123456'
             keyAlias 'key0'

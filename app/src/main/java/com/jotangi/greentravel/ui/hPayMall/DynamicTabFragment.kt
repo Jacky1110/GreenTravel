@@ -247,7 +247,7 @@ class DynamicTabFragment : ProjConstraintFragment(), AdapterView.OnItemSelectedL
 
                 activity?.runOnUiThread {
                     // 更新 Tablayout
-                    addTab(binding.dyT.newTab().setText(tabList[i].producttype_name))
+                    this?.addTab(binding.dyT.newTab().setText(tabList[i].producttype_name))
                 }
             }
         }

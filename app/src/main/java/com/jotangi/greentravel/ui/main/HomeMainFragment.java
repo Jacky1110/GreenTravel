@@ -64,6 +64,8 @@ public class HomeMainFragment extends ProjConstraintFragment implements View.OnC
             "機車租賃",
             "精品配件"
     ));
+    private Bundle bundle;
+
     private HomePageAdapter.ItemClickListener click = (view, position) -> {
         Log.d(TAG, "position: " + position);
         setBnv(1);
@@ -96,6 +98,12 @@ public class HomeMainFragment extends ProjConstraintFragment implements View.OnC
     public void onStart() {
         super.onStart();
         activityTitleRid = R.string.account_listitem_front;
+        bundle = getActivity().getIntent().getExtras();
+
+        if (bundle != null) {
+            boolean isBundle = false;
+            isBundle = true;
+        }
         setBnv(0);
     }
 

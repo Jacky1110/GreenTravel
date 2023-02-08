@@ -1,28 +1,20 @@
 package com.jotangi.greentravel.ui.main;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -33,7 +25,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jotangi.greentravel.AccountCustomerFragment;
 import com.jotangi.greentravel.Api.ApiUrl;
 import com.jotangi.greentravel.CarFixFragment;
-import com.jotangi.greentravel.LoginMainActivity;
 import com.jotangi.greentravel.MallPayFragment;
 import com.jotangi.greentravel.MyBaseFragment;
 import com.jotangi.greentravel.NoticeFragment;
@@ -44,7 +35,6 @@ import com.jotangi.greentravel.ProjSharePreference;
 import com.jotangi.greentravel.R;
 import com.jotangi.greentravel.ui.account.AccountDataFragment;
 import com.jotangi.greentravel.ui.account.AccountForgetPasswordFragment;
-import com.jotangi.greentravel.ui.account.AccountPointFragment;
 import com.jotangi.greentravel.ui.account.AccountQAFragment;
 import com.jotangi.greentravel.ui.account.AccountRegisterFragment;
 import com.jotangi.greentravel.ui.account.AccountRuleFragment;
@@ -60,13 +50,11 @@ import com.jotangi.greentravel.ui.store.FillInInformationFragment;
 import com.jotangi.greentravel.ui.store.HotelIntroduceFragment;
 import com.jotangi.greentravel.ui.store.StoreTabFragment;
 import com.jotangi.greentravel.ui.store.TimeSlotAppointmentFragment;
-import com.jotangi.greentravel.ui.storeManager.StoreManager;
 import com.jotangi.jotangi2022.ApiConUtils;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements MyBaseFragment.FragmentListener {
@@ -148,6 +136,11 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
                     break;
                 case R.id.navigation_business:
                     StoreTabFragment storeTabFragment = new StoreTabFragment();
+
+                    if (bundle != null) {
+                        storeTabFragment.setArguments(bundle);
+                    }
+
                     FragmentTransaction transaction2 = getSupportFragmentManager().beginTransaction();
                     transaction2.replace(R.id.nav_host_fragment_activity_main, storeTabFragment);
                     transaction2.addToBackStack(null);
@@ -155,6 +148,11 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
                     break;
                 case R.id.navigation_member:
                     MemberFragment memberFragment = new MemberFragment();
+
+                    if (bundle != null) {
+                        memberFragment.setArguments(bundle);
+                    }
+
                     FragmentTransaction transaction3 = getSupportFragmentManager().beginTransaction();
                     transaction3.replace(R.id.nav_host_fragment_activity_main, memberFragment);
                     transaction3.addToBackStack(null);
@@ -167,6 +165,25 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
 
         displayIntentData();
         updateCar();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        checkBundle();
+    }
+
+    private void checkBundle() {
+        if (bundle != null) {
+            String destination = bundle.getString("destination_to", "");
+
+            if (destination.equals("store_list")) {
+                bottomNavigationView.setSelectedItemId(R.id.navigation_business);
+            } else if (destination.equals("my_coupon_list")) {
+                bottomNavigationView.setSelectedItemId(R.id.navigation_member);
+            }
+        }
     }
 
     private void handleFragment() {
