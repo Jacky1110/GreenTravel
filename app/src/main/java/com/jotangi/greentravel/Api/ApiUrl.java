@@ -1,12 +1,12 @@
 package com.jotangi.greentravel.Api;
 
 public class ApiUrl {
-    public static final String API_URL = "https://rilink.com.tw/"; //正式機
-//        public static final String API_URL = "https://rilink.jotangi.com.tw:11074/"; // 測試機
-//    public static final String payUrl = "https://rilink.jotangi.com.tw:11074/ticketec/ecpay/ecpayindex.php?orderid="; //測試
-    public static final String payUrl = "https://rilink.com.tw/ticketec/ecpay/ecpayindex.php?orderid="; //正式
-    public static final String API_URL2 = "https://rilink.com.tw/api/v1"; // 正式
-//        public static final String API_URL2 = "https://rilink.jotangi.com.tw:11074/api/v1"; // 測試
+//    public static final String API_URL = "https://rilink.com.tw/"; //正式機
+        public static final String API_URL = "https://rilink.jotangi.com.tw:11074/"; // 測試機
+    public static final String payUrl = "https://rilink.jotangi.com.tw:11074/ticketec/ecpay/ecpayindex.php?orderid="; //測試
+//    public static final String payUrl = "https://rilink.com.tw/ticketec/ecpay/ecpayindex.php?orderid="; //正式
+//    public static final String API_URL2 = "https://rilink.com.tw/api/v1"; // 正式
+        public static final String API_URL2 = "https://rilink.jotangi.com.tw:11074/api/v1"; // 測試
     public static final String MEMBER_IMG_URL = API_URL2 + "/personimages/";
 
     //會員密碼變更
@@ -41,7 +41,7 @@ public class ApiUrl {
     public static String shoppingcart_count = "ticketec/api/shoppingcart_count.php";
     //	清空購物車內的商品
     public static String clear_shoppingcart = "ticketec/api/clear_shoppingcart.php";
-    //	新增商城訂單
+    // 15.新增商城訂單
     public static String add_ecorder = "ticketec/api/add_ecorder.php";
     // 16.商店類別
     public static String store_type = "ticketec/api/store_type.php";
@@ -101,7 +101,8 @@ public class ApiUrl {
     public static final String storeadmin_isnotify = "ticketec/api/storeadmin_isnotify.php";
     //45.	商城店長app設定推播狀態
     public static final String storeadmin_set_notify = "ticketec/api/storeadmin_set_notify.php";
-
+    //46.   新增商城訂單發票
+    public static final String ecorder_invoice = "ticketec/api/ecorder_invoice.php";
 
 
     public static String user_register;

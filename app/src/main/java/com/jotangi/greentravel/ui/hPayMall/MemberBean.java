@@ -109,6 +109,8 @@ public class MemberBean {
 
     public static String barcode;
 
+    public static String orderNo;
+
     public static int channel_id;
 
 

@@ -57,7 +57,7 @@ public class WelcomeActivity extends AppCompatActivity {
                         // Get new FCM registration token
                         String token = task.getResult();
                         MemberBean.NOTIFICATION_TOKEN = token;
-                        Log.d("豪豪", "FCM推播：" + token);
+                        Log.d("TAGE", "FCM推播：" + token);
                     }
                 });
     }

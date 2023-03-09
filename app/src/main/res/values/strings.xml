@@ -24,7 +24,7 @@
     <string name="use_point">使用點數:</string>
     <string name="pd_11">優惠券</string>
     <string name="pd_14">紅利點數折抵 本單可折抵 $0</string>
-    <string name="pd_15">* 配送開立發票方式</string>
+    <string name="pd_15"><font color="#FF0000">*</font> 開立發票方式</string>
     <string name="pd_21">發票資料</string>
     <string name="pd_22">響應電子化發票，發票將寄送至您的E-MAIL。提醒您，發票一旦開立，不得任意更改或改開發票。</string>
     <string name="pd_23">載具號碼</string>
@@ -180,6 +180,7 @@ App服務的參考依據，此記錄為內部應用，決不對外公佈。
     <string name="title_commodity">商品</string>
     <string name="title_shopcart">購物車</string>
     <string name="title_pay_data">填寫付款資料</string>
+    <string name="pd_info_21"><font color="#FF0000">*</font> E-mail</string>
 
     <string-array name="pd_001">
 

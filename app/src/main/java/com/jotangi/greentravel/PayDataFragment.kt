@@ -1,17 +1,15 @@
 package com.jotangi.greentravel
 
 import android.content.DialogInterface
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
+import android.text.method.DigitsKeyListener
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,11 +39,14 @@ class PayDataFragment : ProjConstraintFragment() {
 
     private lateinit var payAdapter: PayAdapter
 
+    private var invoiceType: Int = 0
+
     //    private lateinit var paydisAdapter: PaydisAdapter
 
     private var orderAmountTrue: Int = 0 // 應付金額
     private var orderPay: Int = 0 // 實付金額
     private var subPoint: Int = 0  // 點數折抵
+    private var dialog: AlertDialog? = null
 
     val lists = arrayListOf<Cart>()
     private var priceList: ArrayList<Int> = ArrayList<Int>()
@@ -62,24 +63,16 @@ class PayDataFragment : ProjConstraintFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentPayDataBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        apiEnqueue = ApiEnqueue()
 
-        binding.apply {
-            pdBack.setOnClickListener {
-                requireActivity().onBackPressed()
-            }
-            pdPay.setOnClickListener {
-                Pay()
-            }
-//
-            rvInitial()
-            getPoint()
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        }
-
-        return root
+        initView()
+        resetRecy()
+        getPoint()
     }
 
     override fun onDestroyView() {
@@ -87,25 +80,145 @@ class PayDataFragment : ProjConstraintFragment() {
         binding == null
     }
 
-    override fun onStart() {
-        super.onStart()
+
+    private fun initView() {
         activityTitleRid = R.string.title_pay_data
-        ResetRecy()
+        apiEnqueue = ApiEnqueue()
+
+        binding.apply {
+            pdBack.setOnClickListener {
+                requireActivity().onBackPressed()
+            }
+            pdPay.setOnClickListener {
+                checkValue()
+            }
+
+            etUniformNo.keyListener = DigitsKeyListener.getInstance("0123456789");
+
+            etInvoiceNumber.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+                override fun afterTextChanged(s: Editable) {
+                    if (!s.toString().startsWith("/") || s.toString() == "") {
+                        etInvoiceNumber.setText("/")
+                        etInvoiceNumber.setSelection(1)
+                    }
+                }
+            })
+
+            /*依據發票選擇切換ui高度*/
+            pdBillC.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+                    }
+
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+
+                        val text: String =
+                            binding.pdBillC.selectedItem.toString()
+                        val height: Int = ViewGroup.LayoutParams.WRAP_CONTENT
+                        when (position) {
+                            0 -> {
+                                pdBillC.setSelection(0)
+                                pdBill001.layoutParams.height = height
+                                pdBill001.text = getString(R.string.pd_22)
+                                etInvoiceNumber.layoutParams.height = 0//edittext
+                                pdBill003.layoutParams.height = 0
+                                etCompanyTitle.layoutParams.height = 0
+                                pdBill00302.layoutParams.height = 0
+                                etUniformNo.layoutParams.height = 0
+                                pdBill00304.layoutParams.height = 0
+                                pdBill00305.layoutParams.height = 0
+                                pdBill00201.layoutParams.height = 0
+
+                            }
+                            1 -> {
+                                pdBillC.setSelection(1)
+                                etInvoiceNumber.layoutParams.height = height//edittext
+                                pdBill001.text = getString(R.string.pd_23)
+                                pdBill00201.layoutParams.height = height
+                                pdBill003.layoutParams.height = 0
+                                etCompanyTitle.layoutParams.height = 0
+                                pdBill00302.layoutParams.height = 0
+                                etUniformNo.layoutParams.height = 0
+                                pdBill00304.layoutParams.height = 0
+                                pdBill00305.layoutParams.height = 0
+
+                            }
+                            2 -> {
+                                pdBillC.setSelection(2)
+                                etInvoiceNumber.layoutParams.height = 0
+                                pdBill00201.layoutParams.height = 0
+                                pdBill003.layoutParams.height = height
+                                etCompanyTitle.layoutParams.height = height//edittext
+                                pdBill00302.layoutParams.height = height
+                                etUniformNo.layoutParams.height = height//edittext
+                                pdBill00304.layoutParams.height = 0
+                                pdBill00305.layoutParams.height = 0//edittext
+                            }
+                        }
+                        invoiceType = position
+                        Log.d(TAG, "text: $position")
+                    }
+                }
+        }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private fun checkValue() {
+        binding.apply {
 
+            when (invoiceType) {
+
+                0 -> {
+                    Pay()
+                }
+
+                1 -> {
+                    if (etInvoiceNumber.length() == 8 && etInvoiceNumber.text.toString()
+                            .contains("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-.")
+                    ) {
+
+                        Pay()
+
+                    } else {
+
+                        showDialogView("注意", "手機載具條件格式不符")
+
+                    }
+                }
+
+                2 -> {
+                    if (etUniformNo.length() == 8) {
+
+                        Pay()
+
+                    } else {
+
+                        showDialogView("注意", "統一編號格式不符")
+
+                    }
+                }
+            }
+        }
     }
 
-    fun rvInitial() {
-        ResetRecy()
-    }
 
     private var listSize: Int = 0
 
     /*購物車的商品列表*/
-    fun ResetRecy() {
+    private fun resetRecy() {
         ApiConUtils.shoppingcart_list(
             ApiUrl.API_URL,
             ApiUrl.shoppingcart_list,
@@ -121,8 +234,8 @@ class PayDataFragment : ProjConstraintFragment() {
                             try {
                                 val jsonObject = JSONObject(jsonString)
                                 val code: String = jsonObject.getString("code")
-                                when {
-                                    code.equals("0x0201") -> {
+                                when (code) {
+                                    "0x0201" -> {
                                         MemberBean.isShoppingCarPoint = false
                                         /*通知購物車清空，button紅點清除*/
                                         fragmentListener.onAction(
@@ -135,7 +248,7 @@ class PayDataFragment : ProjConstraintFragment() {
                                         binding.pdNd0.visibility = View.VISIBLE
                                     }
                                 }
-                            } catch (r: Exception) {
+                            } catch (_: Exception) {
 
                             }
                             var result: Int = 0
@@ -173,7 +286,7 @@ class PayDataFragment : ProjConstraintFragment() {
 
                         } catch (e: Exception) {
                         }
-                        var sum: Int = 0
+                        var sum = 0
                         for (i in 0 until listSize) {
                             /*價格加總*/
                             sum += priceList[i]
@@ -203,30 +316,32 @@ class PayDataFragment : ProjConstraintFragment() {
                                 ) {
                                     try {
                                         //若輸入點數大於全部點數，點數設成最大點數
-                                        if (s.toString().toInt() > MemberBean.point.toInt()){
+                                        if (s.toString().toInt() > MemberBean.point.toInt()) {
 
                                             etPoint.setText(MemberBean.point)
-                                            etPoint.setSelection(etPoint.getText().length)
+                                            etPoint.setSelection(etPoint.text.length)
                                         }
                                         //若點數折抵金額大於租金，點數設成可使用的最高金額
-                                        if (etPoint.getText().toString()
+                                        if (etPoint.text.toString()
                                                 .toInt() * 2 > orderAmountTrue
                                         ) {
                                             etPoint.setText("" + orderAmountTrue / 2)
-                                            etPoint.setSelection(etPoint.getText().length)
+                                            etPoint.setSelection(etPoint.text.length)
                                         }
                                         //讓總消費金額扣掉使用的點數(一點折2元)
-                                        subPoint = etPoint.getText().toString().toInt() * 2
+                                        subPoint = etPoint.text.toString().toInt() * 2
                                         orderPay = orderAmountTrue - subPoint
                                         Log.d(TAG, "orderPay: + $orderPay")
 
-                                        viewPoint.text = (MemberBean.point.toInt() - etPoint.getText().toString().toInt()).toString()
+                                        viewPoint.text =
+                                            (MemberBean.point.toInt() - etPoint.text.toString()
+                                                .toInt()).toString()
                                         tvBounsPoint.text = "$ $subPoint"
                                         pdM05.text = "$ $orderPay"
 
 
                                     } catch (e: java.lang.Exception) {
-                                        etPoint.setSelection(etPoint.getText().length)
+                                        etPoint.setSelection(etPoint.text.length)
                                     }
                                 }
 
@@ -274,80 +389,100 @@ class PayDataFragment : ProjConstraintFragment() {
     private fun Pay() {
         orderPay = orderAmountTrue - subPoint
         /*新增訂單的api*/
-        ApiConUtils.add_ecorder(
-            ApiUrl.API_URL,
-            ApiUrl.add_ecorder,
-            MemberBean.member_id,
-            MemberBean.member_pwd,
+        apiEnqueue.addEcorder(
             orderAmountTrue.toString(),
             subPoint.toString(),
             orderPay.toString(),
-            object : ApiConUtils.OnConnect {
-                @Throws(JSONException::class)
-                override fun onSuccess(jsonString: String) {
-                    Log.e("onSuccess", jsonString)
-                    Handler(Looper.getMainLooper()).post {
-                        try {
-                            val jsonObject = JSONObject(jsonString)
-                            val status: String = jsonObject.getString("status")
-                            val code: String = jsonObject.getString("code")
-                            val responseMessage: String =
-                                jsonObject.getString("responseMessage")
-                            when {
-                                code.equals("0x0200") -> {
-                                    AlertDialog.Builder(requireContext()).apply {
-                                        setTitle("新增訂單成功")
-                                        setMessage(responseMessage)
-//                                            setCanceledOnTouchOutside(false)
-                                        setNegativeButton("確認") { dialog, _ ->
-//                                            val uri: Uri = Uri.parse(ApiUrl.payUrl + responseMessage) //要跳轉的網址
-//                                            val intent = Intent(Intent.ACTION_VIEW, uri)
-//                                            intent.setData(uri)
-//                                            startActivity(intent)
+            object : resultListener {
+                override fun onSuccess(message: String?) {
+                    activity?.runOnUiThread {
+                        AlertDialog.Builder(requireContext()).apply {
+                            setTitle("新增訂單成功")
+                            setMessage(message)
+                            setNegativeButton("確認") { dialog, _ ->
 
-                                            val fra = MallPayFragment.newInstance()
-                                            val data = Bundle()
-                                            data.putString("ResOrder", responseMessage)
-                                            fra.arguments = data
-                                            val transaction: FragmentTransaction =
-                                                requireActivity().getSupportFragmentManager()
-                                                    .beginTransaction();
-                                            transaction.replace(
-                                                R.id.nav_host_fragment_activity_main,
-                                                fra
-                                            )
-//                                                    transaction.addToBackStack(DymaticTabFragment.javaClass.getSimpleName())
-                                            transaction.commit()
-                                            dialog.dismiss()
-                                        }
-                                        setCancelable(false)
-                                    }.create().show()
-                                }
+                                val fra = MallPayFragment.newInstance()
+                                val data = Bundle()
+                                data.putString("ResOrder", message)
+                                fra.arguments = data
+                                val transaction: FragmentTransaction =
+                                    requireActivity().supportFragmentManager
+                                        .beginTransaction();
+                                transaction.replace(
+                                    R.id.nav_host_fragment_activity_main,
+                                    fra
+                                )
+                                transaction.commit()
+                                dialog.dismiss()
                             }
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                        }
+                            setCancelable(false)
+                        }.create().show()
                     }
+                    if (message != null) {
+                        getInvoice(message)
+                    }
+                }
 
+                override fun onFailure(message: String?) {
 
                 }
 
-                override fun onFailure(message: String) {
-
-                }
             })
 
     }
 
+    private fun getInvoice(message: String) {
 
-    var dialog: AlertDialog? = null
+        binding.apply {
+
+
+            val companyTitle = etCompanyTitle.text.toString().trim()
+            val uniformNo = etUniformNo.text.toString().trim()
+            val invoicePhone = etInvoiceNumber.text.toString().trim()
+            var type = ""
+
+            when (invoiceType) {
+                0 -> {
+                    type = "1"
+                }
+
+                1 -> {
+                    type = "2"
+                }
+
+                2 -> {
+                    type = "3"
+                }
+            }
+
+            apiEnqueue.ecorderInvoice(
+                message,
+                type,
+                companyTitle,
+                uniformNo,
+                invoicePhone,
+                object : resultListener {
+                    override fun onSuccess(message: String?) {
+                        activity?.runOnUiThread {
+                            Log.d(TAG, "onSuccess: ${"成功"}")
+                        }
+                    }
+
+                    override fun onFailure(message: String?) {
+                        Log.d(TAG, "onSuccess: ${"失敗"}")
+                    }
+
+                })
+        }
+    }
+
     fun showDialog(
         title: String,
         message: String,
         listener: DialogInterface.OnClickListener
     ) {
 
-        if (dialog != null && dialog!!.isShowing()) {
+        if (dialog != null && dialog!!.isShowing) {
             dialog!!.dismiss()
         }
         dialog = AlertDialog.Builder(requireContext()).create()
@@ -361,6 +496,18 @@ class PayDataFragment : ProjConstraintFragment() {
     }
 
 
+    private fun showDialogView(title: String, message: String) {
+        val dialog = AlertDialog.Builder(requireContext()).create()
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.setTitle(title)
+        dialog.setMessage(message)
+        dialog.setButton(
+            android.app.AlertDialog.BUTTON_POSITIVE, "確認"
+        ) { _: DialogInterface?, _: Int ->
+
+        }
+        dialog.show()
+    }
 }
 
 

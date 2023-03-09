@@ -74,6 +74,8 @@ public class ApiEnqueue {
     public final String TASK_STOREADMIN_GET_NOTIFYHISTORY = "TASK_STOREADMIN_GET_NOTIFYHISTORY";
     public final String TASK_PRODUCT_TYPE = "TASK_PRODUCT_TYPE";
     public final String TASK_PRODUCT_LIST = "TASK_PRODUCT_LIST";
+    public final String TASK_ECORDER_INVOICE = "TASK_ECORDER_INVOICE";
+    public final String TASK_ADD_ECORDER = "TASK_ADD_ECORDER";
 
 
     // 1.使用者登入
@@ -334,6 +336,29 @@ public class ApiEnqueue {
 
         runOkHttp(url, formBody);
 
+    }
+
+    // 15.新增商城訂單
+    public void addEcorder(String orderAmount, String discountAmount, String orderPay, resultListener listen) {
+
+        runTask = TASK_ADD_ECORDER;
+
+        listener = listen;
+
+        String url = ApiUrl.API_URL + ApiUrl.add_ecorder;
+        Log.d(TAG, "URL: " + url);
+
+        FormBody formBody = new FormBody.Builder()
+                .add("member_id", MemberBean.member_id)
+                .add("member_pwd", MemberBean.member_pwd)
+                .add("order_amount", orderAmount)
+                .add("discount_amount", discountAmount)
+                .add("order_pay", orderPay)
+                .build();
+        Log.d(TAG, "member_id: " + MemberBean.member_id);
+        Log.d(TAG, "member_pwd: " + MemberBean.member_pwd);
+
+        runOkHttp(url, formBody);
     }
 
     // 17.商店列表
@@ -917,6 +942,34 @@ public class ApiEnqueue {
         runOkHttps(url, formBody);
     }
 
+    // 46.新增商城訂單發票
+    public void ecorderInvoice(String orderNo, String invoiceType, String companyTitle, String uniformNo, String invoicePhone, resultListener listen) {
+
+        runTask = TASK_ECORDER_INVOICE;
+
+        listener = listen;
+
+        String url = ApiUrl.API_URL + ApiUrl.ecorder_invoice;
+
+        FormBody formBody = new FormBody.Builder()
+                .add("member_id", MemberBean.member_id)
+                .add("member_pwd", MemberBean.member_pwd)
+                .add("order_no", orderNo)
+                .add("invoice_type", invoiceType)
+                .add("companytitle", companyTitle)
+                .add("uniformno", uniformNo)
+                .add("invoicephone", invoicePhone)
+                .build();
+
+        Log.d(TAG, "invoice_type: " + invoiceType);
+        Log.d(TAG, "companytitle: " + companyTitle);
+        Log.d(TAG, "uniformno: " + uniformNo);
+        Log.d(TAG, "invoicephone: " + invoicePhone);
+
+        runOkHttps(url, formBody);
+
+    }
+
 
     private void runOkHttps(String url, RequestBody requestBody) {
         Request request = new Request.Builder().url(url).post(requestBody).build();
@@ -1037,6 +1090,11 @@ public class ApiEnqueue {
                 taskShoppingCartCount(body, TASK_SHOPPING_CART_COUNT);
                 break;
 
+            // 15.新增商城訂單
+            case TASK_ADD_ECORDER:
+                taskAddEcorder(body, TASK_ADD_ECORDER);
+                break;
+
             // 17.商店列表
             case TASK_STORE_LIST:
                 taskStoreList(body);
@@ -1142,6 +1200,11 @@ public class ApiEnqueue {
             case TASK_STOREADMIN_SETNOTIFY:
                 taskStoreadminSetnotify(body);
                 break;
+            // 46.新增商城訂單發票
+            case TASK_ECORDER_INVOICE:
+                taskEcorderInvoice(body, TASK_ECORDER_INVOICE);
+                break;
+
 
         }
 
@@ -1293,6 +1356,30 @@ public class ApiEnqueue {
 
             if ("0x0200".equals(code) || "0x0201".equals(code)) {
                 listener.onSuccess(code);
+            } else {
+                listener.onFailure(responseMessage);
+            }
+        } catch (JSONException e) {
+            Log.d(TAG, task + " 剖析失敗：欄位不存在");
+            e.printStackTrace();
+        }
+
+    }
+
+    // 15.新增商城訂單
+    private void taskAddEcorder(String body, String task) {
+        try {
+            // JASON需要try/catch
+            JSONObject jsonObject = new JSONObject(body);
+            String code = jsonObject.getString("code");
+            // code = "0x0200"
+            Log.d(TAG, "code: " + code);
+            String responseMessage = jsonObject.getString("responseMessage");
+            Log.d(TAG, "responseMessage: " + responseMessage);
+
+            // 判斷 A.equals(B)
+            if ("0x0200".equals(code)) {
+                listener.onSuccess(responseMessage);
             } else {
                 listener.onFailure(responseMessage);
             }
@@ -1688,8 +1775,28 @@ public class ApiEnqueue {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
 
+    private void taskEcorderInvoice(String body, String task) {
+        try {
+            // JASON需要try/catch
+            JSONObject jsonObject = new JSONObject(body);
+            String code = jsonObject.getString("code");
+            // code = "0x0200"
+            Log.d(TAG, "code: " + code);
+            String responseMessage = jsonObject.getString("responseMessage");
+            Log.d(TAG, "responseMessage: " + responseMessage);
 
+            // 判斷 A.equals(B)
+            if ("0x0200".equals(code)) {
+                listener.onSuccess(responseMessage);
+            } else {
+                listener.onFailure(responseMessage);
+            }
+        } catch (JSONException e) {
+            Log.d(TAG, task + " 剖析失敗：欄位不存在");
+            e.printStackTrace();
+        }
     }
 }
 

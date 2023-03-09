@@ -47,9 +47,27 @@ class MallOrderDetailFragment : ProjConstraintFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentMallOrderDetailBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+
+        //rvInitial()
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initView()
+    }
+
+    private fun initView() {
+        activityTitleRid = R.string.account_listitem_order
+
         val data: Bundle? = arguments
         apiEnqueue = ApiEnqueue()
 
@@ -62,17 +80,6 @@ class MallOrderDetailFragment : ProjConstraintFragment() {
             }
 
         }
-        binding.apply {
-
-
-        }
-        //rvInitial()
-        return root
-    }
-
-    override fun onStart() {
-        super.onStart()
-        activityTitleRid = R.string.account_listitem_order
 
         binding.rcPdd.apply {
             cartAdapter = PayAdapter(lists)
@@ -80,19 +87,6 @@ class MallOrderDetailFragment : ProjConstraintFragment() {
             adapter = cartAdapter
 
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 
 
@@ -175,14 +169,36 @@ class MallOrderDetailFragment : ProjConstraintFragment() {
                                         val jA = JSONArray(jsonString)
                                         for (i in 0 until jA.length()) {
                                             val pro = jA[i] as JSONObject
-                                            binding.fdID.text = pro.getString("order_no")
-                                            binding.fdDate.text = pro.getString("order_date")
-                                            binding.fdCount.text = pro.getString("order_amount")
-                                            binding.fdTotal.text =
-                                                "$${pro.getString("order_amount")}"
-                                            binding.fdBon.text =
-                                                "$${pro.getString("discount_amount")}"
-                                            binding.fdRes.text = "$${pro.getString("order_pay")}"
+                                            val type = pro.getString("invoicetype")
+                                            binding.apply {
+                                                fdID.text = pro.getString("order_no")
+                                                fdDate.text = pro.getString("order_date")
+                                                fdCount.text = pro.getString("order_amount")
+                                                fdTotal.text = "$${pro.getString("order_amount")}"
+                                                fdBon.text = "$${pro.getString("discount_amount")}"
+                                                fdRes.text = "$${pro.getString("order_pay")}"
+                                                when (type) {
+                                                    "1" -> {
+                                                        tvBillType.text = "個人電子發票"
+                                                    }
+                                                    "2" -> {
+                                                        tvBillType.text = "手機條碼載具"
+                                                    }
+                                                    "3" -> {
+                                                        tvBillType.text = "三聯式發票"
+                                                    }
+
+                                                }
+                                                tvPhoneCarrier.text = pro.getString("invoicephone")
+                                                tvUniformNumbers.text = pro.getString("uniformno")
+                                                tvInvoice.text = pro.getString("companytitle")
+//                                                tvInvoiceNumber.text = pro.getString("")
+                                                tvInvoiceStatus.text =
+                                                    pro.getString("invoicestatus")
+                                                tvOpeningTime.text = pro.getString("invoicedate")
+                                                tvRandomCode.text = pro.getString("randomno")
+                                            }
+
                                             StausText(
                                                 pro.getString("order_status"),
                                                 pro.getString("pay_status")

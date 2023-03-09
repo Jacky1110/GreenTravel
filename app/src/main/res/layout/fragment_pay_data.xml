@@ -24,6 +24,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/shape_round_orange_white"
         android:text="@string/pd_pack"
         android:textColor="@color/normal_red"
@@ -232,74 +234,67 @@
                             android:entries="@array/pd_001"
                             android:inputType="textPersonName"
                             android:visibility="invisible"
-                            app:layout_constraintEnd_toEndOf="@id/textView101"
-                            app:layout_constraintStart_toStartOf="@id/textView101"
-                            app:layout_constraintTop_toBottomOf="@id/textView101" />
+                            app:layout_constraintEnd_toEndOf="@+id/textView101"
+                            app:layout_constraintStart_toStartOf="@+id/textView101"
+                            app:layout_constraintTop_toBottomOf="@+id/textView101" />
 
                         <CheckBox
                             android:id="@+id/checkBox3"
                             android:layout_width="0dp"
                             android:layout_height="0dp"
                             android:text="@string/pd_14"
-                            app:layout_constraintEnd_toEndOf="@id/editTextTextPersonName2"
-                            app:layout_constraintStart_toStartOf="@id/editTextTextPersonName2"
-                            app:layout_constraintTop_toBottomOf="@id/editTextTextPersonName2" />
+                            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName2"
+                            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2"
+                            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
 
                         <TextView
                             android:id="@+id/textView103"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            style="@style/tvMemberList"
                             android:text="@string/pd_15"
-                            android:textSize="20sp"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="@id/checkBox3"
-                            app:layout_constraintStart_toStartOf="@id/textView101"
-                            app:layout_constraintTop_toBottomOf="@id/checkBox3" />
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="@+id/checkBox3"
+                            app:layout_constraintStart_toStartOf="@+id/textView101"
+                            app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
 
-                        <TextView
+                        <Spinner
                             android:id="@+id/pdBillC"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:text="個人電子發票"
-                            android:textColor="@color/c_21b7ff_100"
-                            android:textSize="15sp"
-                            app:layout_constraintEnd_toEndOf="@id/checkBox3"
-                            app:layout_constraintStart_toStartOf="@id/textView103"
-                            app:layout_constraintTop_toBottomOf="@id/textView103" />
+                            android:entries="@array/pd_1501"
+                            app:layout_constraintEnd_toEndOf="@+id/checkBox3"
+                            app:layout_constraintStart_toStartOf="@+id/textView103"
+                            app:layout_constraintTop_toBottomOf="@+id/textView103" />
 
                         <TextView
-                            android:id="@+id/pdTittle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
+                            android:id="@+id/pdTitle"
+                            style="@style/tvMemberList"
+                            android:layout_marginTop="16dp"
                             android:text="@string/pd_21"
                             android:textSize="16sp"
-                            android:textStyle="bold"
-                            app:layout_constraintStart_toStartOf="@id/pdBillC"
-                            app:layout_constraintTop_toBottomOf="@id/pdBillC" />
+                            app:layout_constraintStart_toStartOf="@+id/pdBillC"
+                            app:layout_constraintTop_toBottomOf="@+id/pdBillC" />
 
                         <TextView
                             android:id="@+id/pdBill001"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
                             android:text="@string/pd_22"
-                            app:layout_constraintEnd_toEndOf="@id/pdBillC"
-                            app:layout_constraintStart_toStartOf="@id/pdTittle"
-                            app:layout_constraintTop_toBottomOf="@id/pdTittle" />
+                            app:layout_constraintEnd_toEndOf="@+id/pdBillC"
+                            app:layout_constraintStart_toStartOf="@+id/pdTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/pdTitle" />
 
                         <EditText
-                            android:id="@+id/pdBill002"
+                            android:id="@+id/etInvoiceNumber"
                             android:layout_width="0dp"
                             android:layout_height="0dp"
                             android:layout_marginTop="8dp"
-                            android:background="@drawable/shape_round_gray"
-                            android:ems="10"
                             android:inputType="textPersonName"
                             android:textAlignment="center"
-                            app:layout_constraintEnd_toEndOf="@id/pdBill001"
-                            app:layout_constraintStart_toStartOf="@id/pdBill001"
-                            app:layout_constraintTop_toBottomOf="@id/pdBill001" />
+                            android:singleLine="true"
+                            android:background="@drawable/shape_round_gray"
+                            app:layout_constraintEnd_toEndOf="@+id/pdBill001"
+                            app:layout_constraintStart_toStartOf="@+id/pdBill001"
+                            app:layout_constraintTop_toBottomOf="@+id/pdBill001" />
 
                         <TextView
                             android:id="@+id/pdBill00201"
@@ -307,9 +302,9 @@
                             android:layout_height="0dp"
                             android:layout_marginTop="8dp"
                             android:text="@string/pd_24"
-                            app:layout_constraintEnd_toEndOf="@id/pdBill002"
-                            app:layout_constraintStart_toStartOf="@id/pdBill002"
-                            app:layout_constraintTop_toBottomOf="@id/pdBill002" />
+                            app:layout_constraintEnd_toEndOf="@+id/etInvoiceNumber"
+                            app:layout_constraintStart_toStartOf="@+id/etInvoiceNumber"
+                            app:layout_constraintTop_toBottomOf="@+id/etInvoiceNumber" />
 
                         <TextView
                             android:id="@+id/pdBill003"
@@ -318,12 +313,12 @@
                             android:layout_marginTop="8dp"
                             android:fontFamily="sans-serif-black"
                             android:text="@string/pd_25"
-                            app:layout_constraintEnd_toEndOf="@id/pdBill00201"
-                            app:layout_constraintStart_toStartOf="@id/pdBill00201"
-                            app:layout_constraintTop_toBottomOf="@id/pdBill00201" />
+                            app:layout_constraintEnd_toEndOf="@+id/pdBill00201"
+                            app:layout_constraintStart_toStartOf="@+id/pdBill00201"
+                            app:layout_constraintTop_toBottomOf="@+id/pdBill00201" />
 
                         <EditText
-                            android:id="@+id/pdBill00301"
+                            android:id="@+id/etCompanyTitle"
                             android:layout_width="0dp"
                             android:layout_height="0dp"
                             android:layout_marginTop="8dp"
@@ -342,12 +337,12 @@
                             android:layout_height="0dp"
                             android:layout_marginTop="8dp"
                             android:text="@string/pd_26"
-                            app:layout_constraintEnd_toEndOf="@+id/pdBill00301"
-                            app:layout_constraintStart_toStartOf="@+id/pdBill00301"
-                            app:layout_constraintTop_toBottomOf="@+id/pdBill00301" />
+                            app:layout_constraintEnd_toEndOf="@+id/etCompanyTitle"
+                            app:layout_constraintStart_toStartOf="@+id/etCompanyTitle"
+                            app:layout_constraintTop_toBottomOf="@+id/etCompanyTitle" />
 
                         <EditText
-                            android:id="@+id/pdBill00303"
+                            android:id="@+id/etUniformNo"
                             android:layout_width="0dp"
                             android:layout_height="0dp"
                             android:layout_marginTop="8dp"
@@ -365,10 +360,10 @@
                             android:layout_width="0dp"
                             android:layout_height="0dp"
                             android:layout_marginTop="8dp"
-                            android:text="@string/pd_211"
-                            app:layout_constraintEnd_toEndOf="@+id/pdBill00303"
-                            app:layout_constraintStart_toStartOf="@+id/pdBill00303"
-                            app:layout_constraintTop_toBottomOf="@+id/pdBill00303" />
+                            android:text="@string/pd_info_21"
+                            app:layout_constraintEnd_toEndOf="@+id/etUniformNo"
+                            app:layout_constraintStart_toStartOf="@+id/etUniformNo"
+                            app:layout_constraintTop_toBottomOf="@+id/etUniformNo" />
 
                         <EditText
                             android:id="@+id/pdBill00305"
@@ -394,6 +389,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/pdBill00305" />
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
