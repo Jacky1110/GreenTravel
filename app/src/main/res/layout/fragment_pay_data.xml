@@ -23,9 +23,9 @@
         android:id="@+id/pdBack"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/shape_round_orange_white"
         android:text="@string/pd_pack"
         android:textColor="@color/normal_red"
@@ -270,6 +270,7 @@
                             style="@style/tvMemberList"
                             android:layout_marginTop="16dp"
                             android:text="@string/pd_21"
+                            android:textColor="@color/black"
                             android:textSize="16sp"
                             app:layout_constraintStart_toStartOf="@+id/pdBillC"
                             app:layout_constraintTop_toBottomOf="@+id/pdBillC" />
@@ -288,10 +289,11 @@
                             android:layout_width="0dp"
                             android:layout_height="0dp"
                             android:layout_marginTop="8dp"
-                            android:inputType="textPersonName"
-                            android:textAlignment="center"
-                            android:singleLine="true"
                             android:background="@drawable/shape_round_gray"
+                            android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-."
+                            android:inputType="textPersonName"
+                            android:singleLine="true"
+                            android:textAlignment="center"
                             app:layout_constraintEnd_toEndOf="@+id/pdBill001"
                             app:layout_constraintStart_toStartOf="@+id/pdBill001"
                             app:layout_constraintTop_toBottomOf="@+id/pdBill001" />
@@ -301,7 +303,7 @@
                             android:layout_width="0dp"
                             android:layout_height="0dp"
                             android:layout_marginTop="8dp"
-                            android:text="@string/pd_24"
+                            android:text="@string/pd_22"
                             app:layout_constraintEnd_toEndOf="@+id/etInvoiceNumber"
                             app:layout_constraintStart_toStartOf="@+id/etInvoiceNumber"
                             app:layout_constraintTop_toBottomOf="@+id/etInvoiceNumber" />
@@ -356,14 +358,24 @@
                             app:layout_constraintTop_toBottomOf="@+id/pdBill00302" />
 
                         <TextView
+                            android:id="@+id/pdBill00202"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/pd_22"
+                            app:layout_constraintEnd_toEndOf="@+id/etUniformNo"
+                            app:layout_constraintStart_toStartOf="@+id/etUniformNo"
+                            app:layout_constraintTop_toBottomOf="@+id/etUniformNo" />
+
+                        <TextView
                             android:id="@+id/pdBill00304"
                             android:layout_width="0dp"
                             android:layout_height="0dp"
                             android:layout_marginTop="8dp"
                             android:text="@string/pd_info_21"
-                            app:layout_constraintEnd_toEndOf="@+id/etUniformNo"
-                            app:layout_constraintStart_toStartOf="@+id/etUniformNo"
-                            app:layout_constraintTop_toBottomOf="@+id/etUniformNo" />
+                            app:layout_constraintEnd_toEndOf="@+id/pdBill00202"
+                            app:layout_constraintStart_toStartOf="@+id/pdBill00202"
+                            app:layout_constraintTop_toBottomOf="@+id/pdBill00202" />
 
                         <EditText
                             android:id="@+id/pdBill00305"

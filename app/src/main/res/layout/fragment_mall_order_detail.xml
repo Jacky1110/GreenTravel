@@ -6,339 +6,332 @@
     android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:fillViewport="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView16"
-                style="@style/tvMemberList"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:gravity="center_vertical"
-                android:text="購買記錄  "
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/sd01"
-                style="@style/tvMemberList"
-                android:layout_marginStart="16dp"
-                android:gravity="center_vertical"
-                android:text="@string/mo_id"
-                app:layout_constraintEnd_toEndOf="@+id/textView16"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
-            <TextView
-                android:id="@+id/textView161"
-                style="@style/tvMemberList"
-                android:gravity="center_vertical"
-                android:text="@string/mo_date"
-                app:layout_constraintEnd_toEndOf="@+id/textView16"
-                app:layout_constraintStart_toStartOf="@+id/sd01"
-                app:layout_constraintTop_toBottomOf="@+id/sd01" />
-
-            <TextView
-                android:id="@+id/textView162"
-                style="@style/tvMemberList"
-                android:gravity="center_vertical"
-                android:text="@string/mo_dollar"
-                app:layout_constraintEnd_toEndOf="@+id/textView16"
-                app:layout_constraintStart_toStartOf="@+id/textView161"
-                app:layout_constraintTop_toBottomOf="@+id/textView161" />
-
-            <TextView
-                android:id="@+id/textView163"
-                style="@style/tvMemberList"
-                android:gravity="center_vertical"
-                android:text="@string/mo_status"
-                app:layout_constraintEnd_toEndOf="@+id/textView16"
-                app:layout_constraintStart_toStartOf="@+id/textView162"
-                app:layout_constraintTop_toBottomOf="@+id/textView162" />
-
-            <TextView
-                android:id="@+id/textView164"
-                style="@style/tvMemberList"
-                android:gravity="center_vertical"
-                android:text="@string/pay_status"
-                app:layout_constraintEnd_toEndOf="@+id/textView16"
-                app:layout_constraintStart_toStartOf="@+id/textView163"
-                app:layout_constraintTop_toBottomOf="@+id/textView163" />
-
-            <TextView
-                android:id="@+id/fdID"
-                style="@style/tvMemberText"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:text="202105260099"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/sd01"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/sd01"
-                app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
-            <TextView
-                android:id="@+id/fdDate"
-                style="@style/tvMemberText"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:text="@string/commodity_des"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/textView161"
-                app:layout_constraintEnd_toEndOf="@+id/fdID"
-                app:layout_constraintStart_toStartOf="@+id/fdID"
-                app:layout_constraintTop_toBottomOf="@+id/sd01" />
-
-            <TextView
-                android:id="@+id/fdCount"
-                style="@style/tvMemberText"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:text="@string/commodity_des"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/textView162"
-                app:layout_constraintEnd_toEndOf="@+id/fdDate"
-                app:layout_constraintStart_toStartOf="@+id/fdDate"
-                app:layout_constraintTop_toBottomOf="@+id/textView161" />
-
-            <TextView
-                android:id="@+id/fdOstatus"
-                style="@style/tvMemberText"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:text="@string/commodity_des"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/textView163"
-                app:layout_constraintEnd_toEndOf="@+id/fdCount"
-                app:layout_constraintStart_toStartOf="@+id/fdCount"
-                app:layout_constraintTop_toBottomOf="@+id/textView162" />
-
-            <TextView
-                android:id="@+id/fdPstatus"
-                style="@style/tvMemberText"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:text="@string/commodity_des"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/textView164"
-                app:layout_constraintEnd_toEndOf="@+id/fdOstatus"
-                app:layout_constraintStart_toStartOf="@+id/fdOstatus"
-                app:layout_constraintTop_toBottomOf="@+id/textView163" />
-
-            <TextView
-                android:id="@+id/fdDeliever"
-                style="@style/tvMemberText"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:text="@string/commodity_des"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                app:layout_constraintEnd_toEndOf="@+id/fdPstatus"
-                app:layout_constraintStart_toStartOf="@+id/fdPstatus"
-                app:layout_constraintTop_toBottomOf="@+id/textView164" />
-
-
-            <ScrollView
-                android:id="@+id/scrollView"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/con_purchase"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_margin="10dp"
+                android:background="@drawable/shape_round_outline_black"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView164">
+                app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_vertical"
+                    android:text="購買記錄  "
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/textView48"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:text="發票資訊"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"/>
+                <TextView
+                    android:id="@+id/sd01"
+                    style="@style/tvMemberList"
+                    android:layout_marginStart="16dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/mo_id"
+                    app:layout_constraintEnd_toEndOf="@+id/textView16"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/con_information"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView48">
+                <TextView
+                    android:id="@+id/textView161"
+                    style="@style/tvMemberList"
+                    android:gravity="center_vertical"
+                    android:text="@string/mo_date"
+                    app:layout_constraintEnd_toEndOf="@+id/textView16"
+                    app:layout_constraintStart_toStartOf="@+id/sd01"
+                    app:layout_constraintTop_toBottomOf="@+id/sd01" />
 
-                        <TextView
-                            android:id="@+id/textView47"
-                            style="@style/billText"
-                            android:text="發票類型:"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/textView162"
+                    style="@style/tvMemberList"
+                    android:gravity="center_vertical"
+                    android:text="@string/mo_dollar"
+                    app:layout_constraintEnd_toEndOf="@+id/textView16"
+                    app:layout_constraintStart_toStartOf="@+id/textView161"
+                    app:layout_constraintTop_toBottomOf="@+id/textView161" />
 
-                        <TextView
-                            android:id="@+id/tvBillType"
-                            style="@style/billValueText"
-                            android:text=""
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/textView47"
-                            app:layout_constraintTop_toTopOf="@+id/textView47" />
+                <TextView
+                    android:id="@+id/textView163"
+                    style="@style/tvMemberList"
+                    android:gravity="center_vertical"
+                    android:text="@string/mo_status"
+                    app:layout_constraintEnd_toEndOf="@+id/textView16"
+                    app:layout_constraintStart_toStartOf="@+id/textView162"
+                    app:layout_constraintTop_toBottomOf="@+id/textView162" />
 
-                        <TextView
-                            android:id="@+id/textView50"
-                            style="@style/billText"
-                            android:text="手機載具:"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView47" />
+                <TextView
+                    android:id="@+id/textView164"
+                    style="@style/tvMemberList"
+                    android:gravity="center_vertical"
+                    android:text="@string/pay_status"
+                    app:layout_constraintEnd_toEndOf="@+id/textView16"
+                    app:layout_constraintStart_toStartOf="@+id/textView163"
+                    app:layout_constraintTop_toBottomOf="@+id/textView163" />
 
-                        <TextView
-                            android:id="@+id/tvPhoneCarrier"
-                            style="@style/billValueText"
-                            android:text=""
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/textView50"
-                            app:layout_constraintTop_toTopOf="@+id/textView50" />
+                <TextView
+                    android:id="@+id/fdID"
+                    style="@style/tvMemberText"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="202105260099"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="@+id/sd01"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/sd01"
+                    app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
-                        <TextView
-                            android:id="@+id/textView51"
-                            style="@style/billText"
-                            android:text="統一編號:"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView50" />
+                <TextView
+                    android:id="@+id/fdDate"
+                    style="@style/tvMemberText"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:text="@string/commodity_des"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView161"
+                    app:layout_constraintEnd_toEndOf="@+id/fdID"
+                    app:layout_constraintStart_toStartOf="@+id/fdID"
+                    app:layout_constraintTop_toBottomOf="@+id/sd01" />
 
-                        <TextView
-                            android:id="@+id/tvUniformNumbers"
-                            style="@style/billValueText"
-                            android:text=""
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/textView51"
-                            app:layout_constraintTop_toTopOf="@+id/textView51" />
+                <TextView
+                    android:id="@+id/fdCount"
+                    style="@style/tvMemberText"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:text="@string/commodity_des"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView162"
+                    app:layout_constraintEnd_toEndOf="@+id/fdDate"
+                    app:layout_constraintStart_toStartOf="@+id/fdDate"
+                    app:layout_constraintTop_toBottomOf="@+id/textView161" />
 
-                        <TextView
-                            android:id="@+id/textView52"
-                            style="@style/billText"
-                            android:text="發票抬頭:"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView51" />
+                <TextView
+                    android:id="@+id/fdOstatus"
+                    style="@style/tvMemberText"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:text="@string/commodity_des"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView163"
+                    app:layout_constraintEnd_toEndOf="@+id/fdCount"
+                    app:layout_constraintStart_toStartOf="@+id/fdCount"
+                    app:layout_constraintTop_toBottomOf="@+id/textView162" />
 
-                        <TextView
-                            android:id="@+id/tvInvoice"
-                            style="@style/billValueText"
-                            android:text=""
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/textView52"
-                            app:layout_constraintTop_toTopOf="@+id/textView52" />
+                <TextView
+                    android:id="@+id/fdPstatus"
+                    style="@style/tvMemberText"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:text="@string/commodity_des"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView164"
+                    app:layout_constraintEnd_toEndOf="@+id/fdOstatus"
+                    app:layout_constraintStart_toStartOf="@+id/fdOstatus"
+                    app:layout_constraintTop_toBottomOf="@+id/textView163" />
 
-                        <TextView
-                            android:id="@+id/textView53"
-                            style="@style/billText"
-                            android:text="發票號碼:"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView52" />
+                <TextView
+                    android:id="@+id/fdDeliever"
+                    style="@style/tvMemberText"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:text="@string/commodity_des"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="@+id/fdPstatus"
+                    app:layout_constraintStart_toStartOf="@+id/fdPstatus"
+                    app:layout_constraintTop_toBottomOf="@+id/textView164" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                        <TextView
-                            android:id="@+id/tvInvoiceNumber"
-                            style="@style/billValueText"
-                            android:text=""
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/textView53"
-                            app:layout_constraintTop_toTopOf="@+id/textView53" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/con_information"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:background="@drawable/shape_round_outline_black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/con_purchase">
 
-                        <TextView
-                            android:id="@+id/textView54"
-                            style="@style/billText"
-                            android:text="發票狀態:"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView53" />
+                <TextView
+                    android:id="@+id/textView48"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="發票資訊"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
-                            android:id="@+id/tvInvoiceStatus"
-                            style="@style/billValueText"
-                            android:text=""
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/textView54"
-                            app:layout_constraintTop_toTopOf="@+id/textView54" />
+                <TextView
+                    android:id="@+id/textView47"
+                    style="@style/billText"
+                    android:text="發票類型:"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView48" />
 
-                        <TextView
-                            android:id="@+id/textView55"
-                            style="@style/billText"
-                            android:text="開立時間:"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView54" />
+                <TextView
+                    android:id="@+id/tvBillType"
+                    style="@style/billValueText"
+                    android:text=""
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView47"
+                    app:layout_constraintTop_toTopOf="@+id/textView47" />
 
-                        <TextView
-                            android:id="@+id/tvOpeningTime"
-                            style="@style/billValueText"
-                            android:text=""
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/textView55"
-                            app:layout_constraintTop_toTopOf="@+id/textView55" />
+                <TextView
+                    android:id="@+id/textView50"
+                    style="@style/billText"
+                    android:text="手機載具:"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView47" />
 
-                        <TextView
-                            android:id="@+id/textView56"
-                            style="@style/billText"
-                            android:text="隨機碼:"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView55" />
+                <TextView
+                    android:id="@+id/tvPhoneCarrier"
+                    style="@style/billValueText"
+                    android:text=""
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView50"
+                    app:layout_constraintTop_toTopOf="@+id/textView50" />
 
-                        <TextView
-                            android:id="@+id/tvRandomCode"
-                            style="@style/billValueText"
-                            android:text=""
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/textView56"
-                            app:layout_constraintTop_toTopOf="@+id/textView56" />
+                <TextView
+                    android:id="@+id/textView51"
+                    style="@style/billText"
+                    android:text="統一編號:"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView50" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/tvUniformNumbers"
+                    style="@style/billValueText"
+                    android:text=""
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView51"
+                    app:layout_constraintTop_toTopOf="@+id/textView51" />
 
-                    <TextView
-                        android:id="@+id/textView23"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginStart="10dp"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:text="訂單明細"
-                        app:layout_constraintBottom_toTopOf="@+id/rcPdd"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/con_information" />
+                <TextView
+                    android:id="@+id/textView52"
+                    style="@style/billText"
+                    android:text="發票抬頭:"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView51" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rcPdd"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView23" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </ScrollView>
+                <TextView
+                    android:id="@+id/tvInvoice"
+                    style="@style/billValueText"
+                    android:text=""
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView52"
+                    app:layout_constraintTop_toTopOf="@+id/textView52" />
 
+                <TextView
+                    android:id="@+id/textView53"
+                    style="@style/billText"
+                    android:text="發票號碼:"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView52" />
 
+                <TextView
+                    android:id="@+id/tvInvoiceNumber"
+                    style="@style/billValueText"
+                    android:text=""
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView53"
+                    app:layout_constraintTop_toTopOf="@+id/textView53" />
+
+                <TextView
+                    android:id="@+id/textView54"
+                    style="@style/billText"
+                    android:text="發票狀態:"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView53" />
+
+                <TextView
+                    android:id="@+id/tvInvoiceStatus"
+                    style="@style/billValueText"
+                    android:text=""
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView54"
+                    app:layout_constraintTop_toTopOf="@+id/textView54" />
+
+                <TextView
+                    android:id="@+id/textView55"
+                    style="@style/billText"
+                    android:text="開立時間:"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView54" />
+
+                <TextView
+                    android:id="@+id/tvOpeningTime"
+                    style="@style/billValueText"
+                    android:text=""
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView55"
+                    app:layout_constraintTop_toTopOf="@+id/textView55" />
+
+                <TextView
+                    android:id="@+id/textView56"
+                    style="@style/billText"
+                    android:text="隨機碼:"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView55" />
+
+                <TextView
+                    android:id="@+id/tvRandomCode"
+                    style="@style/billValueText"
+                    android:text=""
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView56"
+                    app:layout_constraintTop_toTopOf="@+id/textView56" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/con_order"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/con_information">
+
+                <TextView
+                    android:id="@+id/textView23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="10dp"
+                    android:text="訂單明細"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcPdd"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/cdTotal"
@@ -349,8 +342,8 @@
                 android:text="@string/pd_16"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/scrollView"
-                app:layout_constraintTop_toBottomOf="@+id/scrollView" />
+                app:layout_constraintStart_toStartOf="@+id/con_order"
+                app:layout_constraintTop_toBottomOf="@+id/con_order" />
 
             <TextView
                 android:id="@+id/cdBonus"

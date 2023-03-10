@@ -142,6 +142,7 @@ class PayDataFragment : ProjConstraintFragment() {
                                 pdBill00304.layoutParams.height = 0
                                 pdBill00305.layoutParams.height = 0
                                 pdBill00201.layoutParams.height = 0
+                                pdBill00202.layoutParams.height = 0
 
                             }
                             1 -> {
@@ -155,11 +156,14 @@ class PayDataFragment : ProjConstraintFragment() {
                                 etUniformNo.layoutParams.height = 0
                                 pdBill00304.layoutParams.height = 0
                                 pdBill00305.layoutParams.height = 0
+                                pdBill00202.layoutParams.height = 0
 
                             }
                             2 -> {
                                 pdBillC.setSelection(2)
+                                pdBill00202.layoutParams.height = height
                                 etInvoiceNumber.layoutParams.height = 0
+                                pdBill001.layoutParams.height = 0
                                 pdBill00201.layoutParams.height = 0
                                 pdBill003.layoutParams.height = height
                                 etCompanyTitle.layoutParams.height = height//edittext
@@ -179,6 +183,15 @@ class PayDataFragment : ProjConstraintFragment() {
     private fun checkValue() {
         binding.apply {
 
+            if (etCompanyTitle.text.equals("")) {
+
+                showDialogView("注意", "發票抬頭未填寫")
+
+            } else if (etCompanyTitle.text.equals("") && etUniformNo.text.equals("")) {
+
+                showDialogView("注意", "統一編號格式不符\n發票抬頭未填寫")
+            }
+
             when (invoiceType) {
 
                 0 -> {
@@ -186,7 +199,7 @@ class PayDataFragment : ProjConstraintFragment() {
                 }
 
                 1 -> {
-                    if (etInvoiceNumber.length() == 8 && etInvoiceNumber.text.toString()
+                    if (etInvoiceNumber.length() == 8 || etInvoiceNumber.text.toString()
                             .contains("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-.")
                     ) {
 
@@ -194,21 +207,32 @@ class PayDataFragment : ProjConstraintFragment() {
 
                     } else {
 
-                        showDialogView("注意", "手機載具條件格式不符")
+                        showDialogView("注意", "手機載具條碼條件格式不符")
 
                     }
                 }
 
                 2 -> {
-                    if (etUniformNo.length() == 8) {
+                    if (etUniformNo.length() == 8 && etCompanyTitle.length() > 1) {
 
                         Pay()
 
-                    } else {
+                    }
+                    if (etCompanyTitle.length() < 1 && etUniformNo.length() < 1) {
+
+                        showDialogView("注意", "統一編號格式不符\n發票抬頭未填寫")
+
+                    } else if (etCompanyTitle.length() < 1) {
+
+                        showDialogView("注意", "發票抬頭未填寫")
+
+                    }
+                    if (etUniformNo.length() != 8 && etCompanyTitle.length() > 1) {
 
                         showDialogView("注意", "統一編號格式不符")
 
                     }
+
                 }
             }
         }

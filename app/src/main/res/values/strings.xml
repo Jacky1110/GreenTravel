@@ -24,7 +24,7 @@
     <string name="use_point">使用點數:</string>
     <string name="pd_11">優惠券</string>
     <string name="pd_14">紅利點數折抵 本單可折抵 $0</string>
-    <string name="pd_15"><font color="#FF0000">*</font> 開立發票方式</string>
+    <string name="pd_15"><font color="#FF0000">*</font> 發票開立資訊</string>
     <string name="pd_21">發票資料</string>
     <string name="pd_22">響應電子化發票，發票將寄送至您的E-MAIL。提醒您，發票一旦開立，不得任意更改或改開發票。</string>
     <string name="pd_23">載具號碼</string>
@@ -195,10 +195,10 @@ App服務的參考依據，此記錄為內部應用，決不對外公佈。
             個人電子發票
         </item>
         <item>
-            手機載具
+            手機條碼載具
         </item>
         <item>
-         統一編號電子發票
+         三聯式發票
         </item>
 
 

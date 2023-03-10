@@ -147,7 +147,7 @@ class MallOrderDetailFragment : ProjConstraintFragment() {
                                         CustomDaialog.showNormal(
                                             requireActivity(),
                                             "",
-                                            code + "  " + responseMessage,
+                                            "$code  $responseMessage",
                                             "確定",
                                             object : CustomDaialog.OnBtnClickListener {
                                                 override fun onCheck() {}
@@ -160,6 +160,7 @@ class MallOrderDetailFragment : ProjConstraintFragment() {
 
                                 }
                             } catch (e: Exception) {
+
                             }
                             try {
                                 requireActivity().runOnUiThread {
@@ -170,6 +171,13 @@ class MallOrderDetailFragment : ProjConstraintFragment() {
                                         for (i in 0 until jA.length()) {
                                             val pro = jA[i] as JSONObject
                                             val type = pro.getString("invoicetype")
+                                            val invoicePhone = pro.getString("invoicephone")
+                                            val uniformNo = pro.getString("uniformno")
+                                            val companyTitle = pro.getString("companytitle")
+                                            val invoiceNo = pro.getString("invoiceno")
+                                            val invoiceStatus = pro.getString("invoicestatus")
+                                            val invoiceDate = pro.getString("invoicedate")
+                                            val randomNo = pro.getString("randomno")
                                             binding.apply {
                                                 fdID.text = pro.getString("order_no")
                                                 fdDate.text = pro.getString("order_date")
@@ -189,14 +197,73 @@ class MallOrderDetailFragment : ProjConstraintFragment() {
                                                     }
 
                                                 }
-                                                tvPhoneCarrier.text = pro.getString("invoicephone")
-                                                tvUniformNumbers.text = pro.getString("uniformno")
-                                                tvInvoice.text = pro.getString("companytitle")
-//                                                tvInvoiceNumber.text = pro.getString("")
-                                                tvInvoiceStatus.text =
-                                                    pro.getString("invoicestatus")
-                                                tvOpeningTime.text = pro.getString("invoicedate")
-                                                tvRandomCode.text = pro.getString("randomno")
+                                                if (invoicePhone == "null") {
+
+                                                    tvPhoneCarrier.text = "---"
+
+                                                } else {
+
+                                                    tvPhoneCarrier.text = invoicePhone
+
+                                                }
+
+                                                if (uniformNo == "null") {
+
+                                                    tvUniformNumbers.text = "---"
+
+                                                } else {
+
+                                                    tvUniformNumbers.text = uniformNo
+                                                }
+
+                                                if (companyTitle == "null") {
+
+                                                    tvInvoice.text = "---"
+
+                                                } else {
+
+                                                    tvInvoice.text = companyTitle
+
+                                                }
+
+                                                if (invoiceNo == "null") {
+
+                                                    tvInvoiceNumber.text = "---"
+
+                                                } else {
+
+                                                    tvInvoiceNumber.text = invoiceNo
+
+                                                }
+
+                                                if (invoiceStatus == "1") {
+
+                                                    tvInvoiceStatus.text = "已開立"
+
+                                                } else {
+
+                                                    tvInvoiceStatus.text = "未開立發票"
+
+                                                }
+
+                                                if (invoiceDate == "null") {
+
+                                                    tvOpeningTime.text = "---"
+
+                                                } else {
+
+                                                    tvOpeningTime.text = invoiceDate
+                                                }
+
+                                                if (randomNo == "null") {
+
+                                                    tvRandomCode.text = "---"
+
+                                                } else {
+
+                                                    tvRandomCode.text = randomNo
+
+                                                }
                                             }
 
                                             StausText(
