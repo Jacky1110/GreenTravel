@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +23,7 @@ import com.jotangi.greentravel.Api.ApiEnqueue;
 import com.jotangi.greentravel.CouponActivity;
 import com.jotangi.greentravel.ProjConstraintFragment;
 import com.jotangi.greentravel.R;
+import com.jotangi.greentravel.RegisterCouponFragment;
 import com.jotangi.greentravel.ui.account.AccountLoginFragment;
 
 import org.json.JSONArray;
@@ -54,6 +56,7 @@ public class CouponListFragment extends ProjConstraintFragment {
 
     static ArrayList<CouponModel> couponList = new ArrayList<>(); //可以使用
     static ArrayList<UnCouponModel> couponList2 = new ArrayList<>(); //已過期或已使用
+
 
     public static CouponListFragment newInstance() {
         CouponListFragment fragment = new CouponListFragment();
@@ -224,29 +227,71 @@ public class CouponListFragment extends ProjConstraintFragment {
 
                             Log.d(TAG, "data.size: " + couponList.size());
 
-                            requireActivity().runOnUiThread(() -> {
-                                pagerAdapter = new PagerAdapter();
-                                pagerAdapter.setData(couponList);
-                                recyclerView.setAdapter(pagerAdapter);
-                                pagerAdapter.setClickListener(useClick);
-                            });
+                            getCouponList();
 
-                            swipe_refresh.setOnRefreshListener(() -> {
-                                //延迟2秒设置不刷新,模拟耗时操作，需要放在子线程中
-                                new Handler().postDelayed(() -> {
-                                    requireActivity().runOnUiThread(() -> {
-
-                                        pagerAdapter.setData(couponList);
-                                        recyclerView.setAdapter(pagerAdapter);
-                                        swipe_refresh.setRefreshing(false);//设置是否刷新
-                                    });
-
-                                }, 1000);
-                            });
 
                         } catch (JSONException exception) {
                             exception.printStackTrace();
                         }
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(String message) {
+
+            }
+        });
+    }
+
+    private void getCouponList() {
+        String type = "0";
+        apiEnqueue.getNewMemberCoupon(type, new ApiEnqueue.resultListener() {
+            @Override
+            public void onSuccess(String message) {
+                requireActivity().runOnUiThread(() -> {
+                    try {
+                        JSONArray couArray = new JSONArray(message);
+                        for (int i = 0; i < couArray.length(); i++) {
+                            CouponModel model = new CouponModel();
+                            JSONObject jsonObject = (JSONObject) couArray.get(i);
+                            Log.d("TAG", "jsonObject(1): " + jsonObject);
+
+                            model.product_name = jsonObject.getString("coupon_name");
+                            model.order_date = jsonObject.getString("coupon_enddate");
+                            model.product_picture = jsonObject.getString("coupon_picture");
+                            Log.d(TAG, "coupon_picture: " + model.product_picture);
+                            model.couponId = jsonObject.getString("coupon_id");
+                            model.couponDescription = jsonObject.getString("coupon_description");
+                            couponList.add(model);
+
+                        }
+
+                        Log.d(TAG, "data.size: " + couponList.size());
+
+                        requireActivity().runOnUiThread(() -> {
+                            pagerAdapter = new PagerAdapter();
+                            pagerAdapter.setData(couponList);
+                            recyclerView.setAdapter(pagerAdapter);
+                            pagerAdapter.setClickListener(useClick);
+                        });
+
+                        swipe_refresh.setOnRefreshListener(() -> {
+                            //延迟2秒设置不刷新,模拟耗时操作，需要放在子线程中
+                            new Handler().postDelayed(() -> {
+                                requireActivity().runOnUiThread(() -> {
+
+                                    pagerAdapter.setData(couponList);
+                                    recyclerView.setAdapter(pagerAdapter);
+                                    swipe_refresh.setRefreshing(false);//设置是否刷新
+                                });
+
+                            }, 1000);
+                        });
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
                 });
             }
@@ -325,6 +370,8 @@ public class CouponListFragment extends ProjConstraintFragment {
 
                         }
 
+                        getUnCouponList();
+
 
 //                        if (qrconfirm.equals(null)) {
 //                            runOnUiThread(() -> {
@@ -334,6 +381,47 @@ public class CouponListFragment extends ProjConstraintFragment {
 //                            });
 //                        }
 //                    }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+
+
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(String message) {
+
+            }
+        });
+    }
+
+    private void getUnCouponList() {
+        String type = "1";
+        apiEnqueue.getNewMemberCoupon(type, new ApiEnqueue.resultListener() {
+            @Override
+            public void onSuccess(String message) {
+                requireActivity().runOnUiThread(() -> {
+                    try {
+                        JSONArray couArray = new JSONArray(message);
+                        for (int i = 0; i < couArray.length(); i++) {
+                            UnCouponModel model = new UnCouponModel();
+                            JSONObject jsonObject = (JSONObject) couArray.get(i);
+                            Log.d("TAG", "jsonObject(1): " + jsonObject);
+
+                            model.name = jsonObject.getString("coupon_name");
+                            model.day = jsonObject.getString("coupon_enddate");
+                            model.pic = jsonObject.getString("coupon_picture");
+                            Log.d(TAG, "coupon_picture: " + model.pic);
+                            model.couponId = jsonObject.getString("coupon_id");
+                            model.couponDescription = jsonObject.getString("coupon_description");
+                            couponList2.add(model);
+
+                        }
+
+                        Log.d(TAG, "data.size: " + couponList.size());
 
                         requireActivity().runOnUiThread(() -> {
                             unpageAdapter = new UnPageAdapter();
@@ -355,8 +443,6 @@ public class CouponListFragment extends ProjConstraintFragment {
 
                     } catch (JSONException e) {
                         e.printStackTrace();
-
-
                     }
                 });
             }
@@ -366,6 +452,7 @@ public class CouponListFragment extends ProjConstraintFragment {
 
             }
         });
+
     }
 
     private PagerAdapter.ItemClickListener useClick = new PagerAdapter.ItemClickListener() {
@@ -374,7 +461,20 @@ public class CouponListFragment extends ProjConstraintFragment {
             Log.d(TAG, "position: " + position);
 
             // 在首頁，且 單一商品的 position
-            if (couponList.get(position).product.isEmpty()) {
+            if (!couponList.get(position).couponId.isEmpty()) {
+
+                FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.nav_host_fragment_activity_main,
+                        RegisterCouponFragment.newInstance(
+                                couponList.get(position).product_name,
+                                couponList.get(position).order_date,
+                                couponList.get(position).product_picture,
+                                couponList.get(position).couponDescription,
+                                couponList.get(position).couponId));
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+            } else if (couponList.get(position).product.isEmpty()) {
 
                 intent = new Intent();
                 intent.putExtra("qrconfirm", couponList.get(position).qrconfirm);

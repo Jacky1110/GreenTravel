@@ -1,5 +1,7 @@
 package com.jotangi.greentravel.PagerStore;
 
+import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.jotangi.greentravel.Api.ApiUrl;
 import com.jotangi.greentravel.R;
 import com.squareup.picasso.Picasso;
@@ -74,14 +77,26 @@ public class PagerAdapter extends RecyclerView.Adapter<PagerAdapter.ViewHolder> 
         } else {
             holder.orderNoTV.setText("店家名稱: " + mData.get(position).store_name);
             holder.buyDateTV.setVisibility(View.GONE);
-        }if (mData.get(position).product.isEmpty()) {
+        }
+        if (mData.get(position).product.isEmpty()) {
             holder.buyDateTV.setText("購買日期: " + mData.get(position).order_date);
             holder.orderNoTV.setText("訂單編號: " + mData.get(position).order_no);
             holder.mathTV.setText("數量: " + mData.get(position).order_qty);
-        } else{
+        } else {
             holder.buyDateTV.setText("購買日期: " + mData.get(position).order_date);
             holder.orderNoTV.setText("訂單編號: " + mData.get(position).order_no);
             holder.mathTV.setText("票券數量: " + mData.get(position).order_qty);
+
+        }
+
+        if (!mData.get(position).couponId.isEmpty()) {
+            holder.orderNoTV.setText("店家名稱: " + mData.get(position).store_name);
+            holder.buyDateTV.setText("有效期限: " + mData.get(position).order_date);
+            Glide.with(holder.itemView)
+                    .load(mData.get(position).product_picture).into(holder.iconIV);
+            Log.d(TAG, "onBindViewHolder: " + mData.get(position).product_picture);
+            holder.orderNoTV.setVisibility(View.GONE);
+            holder.mathTV.setVisibility(View.GONE);
 
         }
 
@@ -115,6 +130,10 @@ class CouponModel {
     String order_qty = "";
 
     String product = "";
+
+    String couponId = "";
+
+    String couponDescription = "";
 }
 
 

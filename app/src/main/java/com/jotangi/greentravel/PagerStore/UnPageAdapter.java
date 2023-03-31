@@ -1,5 +1,6 @@
 package com.jotangi.greentravel.PagerStore;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.jotangi.greentravel.Api.ApiUrl;
 import com.jotangi.greentravel.R;
 import com.squareup.picasso.Picasso;
@@ -60,10 +63,30 @@ public class UnPageAdapter extends RecyclerView.Adapter<UnPageAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Picasso.get().load(ApiUrl.API_URL + "ticketec/" + mData.get(position).pic).into(holder.pic);
-        holder.Id.setText(mData.get(position).id);
+
+        String imagerUrl = mData.get(position).pic;
         holder.Name.setText(mData.get(position).name);
-        holder.Day.setText(mData.get(position).day);
+        if (!mData.get(position).couponId.isEmpty()) {
+            Log.d(TAG, "imagerUrl123: " + mData.get(position).pic);
+            Glide.with(holder.itemView)
+                    .load(imagerUrl)
+                    .into(holder.pic);
+
+//            Picasso.get()
+//                    .load(mData.get(position).pic)
+//                    .resize(100, 0)
+//                    .into(holder.pic);
+            holder.Day.setText("有效期限：" + mData.get(position).day);
+            holder.Id.setVisibility(View.INVISIBLE);
+
+
+        } else {
+            Log.d(TAG, "imagerUrl: " + mData.get(position).pic);
+            Picasso.get().load(ApiUrl.API_URL + "ticketec/" + mData.get(position).pic).into(holder.pic);
+            holder.Day.setText("購買日期：" + mData.get(position).day);
+            holder.Id.setText("訂單編號：" + mData.get(position).id);
+        }
+
 
     }
 
@@ -81,10 +104,18 @@ public class UnPageAdapter extends RecyclerView.Adapter<UnPageAdapter.ViewHolder
 
 class UnCouponModel {
     String pic = "";
+
     String name = "";
+
     String day = "";
+
     String id = "";
+
     String product = "";
+
+    String couponId = "";
+
+    String couponDescription = "";
 }
 
 

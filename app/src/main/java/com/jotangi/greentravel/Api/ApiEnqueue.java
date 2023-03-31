@@ -76,6 +76,9 @@ public class ApiEnqueue {
     public final String TASK_PRODUCT_LIST = "TASK_PRODUCT_LIST";
     public final String TASK_ECORDER_INVOICE = "TASK_ECORDER_INVOICE";
     public final String TASK_ADD_ECORDER = "TASK_ADD_ECORDER";
+    public final String TASK_STORETYPE_LIST = "TASK_STORETYPE_LIST";
+    public final String TASK_GET_NEW_MEMBER_COUPON = "TASK_GET_NEW_MEMBER_COUPON";
+    public final String TASK_NEW_MEMBER_COUPON_CONFIRM = "TASK_NEW_MEMBER_COUPON_CONFIRM";
 
 
     // 1.使用者登入
@@ -362,7 +365,7 @@ public class ApiEnqueue {
     }
 
     // 17.商店列表
-    public void storeList(resultListener listen) {
+    public void storeList(String storeType, resultListener listen) {
 
         runTask = TASK_STORE_LIST;
 
@@ -374,9 +377,11 @@ public class ApiEnqueue {
         FormBody formBody = new FormBody.Builder()
                 .add("member_id", MemberBean.member_id)
                 .add("member_pwd", MemberBean.member_pwd)
+                .add("store_type", storeType)
                 .build();
         Log.d(TAG, "member_id: " + MemberBean.member_id);
         Log.d(TAG, "member_pwd: " + MemberBean.member_pwd);
+        Log.d(TAG, "storeList: " + storeType);
 
         runOkHttp(url, formBody);
     }
@@ -970,6 +975,59 @@ public class ApiEnqueue {
 
     }
 
+    // 47.商店類別列表
+    public void storetypeList(resultListener listen) {
+
+        runTask = TASK_STORETYPE_LIST;
+
+        listener = listen;
+
+        String url = ApiUrl.API_URL + ApiUrl.storetype_list;
+
+        FormBody formBody = new FormBody.Builder()
+                .add("member_id", MemberBean.member_id)
+                .add("member_pwd", MemberBean.member_pwd)
+                .build();
+
+        runOkHttps(url, formBody);
+    }
+
+    //48.	新會員好禮優惠卷
+    public void getNewMemberCoupon(String type, resultListener listen) {
+
+        runTask = TASK_GET_NEW_MEMBER_COUPON;
+
+        listener = listen;
+
+        String url = ApiUrl.API_URL + ApiUrl.get_newmember_coupon;
+
+        FormBody formBody = new FormBody.Builder()
+                .add("member_id", MemberBean.member_id)
+                .add("member_pwd", MemberBean.member_pwd)
+                .add("confirm_type", type)
+                .build();
+
+        runOkHttps(url, formBody);
+    }
+
+    //49.	新會員好禮核銷(領取)
+    public void newMemberCouponConfirm(String couponId, resultListener listen) {
+
+        runTask = TASK_NEW_MEMBER_COUPON_CONFIRM;
+
+        listener = listen;
+
+        String url = ApiUrl.API_URL + ApiUrl.newmember_coupon_confirm;
+
+        FormBody formBody = new FormBody.Builder()
+                .add("member_id", MemberBean.member_id)
+                .add("member_pwd", MemberBean.member_pwd)
+                .add("coupon_id", couponId)
+                .build();
+
+        runOkHttps(url, formBody);
+    }
+
 
     private void runOkHttps(String url, RequestBody requestBody) {
         Request request = new Request.Builder().url(url).post(requestBody).build();
@@ -1203,6 +1261,16 @@ public class ApiEnqueue {
             // 46.新增商城訂單發票
             case TASK_ECORDER_INVOICE:
                 taskEcorderInvoice(body, TASK_ECORDER_INVOICE);
+                break;
+
+            case TASK_STORETYPE_LIST:
+                taskStoretypeList(body);
+                break;
+            case TASK_GET_NEW_MEMBER_COUPON:
+                TaskGetNewMemberCoupon(body);
+                break;
+            case TASK_NEW_MEMBER_COUPON_CONFIRM:
+                taskNewMemberCouponConfirm(body, TASK_NEW_MEMBER_COUPON_CONFIRM);
                 break;
 
 
@@ -1698,6 +1766,7 @@ public class ApiEnqueue {
     // 37.新增取得banner資訊
     private void taskBannerList(String body) {
         listener.onSuccess(body);
+
     }
 
     // 39.設定會員推播token
@@ -1778,6 +1847,57 @@ public class ApiEnqueue {
     }
 
     private void taskEcorderInvoice(String body, String task) {
+        try {
+            // JASON需要try/catch
+            JSONObject jsonObject = new JSONObject(body);
+            String code = jsonObject.getString("code");
+            // code = "0x0200"
+            Log.d(TAG, "code: " + code);
+            String responseMessage = jsonObject.getString("responseMessage");
+            Log.d(TAG, "responseMessage: " + responseMessage);
+
+            // 判斷 A.equals(B)
+            if ("0x0200".equals(code)) {
+                listener.onSuccess(responseMessage);
+            } else {
+                listener.onFailure(responseMessage);
+            }
+        } catch (JSONException e) {
+            Log.d(TAG, task + " 剖析失敗：欄位不存在");
+            e.printStackTrace();
+        }
+    }
+
+    private void taskStoretypeList(String body) {
+
+        try {
+            JSONObject jsonObject = new JSONObject(body);
+            String code = jsonObject.getString("code");
+            Log.d(TAG, "code: " + code);
+            String info = jsonObject.getString("info");
+            if ("0x0200".equals(code)) {
+                listener.onSuccess(info);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void TaskGetNewMemberCoupon(String body) {
+        try {
+            JSONObject jsonObject = new JSONObject(body);
+            String code = jsonObject.getString("code");
+            Log.d(TAG, "code: " + code);
+            String info = jsonObject.getString("info");
+            if ("0x0200".equals(code)) {
+                listener.onSuccess(info);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void taskNewMemberCouponConfirm(String body, String task) {
         try {
             // JASON需要try/catch
             JSONObject jsonObject = new JSONObject(body);

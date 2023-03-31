@@ -103,6 +103,13 @@ public class ApiUrl {
     public static final String storeadmin_set_notify = "ticketec/api/storeadmin_set_notify.php";
     //46.   新增商城訂單發票
     public static final String ecorder_invoice = "ticketec/api/ecorder_invoice.php";
+    //47.	商店類別列表
+    public static final String storetype_list = "ticketec/api/storetype_list.php";
+    //48.	新會員好禮優惠卷
+    public static final String get_newmember_coupon = "ticketec/api/get_newmember_coupon.php";
+    //49.	新會員好禮核銷(領取)
+    public static final String newmember_coupon_confirm = "ticketec/api/newmember_coupon_confirm.php";
+
 
 
     public static String user_register;

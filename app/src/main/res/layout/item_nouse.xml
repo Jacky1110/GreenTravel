@@ -8,7 +8,6 @@
         android:id="@+id/sdIg2"
         android:layout_width="100dp"
         android:layout_height="0dp"
-        android:scaleType="centerInside"
         app:layout_constraintBottom_toBottomOf="@id/view6"
         app:layout_constraintStart_toStartOf="@id/view6"
         app:layout_constraintTop_toTopOf="@id/view6"
@@ -50,28 +49,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:fontFamily="sans-serif-condensed-light"
-                android:text="商品名稱:體驗券"
+                android:text="體驗券"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:fontFamily="sans-serif-condensed-light"
-                    android:text="購買日期："
-                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/ex_day"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     android:fontFamily="sans-serif-condensed-light"
                     android:text="2022-05-19"
                     android:textColor="@color/black" />
@@ -80,22 +72,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:fontFamily="sans-serif-condensed-light"
-                    android:text="訂單編號："
-                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/ex_id"
-                    style="@style/tvMemberList"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     android:fontFamily="sans-serif-condensed-light"
                     android:text="202203456789"
                     android:textColor="@color/black" />

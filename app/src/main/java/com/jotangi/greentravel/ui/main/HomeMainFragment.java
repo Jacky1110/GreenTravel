@@ -138,7 +138,8 @@ public class HomeMainFragment extends ProjConstraintFragment implements View.OnC
         recyView.setLayoutManager(new GridLayoutManager(requireActivity(), 2));
 //        initCategoryRecyclerView();
 
-        apiStoreList();
+//        apiStoreList();
+        apiTicketList();
     }
 
 //    private void initCategoryRecyclerView() {
@@ -186,7 +187,9 @@ public class HomeMainFragment extends ProjConstraintFragment implements View.OnC
 
             @Override
             public void onFailure(String message) {
-
+                requireActivity().runOnUiThread(() ->{
+                    apiTicketList();
+                });
             }
         });
 
@@ -285,7 +288,7 @@ public class HomeMainFragment extends ProjConstraintFragment implements View.OnC
                             data.add(model);
                         }
 
-                        getActivity().runOnUiThread(() -> {
+                        requireActivity().runOnUiThread(() -> {
                             adapter = new HomePageAdapter();
                             adapter.setmData(data);
                             recyView.setAdapter(adapter);

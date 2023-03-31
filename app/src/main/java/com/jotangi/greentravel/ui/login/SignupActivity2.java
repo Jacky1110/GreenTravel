@@ -14,6 +14,7 @@ import com.jotangi.greentravel.Base.BaseActivity;
 import com.jotangi.greentravel.Api.ApiUrl;
 import com.jotangi.greentravel.Keychain;
 import com.jotangi.greentravel.R;
+import com.jotangi.greentravel.ui.hPayMall.MemberBean;
 import com.jotangi.jotangi2022.ApiConUtils;
 
 public class SignupActivity2 extends BaseActivity implements View.OnClickListener {
@@ -100,6 +101,7 @@ public class SignupActivity2 extends BaseActivity implements View.OnClickListene
                     @Override
                     public void run() {
                         progressBar.setVisibility(View.GONE);
+                        MemberBean.member_pwd = pw1;
                         AppUtility.showMyDialog(SignupActivity2.this, jsonString, "確認", null, new AppUtility.OnBtnClickListener() {
                             @Override
                             public void onCheck() {

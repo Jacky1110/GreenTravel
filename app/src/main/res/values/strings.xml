@@ -143,6 +143,7 @@ App服務的參考依據，此記錄為內部應用，決不對外公佈。
     <string name="button_register">註冊會員</string>
 
     <string name="sex">性別</string>
+    <string name="store">推薦店家</string>
     <string name="man">男</string>
     <string name="woman">女</string>
     <string name="birthday">生日</string>

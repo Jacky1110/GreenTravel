@@ -20,10 +20,10 @@ public class MemberBean {
     public static String birthday;
     // 電話
     public static String tel;
-    // 照片名稱
-    public static String imgtitle;
-    //
-    public static String product;
+    // 推薦商店編號
+    public static String referrerShopStoreId;
+    // 推薦商店類別編號
+    public static String referrerShopStoreType;
     //
     public static String NOTIFICATION_TOKEN;
 
@@ -112,6 +112,12 @@ public class MemberBean {
     public static String orderNo;
 
     public static int channel_id;
+
+    public static String storetype_id;
+
+    public static String storetype_name;
+
+    public static String storeId;
 
 
     public static String getPw() {

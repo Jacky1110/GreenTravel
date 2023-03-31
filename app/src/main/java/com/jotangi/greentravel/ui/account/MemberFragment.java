@@ -494,6 +494,8 @@ public class MemberFragment extends ProjConstraintFragment {
                         rPointTextView.setText(MemberBean.point);
                         MemberBean.cmdImageFile = jsonObject.getString("cmdImageFile");
                         Log.d(TAG, "MemberBean.cmdImageFile: " + MemberBean.cmdImageFile);
+                        MemberBean.referrerShopStoreId = jsonObject.getString("referrerStoreName");
+                        MemberBean.referrerShopStoreType = jsonObject.getString("referrerStoreType");
 
                         Picasso.get().load(ApiUrl.MEMBER_IMG_URL + MemberBean.cmdImageFile)
                                 .placeholder(R.drawable.default_head)

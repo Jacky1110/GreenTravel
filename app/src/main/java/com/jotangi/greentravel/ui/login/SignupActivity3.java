@@ -15,13 +15,21 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.jotangi.greentravel.Api.ApiEnqueue;
 import com.jotangi.greentravel.AppUtility;
 import com.jotangi.greentravel.Base.BaseActivity;
 import com.jotangi.greentravel.Api.ApiUrl;
 import com.jotangi.greentravel.Keychain;
 import com.jotangi.greentravel.R;
+import com.jotangi.greentravel.ui.hPayMall.MemberBean;
 import com.jotangi.jotangi2022.ApiConUtils;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 
 public class SignupActivity3 extends BaseActivity implements View.OnClickListener {
@@ -32,7 +40,7 @@ public class SignupActivity3 extends BaseActivity implements View.OnClickListene
     EditText etMail;  //email
     EditText etReferrerPhone;  //推薦人
 
-    TextView tvPhone;  //account
+    TextView tvPhone, tvCategoryView, tvStoreView;  //account
 
     EditText etAdd;  //地址
 
@@ -44,6 +52,8 @@ public class SignupActivity3 extends BaseActivity implements View.OnClickListene
     ImageButton BtnGoBack;
 
     ProgressBar progressBar;
+
+    ApiEnqueue apiEnqueue;
 
     private DatePickerDialog datePickerDialog;
 
@@ -60,6 +70,8 @@ public class SignupActivity3 extends BaseActivity implements View.OnClickListene
     }
 
     private void initView() {
+
+        apiEnqueue = new ApiEnqueue();
 
         progressBar = findViewById(R.id.progressBar);
 
@@ -101,6 +113,178 @@ public class SignupActivity3 extends BaseActivity implements View.OnClickListene
         BtnGoBack.setOnClickListener(this);
 
         etReferrerPhone = findViewById(R.id.etReferrerPhone);
+
+        tvStoreView = findViewById(R.id.tv_store_view);
+        tvStoreView.setOnClickListener(view -> {
+            getRecommendedStoreName();
+        });
+        tvCategoryView = findViewById(R.id.tv_category_view);
+        tvCategoryView.setOnClickListener(view -> {
+            tvStoreView.setText("");
+            getRecommendedStoreId();
+        });
+    }
+
+    private void getRecommendedStoreId() {
+
+        apiEnqueue.storetypeList(new ApiEnqueue.resultListener() {
+            @Override
+            public void onSuccess(String message) {
+                runOnUiThread(() -> {
+                    try {
+                        JSONArray jsonArray = new JSONArray(message);
+                        Log.d(TAG, "storetype: " + jsonArray);
+                        String[] name = new String[jsonArray.length()];
+                        JSONObject storeObject;
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            storeObject = (JSONObject) jsonArray.get(i);
+                            name[i] = storeObject.getString("storetype_name");
+                            Log.d(TAG, "storetype_name: " + name[i]);
+
+                        }
+                        ArrayList<String> typeName = new ArrayList<>(Arrays.asList(name));
+                        typeName.add("無");
+
+                        showChooseDialog(typeName);
+
+                    } catch (JSONException e) {
+
+                        e.printStackTrace();
+
+                    }
+
+                });
+            }
+
+            @Override
+            public void onFailure(String message) {
+
+            }
+        });
+    }
+
+    private void showChooseDialog(ArrayList<String> typeName) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setItems(typeName.toArray(new String[0]), (dialog, which) -> {
+
+            tvCategoryView.setText(typeName.get(which));
+
+            switch (typeName.get(which)) {
+                case "租車":
+
+                    MemberBean.storetype_id = "2";
+
+                    break;
+                case "購車維修保養":
+
+                    MemberBean.storetype_id = "1";
+
+                    break;
+                case "無":
+
+                    MemberBean.storetype_id = "-1";
+                    tvStoreView.setText("無");
+                    break;
+            }
+
+            dialog.dismiss();
+
+            Log.d(TAG, "showChooseDialog: " + typeName.get(which));
+
+        });
+        builder.show();
+    }
+
+    private void getRecommendedStoreName() {
+
+        String storeType = MemberBean.storetype_id;
+
+        apiEnqueue.storeList(storeType, new ApiEnqueue.resultListener() {
+            @Override
+            public void onSuccess(String message) {
+                runOnUiThread(() -> {
+                    try {
+                        JSONArray jsonArray = new JSONArray(message);
+                        String[] storeName = new String[jsonArray.length()];
+                        String[] storeId = new String[jsonArray.length()];
+                        JSONObject storeObject;
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            storeObject = (JSONObject) jsonArray.get(i);
+                            storeName[i] = storeObject.getString("store_name");
+                            storeId[i] = storeObject.getString("store_id");
+                            Log.d(TAG, "store_name: " + storeName[i]);
+
+                        }
+
+                        showChooseStoreDialog(storeName, storeId);
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                });
+            }
+
+            @Override
+            public void onFailure(String message) {
+
+            }
+        });
+
+    }
+
+    private void showChooseStoreDialog(String[] storeName, String[] storeId) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setSingleChoiceItems(storeName, 0, (dialog, which) -> {
+            tvStoreView.setText(storeName[which]);
+            MemberBean.storetype_name = storeName[which];
+            switch (which) {
+                case 0:
+
+                    MemberBean.storeId = storeId[0];
+
+                    break;
+                case 1:
+
+                    MemberBean.storeId = storeId[1];
+
+                    break;
+                case 2:
+
+                    MemberBean.storeId = storeId[2];
+                    break;
+                case 3:
+
+                    MemberBean.storeId = storeId[3];
+                    break;
+            }
+
+
+            dialog.dismiss();//随便点击一个item消失对话框，不用点击确认取消
+
+            Log.d("TAG", "showChooseStoreDialog: " + which);
+            Log.d("TAG", "showChooseStoreDialog1: " + storeName[which]);
+        });
+
+        builder.show();
+
+    }
+
+    private void showStoreDialog(String[] storeName) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setSingleChoiceItems(storeName, 0, (dialog, which) -> {
+
+            tvStoreView.setText(storeName[which]);
+            dialog.dismiss();
+
+            Log.d("TAG", "showStoreDialog: " + which);
+            Log.d("TAG", "showStoreDialog1: " + storeName[which]);
+        });
+
+        builder.show();
     }
 
     @Override
@@ -139,9 +323,11 @@ public class SignupActivity3 extends BaseActivity implements View.OnClickListene
         String city = "";
         String region = "";
         String sex = "";
+        String shopStoreId = MemberBean.storetype_id;
+        String shopStoreType = MemberBean.storeId;
 
         progressBar.setVisibility(View.VISIBLE);
-        ApiConUtils.initPersonalData(ApiUrl.API_URL2, ApiUrl.modifypersondata, account, pw, accountType, name, tel, birthday, email, sex, city, region, address, referrerPhone, new ApiConUtils.OnConnectResultListener() {
+        ApiConUtils.initPersonalData(ApiUrl.API_URL2, ApiUrl.modifypersondata, account, pw, accountType, name, tel, birthday, email, sex, city, region, address, referrerPhone, shopStoreId, shopStoreType, new ApiConUtils.OnConnectResultListener() {
 
             @Override
             public void onSuccess(final String jsonString) {

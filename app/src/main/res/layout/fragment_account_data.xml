@@ -175,8 +175,8 @@
 
             <TextView
                 android:id="@+id/sex_required_mark_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="11dp"
                 android:layout_marginStart="3dp"
                 android:text="*"
                 android:textColor="@color/red"
@@ -221,13 +221,69 @@
 
             </RadioGroup>
 
+            <!-- 推薦店家-->
+            <TextView
+                android:id="@+id/tv_recommended_store"
+                style="@style/EditWithLabelView_Label"
+                android:text="@string/store"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rg_sex" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="想瞭解您從何處得知Rilink"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_recommended_store" />
+
+            <TextView
+                android:id="@+id/recommended_store_mark_textView"
+                android:layout_width="0dp"
+                android:layout_height="11dp"
+                android:layout_marginStart="3dp"
+                android:text="*"
+                android:textColor="@color/red"
+                app:layout_constraintStart_toEndOf="@+id/tv_recommended_store"
+                app:layout_constraintTop_toTopOf="@+id/tv_recommended_store" />
+
+
+            <TextView
+                android:id="@+id/tv_category_view"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:hint="請選擇類別"
+                android:paddingStart="10dp"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/tv_recommended_store"
+                app:layout_constraintTop_toBottomOf="@+id/tv_recommended_store" />
+
+
+
+            <TextView
+                android:id="@+id/tv_store_view"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:paddingStart="10dp"
+                android:textColor="@color/black"
+                android:gravity="center_vertical"
+                android:hint="請選擇店家"
+                app:layout_constraintStart_toStartOf="@+id/tv_category_view"
+                app:layout_constraintTop_toBottomOf="@+id/tv_category_view" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/btn_register"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="200dp"
                 android:background="@drawable/shape_round_orange_white"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rg_sex"
                 app:layout_constraintWidth_percent="0.3">
@@ -248,6 +304,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

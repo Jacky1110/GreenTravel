@@ -37,8 +37,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="64dp"
-            >
+            android:paddingBottom="64dp">
 
             <TextView
                 android:id="@+id/textView1"
@@ -221,18 +220,17 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
             <TextView
-                android:visibility="gone"
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
                 android:layout_marginTop="16dp"
                 android:text="地址"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etPassword2" />
 
             <LinearLayout
-                android:visibility="gone"
                 android:id="@+id/LyAdd"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -240,6 +238,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="48dp"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView7">
@@ -273,7 +272,6 @@
             </LinearLayout>
 
             <EditText
-                android:visibility="gone"
                 android:id="@+id/etAdd"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
@@ -286,6 +284,7 @@
                 android:inputType="textPersonName"
                 android:paddingStart="16dp"
                 android:singleLine="true"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.485"
                 app:layout_constraintStart_toStartOf="parent"
@@ -321,22 +320,21 @@
                 android:hint="選擇"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView8"
-                />
+                app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
-<!--            <EditText-->
-<!--                android:id="@+id/etBirthday"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="48dp"-->
-<!--                android:layout_marginStart="48dp"-->
-<!--                android:layout_marginTop="8dp"-->
-<!--                android:layout_marginEnd="48dp"-->
-<!--                android:background="@drawable/shape_capsule_fine"-->
-<!--                android:ems="10"-->
-<!--                android:inputType="date"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/textView8" />-->
+            <!--            <EditText-->
+            <!--                android:id="@+id/etBirthday"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="48dp"-->
+            <!--                android:layout_marginStart="48dp"-->
+            <!--                android:layout_marginTop="8dp"-->
+            <!--                android:layout_marginEnd="48dp"-->
+            <!--                android:background="@drawable/shape_capsule_fine"-->
+            <!--                android:ems="10"-->
+            <!--                android:inputType="date"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toBottomOf="@+id/textView8" />-->
 
             <TextView
                 android:id="@+id/textView9"
@@ -388,7 +386,6 @@
             </RadioGroup>
 
             <CheckBox
-                android:visibility="gone"
                 android:id="@+id/checkBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -396,11 +393,11 @@
                 android:layout_marginTop="24dp"
                 android:text="已閱讀會員條款"
                 android:textSize="16dp"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
 
             <Button
-                android:visibility="gone"
                 android:id="@+id/link_ReadTerms"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
@@ -410,6 +407,7 @@
                 android:text="會員條款及隱私政策"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16dp"
+                android:visibility="gone"
                 app:layout_constraintStart_toEndOf="@+id/checkBox"
                 app:layout_constraintTop_toTopOf="@+id/checkBox" />
 
@@ -421,7 +419,70 @@
                 android:layout_marginTop="16dp"
                 android:text="推薦碼"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_store_view" />
+
+            <!-- 推薦店家-->
+            <TextView
+                android:id="@+id/tv_recommended_store"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/store"
+                app:layout_constraintStart_toStartOf="@+id/textView9"
                 app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="想瞭解您從何處得知Rilink"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_recommended_store" />
+
+            <TextView
+                android:id="@+id/recommended_store_mark_textView"
+                android:layout_width="0dp"
+                android:layout_height="11dp"
+                android:layout_marginStart="3dp"
+                android:text="*"
+                android:textColor="@color/red"
+                app:layout_constraintStart_toEndOf="@+id/tv_recommended_store"
+                app:layout_constraintTop_toTopOf="@+id/tv_recommended_store" />
+
+
+            <TextView
+                android:id="@+id/tv_category_view"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="48dp"
+                android:background="@drawable/shape_capsule_fine"
+                android:gravity="center_vertical"
+                android:hint="請選擇類別"
+                android:paddingStart="16dp"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_recommended_store" />
+
+
+            <TextView
+                android:id="@+id/tv_store_view"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="48dp"
+                android:background="@drawable/shape_capsule_fine"
+                android:gravity="center_vertical"
+                android:hint="請選擇店家"
+                android:paddingStart="16dp"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_category_view" />
 
 
             <EditText
@@ -434,8 +495,8 @@
                 android:background="@drawable/shape_capsule_fine"
                 android:ems="10"
                 android:hint="推薦人手機號碼"
-                android:paddingStart="16dp"
                 android:inputType="number"
+                android:paddingStart="16dp"
                 android:singleLine="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -446,8 +507,8 @@
                 android:id="@+id/submitBtn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
                 android:layout_marginStart="48dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="48dp"
                 android:background="@drawable/shape_capsule_line_m_color"
                 android:text="同意並完成註冊"
@@ -466,10 +527,10 @@
         style="@style/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

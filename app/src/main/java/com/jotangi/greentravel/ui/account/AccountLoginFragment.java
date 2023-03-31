@@ -285,6 +285,7 @@ public class AccountLoginFragment extends Fragment {
                     MemberBean.birthday = jsonObject.getString("birthday");
                     MemberBean.cmdImageFile = jsonObject.getString("cmdImageFile");
 
+
                     Log.d(TAG, "cmdImageFile: " + MemberBean.cmdImageFile);
 
                     shoppingCar();

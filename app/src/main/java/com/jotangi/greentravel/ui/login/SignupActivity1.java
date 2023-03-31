@@ -17,6 +17,7 @@ import com.jotangi.greentravel.AppUtility;
 import com.jotangi.greentravel.Base.BaseActivity;
 import com.jotangi.greentravel.Api.ApiUrl;
 import com.jotangi.greentravel.R;
+import com.jotangi.greentravel.ui.hPayMall.MemberBean;
 import com.jotangi.jotangi2022.ApiConUtils;
 
 public class SignupActivity1 extends BaseActivity implements View.OnClickListener {
@@ -124,8 +125,7 @@ public class SignupActivity1 extends BaseActivity implements View.OnClickListene
 
         String type = "0"; //請帶0 請於app端檢查格式
         progressBar.setVisibility(View.VISIBLE);
-        ApiConUtils.signup(ApiUrl.API_URL2, ApiUrl.signup,phone, type, new ApiConUtils.OnConnectResultListener()
-        {
+        ApiConUtils.signup(ApiUrl.API_URL2, ApiUrl.signup, phone, type, new ApiConUtils.OnConnectResultListener() {
             @Override
             public void onSuccess(final String jsonString) {
                 runOnUiThread(new Runnable() {
@@ -135,6 +135,7 @@ public class SignupActivity1 extends BaseActivity implements View.OnClickListene
 
                         if (jsonString.equals("101")) {
 
+                            MemberBean.member_id = phone;
                             String message = "帳號新增成功\n驗證碼已發送";
                             AppUtility.showMyDialog(SignupActivity1.this, message, "確認", "", new AppUtility.OnBtnClickListener() {
                                 @Override

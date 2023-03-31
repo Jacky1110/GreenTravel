@@ -1457,6 +1457,9 @@ public class ApiConUtils {
                 .add("accountType", base64(accountType))
                 .build();
 
+        Log.d(TAG, "account: " + base64(account));
+        Log.d(TAG, "accountType: " + base64(accountType));
+
         Request request = new Request.Builder()
                 .url(url)
                 .post(formBody)
@@ -1626,7 +1629,7 @@ public class ApiConUtils {
 
     //註冊驗證通過 (初始個人資料)
     public static void initPersonalData(String api_url, String api_constant, String account, String pw, String accountType, String name,
-                                        String tel, String birthday, String email, String sex, String city, String region, String address, String referrerPhone, @NonNull final OnConnectResultListener listener) {
+                                        String tel, String birthday, String email, String sex, String city, String region, String address, String referrerPhone,String referrerShopStoreId, String referrerShopStoreType, @NonNull final OnConnectResultListener listener) {
         String url = api_url + api_constant;
         FormBody formBody = new FormBody
                 .Builder()
@@ -1642,6 +1645,8 @@ public class ApiConUtils {
                 .add("region", base64(region))
                 .add("address", base64(address))
                 .add("referrerPhone", base64(referrerPhone))
+                .add("referrerShopStoreId",base64(referrerShopStoreId))
+                .add("referrerShopStoreType",base64(referrerShopStoreType))
                 .build();
         Request request = new Request.Builder()
                 .url(url)
