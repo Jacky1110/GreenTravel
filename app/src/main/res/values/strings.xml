@@ -58,6 +58,7 @@
     <string name="account_listitem_record">我的訂單</string>
     <string name="account_listitem_packer">我的票券</string>
     <string name="account_listitem_rule">協議及聲明</string>
+    <string name="account_listitem_del">刪除帳號</string>
     <string name="account_listitem_qa">常見問題</string>
     <string name="account_listitem_cs">聯絡客服</string>
     <string name="memberheart">會員中心</string>

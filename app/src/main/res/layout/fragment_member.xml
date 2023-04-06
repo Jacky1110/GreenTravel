@@ -197,8 +197,8 @@
             android:id="@+id/item_fix"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginTop="20dp"
+            android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="@+id/linearLayout"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
@@ -279,8 +279,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="60dp">
+            android:layout_marginTop="60dp"
+            android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_list1"
@@ -475,23 +475,49 @@
                         android:background="@color/white" />
                 </RelativeLayout>
 
+                <View
+                    android:id="@+id/view6"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="@color/gray_a0"
+                    app:layout_constraintEnd_toEndOf="@+id/item_rule"
+                    app:layout_constraintStart_toStartOf="@+id/item_rule"
+                    app:layout_constraintTop_toBottomOf="@+id/item_rule" />
 
-                <!--                <RelativeLayout-->
-                <!--                    android:id="@+id/bn_logout"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--                    app:layout_constraintTop_toBottomOf="@id/item_qa">-->
 
-                <!--                    <TextView-->
-                <!--                        style="@style/AccountMainListItemTextView"-->
-                <!--                        android:text="@string/logout"-->
-                <!--                        android:textColor="#ED3434" />-->
+                <RelativeLayout
+                    android:id="@+id/item_del"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/item_rule">
 
-                <!--                    <ImageView-->
-                <!--                        style="@style/AccountMainListItemImageView"-->
-                <!--                        android:src="@mipmap/icon_next" />-->
-                <!--                </RelativeLayout>-->
+                    <TextView
+                        style="@style/AccountMainListItemTextView"
+                        android:text="@string/account_listitem_del" />
+
+                    <ImageView
+                        style="@style/AccountMainListItemImageView"
+                        android:src="@mipmap/icon_next" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/white" />
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/view7"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="@color/gray_a0"
+                    app:layout_constraintEnd_toEndOf="@+id/item_del"
+                    app:layout_constraintStart_toStartOf="@+id/item_del"
+                    app:layout_constraintTop_toBottomOf="@+id/item_del" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>

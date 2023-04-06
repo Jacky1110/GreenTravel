@@ -68,15 +68,14 @@ public class MemberFragment extends ProjConstraintFragment {
     private TextView rPointTextView, txtUserName;
     private RelativeLayout bnRecord;
     private LinearLayout bnPoint, bnPacker, btnFix;
-    private RelativeLayout bnUserRule;
-    private RelativeLayout bnQA;
-    private RelativeLayout bnCS;
+    private RelativeLayout bnUserRule, bnQA, bnCS, btnDel;
     private CardView vwUserCard;
     private ImageView vwHeadImage;
     private ApiEnqueue apiEnqueue;
     private Bitmap tempImage;
     private SharedPreferences pref;
     private Bundle bundle;
+    private AlertDialog dialog = null;
     private boolean isFromRilink = false, isFirst = false;
 
     public static MemberFragment newInstance() {
@@ -134,7 +133,7 @@ public class MemberFragment extends ProjConstraintFragment {
                 SharedPreferences pref = requireActivity().getSharedPreferences("loginInfo", MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
                 editor.clear();
-                editor.commit();
+                editor.apply();
                 Intent intent = new Intent(requireActivity(), LoginMainActivity.class);
                 startActivity(intent);
                 requireActivity().finish();
@@ -248,6 +247,13 @@ public class MemberFragment extends ProjConstraintFragment {
 //            builder.create().show();
         });
 
+        btnDel = rootView.findViewById(R.id.item_del);
+        btnDel.setOnClickListener(view -> {
+            showDialog("", "是否要刪除使用者帳號", (dialog1, which) -> {
+                dialog.dismiss();
+            });
+        });
+
 //        bnLogout = rootView.findViewById(R.id.bn_logout);
 //        bnLogout.setOnClickListener(v -> {
 //
@@ -278,10 +284,34 @@ public class MemberFragment extends ProjConstraintFragment {
         });
 
         txtUserName = rootView.findViewById(R.id.tv_User_name);
-        memberInfor();
-        handleData();
 
+        handleData();
         checkBundle();
+    }
+
+    private void getDelMember() {
+
+        apiEnqueue.user_del(new ApiEnqueue.resultListener() {
+            @Override
+            public void onSuccess(String message) {
+                requireActivity().runOnUiThread(() -> {
+                    Log.d(TAG, "getDelMember: " + message);
+                    SharedPreferences pref = requireActivity().getSharedPreferences("loginInfo", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.clear();
+                    editor.apply();
+                    Intent intent = new Intent(requireActivity(), LoginMainActivity.class);
+                    startActivity(intent);
+                    requireActivity().finish();
+                });
+            }
+
+            @Override
+            public void onFailure(String message) {
+
+            }
+        });
+
     }
 
     private void checkBundle() {
@@ -502,6 +532,8 @@ public class MemberFragment extends ProjConstraintFragment {
                                 .into(vwHeadImage);
 
                         txtUserName.setText("Hi~ " + MemberBean.name);
+
+                        memberInfor();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -595,6 +627,33 @@ public class MemberFragment extends ProjConstraintFragment {
                 .putString("password", pwd)
                 .commit();
         Log.d("登出", "成功" + status + "/" + account + "/" + pwd);
+    }
+
+    private void showDialog(String title, String message, DialogInterface.OnClickListener listener) {
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
+        dialog = new AlertDialog.Builder(requireContext()).create();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setTitle(title);
+        dialog.setMessage(message);
+        dialog.setButton(AlertDialog.BUTTON_POSITIVE, "確認", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                getDelMember();
+
+            }
+        });
+
+        dialog.setButton(AlertDialog.BUTTON_NEGATIVE, "取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                listener.onClick(dialog, which);
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 
 

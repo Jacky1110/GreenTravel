@@ -255,7 +255,6 @@
                 android:layout_marginTop="10dp"
                 android:background="@color/white"
                 android:gravity="center_vertical"
-                android:hint="請選擇類別"
                 android:paddingStart="10dp"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="@+id/tv_recommended_store"
@@ -272,7 +271,6 @@
                 android:paddingStart="10dp"
                 android:textColor="@color/black"
                 android:gravity="center_vertical"
-                android:hint="請選擇店家"
                 app:layout_constraintStart_toStartOf="@+id/tv_category_view"
                 app:layout_constraintTop_toBottomOf="@+id/tv_category_view" />
 

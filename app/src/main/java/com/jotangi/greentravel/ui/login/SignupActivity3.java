@@ -13,6 +13,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.jotangi.greentravel.Api.ApiEnqueue;
@@ -59,6 +60,8 @@ public class SignupActivity3 extends BaseActivity implements View.OnClickListene
 
     private String selectedDate;
 
+    private RadioButton r1, r2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +80,8 @@ public class SignupActivity3 extends BaseActivity implements View.OnClickListene
 
         etName = findViewById(R.id.etName);
         etMail = findViewById(R.id.etMail);
+        r1 = findViewById(R.id.rBtn_Male);
+        r2 = findViewById(R.id.rBtn_Female);
 
         btnBirthday = findViewById(R.id.etBirthday);
         btnBirthday.setOnClickListener(this);
@@ -323,11 +328,21 @@ public class SignupActivity3 extends BaseActivity implements View.OnClickListene
         String city = "";
         String region = "";
         String sex = "";
-        String shopStoreId = MemberBean.storetype_id;
-        String shopStoreType = MemberBean.storeId;
+        if (r1.isChecked()) {
+            sex = "0";
+            Log.d("TAG", "sex: " + sex);
+        } else if (r2.isChecked()) {
+            sex = "1";
+            Log.d("TAG", "sex: " + sex);
+        }
+        String shopStoreId = MemberBean.storeId;
+        Log.d(TAG, "shopStoreId: " + shopStoreId);
+        String shopStoreType = MemberBean.storetype_id;
+        Log.d(TAG, "shopStoreType: " + shopStoreType);
+        String referrerStore = "1";
 
         progressBar.setVisibility(View.VISIBLE);
-        ApiConUtils.initPersonalData(ApiUrl.API_URL2, ApiUrl.modifypersondata, account, pw, accountType, name, tel, birthday, email, sex, city, region, address, referrerPhone, shopStoreId, shopStoreType, new ApiConUtils.OnConnectResultListener() {
+        ApiConUtils.initPersonalData(ApiUrl.API_URL2, ApiUrl.modifypersondata, account, pw, accountType, name, tel, birthday, email, sex, city, region, address, referrerPhone, shopStoreId, shopStoreType, referrerStore, new ApiConUtils.OnConnectResultListener() {
 
             @Override
             public void onSuccess(final String jsonString) {

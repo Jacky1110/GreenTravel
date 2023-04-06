@@ -852,7 +852,7 @@ public class ApiConUtils {
 
                 if (responseBody != null) {
                     body = responseBody.string();
-                    Log.d(TAG, "body: " +body);
+                    Log.d(TAG, "body: " + body);
                 }
 
                 try {
@@ -1629,7 +1629,7 @@ public class ApiConUtils {
 
     //註冊驗證通過 (初始個人資料)
     public static void initPersonalData(String api_url, String api_constant, String account, String pw, String accountType, String name,
-                                        String tel, String birthday, String email, String sex, String city, String region, String address, String referrerPhone,String referrerShopStoreId, String referrerShopStoreType, @NonNull final OnConnectResultListener listener) {
+                                        String tel, String birthday, String email, String sex, String city, String region, String address, String referrerPhone, String referrerShopStoreId, String referrerShopStoreType, String referrerStore, @NonNull final OnConnectResultListener listener) {
         String url = api_url + api_constant;
         FormBody formBody = new FormBody
                 .Builder()
@@ -1645,9 +1645,27 @@ public class ApiConUtils {
                 .add("region", base64(region))
                 .add("address", base64(address))
                 .add("referrerPhone", base64(referrerPhone))
-                .add("referrerShopStoreId",base64(referrerShopStoreId))
-                .add("referrerShopStoreType",base64(referrerShopStoreType))
+                .add("referrerShopStoreId", base64(referrerShopStoreId))
+                .add("referrerShopStoreType", base64(referrerShopStoreType))
+                .add("referrerStore", base64(referrerStore))
                 .build();
+
+        Log.d(TAG, "account: " + base64(account));
+        Log.d(TAG, "pw: " + base64(pw));
+        Log.d(TAG, "accountType: " + base64(accountType));
+        Log.d(TAG, "name: " + base64(name));
+        Log.d(TAG, "tel: " + base64(tel));
+        Log.d(TAG, "birthday: " + base64(birthday));
+        Log.d(TAG, "email: " + base64(email));
+        Log.d(TAG, "sex: " + base64(sex));
+        Log.d(TAG, "email: " + base64(email));
+        Log.d(TAG, "referrerShopStoreId: " + base64(referrerShopStoreId));
+        Log.d(TAG, "referrerShopStoreId2: " + referrerShopStoreId);
+        Log.d(TAG, "referrerShopStoreType: " + base64(referrerShopStoreType));
+        Log.d(TAG, "referrerShopStoreType2: " + referrerShopStoreType);
+        Log.d(TAG, "referrerStore: " + base64(referrerStore));
+        Log.d(TAG, "referrerStore: " + referrerStore);
+
         Request request = new Request.Builder()
                 .url(url)
                 .post(formBody)
@@ -1775,8 +1793,8 @@ public class ApiConUtils {
                 .add("tel", base64(tel))
                 .add("name", base64(name))
                 .add("sex", base64(sex))
-                .add("city",base64(city))
-                .add("region",base64(region))
+                .add("city", base64(city))
+                .add("region", base64(region))
                 .add("birthday", base64(birthday))
                 .add("email", base64(email))
                 .add("address", base64(address))

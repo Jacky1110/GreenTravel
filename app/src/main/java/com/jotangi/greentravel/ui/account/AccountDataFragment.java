@@ -97,26 +97,6 @@ public class AccountDataFragment extends ProjConstraintFragment {
         tvCategoryView = rootView.findViewById(R.id.tv_category_view);
         tvStoreView = rootView.findViewById(R.id.tv_store_view);
 
-        if (MemberBean.referrerShopStoreId != null && MemberBean.referrerShopStoreId.equals("null")) {
-
-            tvCategoryView.setText("無");
-
-        } else {
-
-            tvCategoryView.setText(MemberBean.referrerShopStoreId);
-
-        }
-
-        if (MemberBean.referrerShopStoreType != null && MemberBean.referrerShopStoreType.equals("null")) {
-
-            tvStoreView.setText("無");
-
-        } else {
-
-            tvStoreView.setText(MemberBean.referrerShopStoreType);
-
-        }
-
         if (MemberBean.birthday != null && MemberBean.birthday.equals("null")) {
             edBirthday.setText(null);
             //edHomenumber.setText(null);
@@ -258,13 +238,33 @@ public class AccountDataFragment extends ProjConstraintFragment {
                             }
                             switch (MemberBean.sex) {
                                 case "0":
-                                    r1.setChecked(false);
-                                    r2.setChecked(true);
-                                    break;
-                                case "1":
                                     r1.setChecked(true);
                                     r2.setChecked(false);
                                     break;
+                                case "1":
+                                    r1.setChecked(false);
+                                    r2.setChecked(true);
+                                    break;
+
+                            }
+
+                            if (MemberBean.referrerShopStoreId != null && MemberBean.referrerShopStoreId.equals("null")) {
+
+                                tvCategoryView.setText("無");
+
+                            } else {
+
+                                tvCategoryView.setText(MemberBean.referrerShopStoreId);
+
+                            }
+
+                            if (MemberBean.referrerShopStoreType != null && MemberBean.referrerShopStoreType.equals("null")) {
+
+                                tvStoreView.setText("無");
+
+                            } else {
+
+                                tvStoreView.setText(MemberBean.referrerShopStoreType);
 
                             }
 

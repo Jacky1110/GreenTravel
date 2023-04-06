@@ -79,6 +79,7 @@ public class ApiEnqueue {
     public final String TASK_STORETYPE_LIST = "TASK_STORETYPE_LIST";
     public final String TASK_GET_NEW_MEMBER_COUPON = "TASK_GET_NEW_MEMBER_COUPON";
     public final String TASK_NEW_MEMBER_COUPON_CONFIRM = "TASK_NEW_MEMBER_COUPON_CONFIRM";
+    public final String TASK_USER_DEL = "TASK_USER_DEL";
 
 
     // 1.使用者登入
@@ -783,6 +784,27 @@ public class ApiEnqueue {
 
     }
 
+    //34.	使用者刪除
+    public void user_del(resultListener listen){
+
+        runTask = TASK_USER_DEL;
+
+        listener = listen;
+
+        String url = ApiUrl.API_URL + ApiUrl.user_del;
+        Log.d(TAG, "url: " + url);
+
+        FormBody formBody = new FormBody.Builder()
+                .add("member_id", MemberBean.member_id)
+                .add("member_pwd", MemberBean.member_pwd)
+                .build();
+
+        Log.d(TAG, "member_id: " + MemberBean.member_id);
+        Log.d(TAG, "member_pwd: " + MemberBean.member_pwd);
+
+        runOkHttps(url, formBody);
+    }
+
     // 35.查詢會員預約服務列表
     public void fixMotorList(String no, resultListener listen) {
 
@@ -1228,6 +1250,9 @@ public class ApiEnqueue {
             case TASK_FETCH_POINT_HISTORY:
                 taskFetchPointHistory(body, TASK_FETCH_POINT_HISTORY);
                 break;
+            case TASK_USER_DEL:
+                taskUserDel(body,TASK_USER_DEL);
+                break;
             // 35.查詢會員預約服務列表
             case TASK_FIX_MOTOR_LIST:
                 taskFixMotorList(body, TASK_FETCH_POINT_HISTORY);
@@ -1278,6 +1303,7 @@ public class ApiEnqueue {
 
 
     }
+
 
 
     // 1.使用者登入
@@ -1716,6 +1742,28 @@ public class ApiEnqueue {
                 listener.onSuccess(jsonObject.getString("data"));
             }
 
+        } catch (JSONException e) {
+            Log.d(TAG, task + " 剖析失敗：欄位不存在");
+            e.printStackTrace();
+        }
+    }
+
+    private void taskUserDel(String body, String task) {
+        try {
+            // JASON需要try/catch
+            JSONObject jsonObject = new JSONObject(body);
+            String code = jsonObject.getString("code");
+            // code = "0x0200"
+            Log.d(TAG, "code: " + code);
+            String responseMessage = jsonObject.getString("responseMessage");
+            Log.d(TAG, "responseMessage: " + responseMessage);
+
+            // 判斷 A.equals(B)
+            if ("0x0200".equals(code)) {
+                listener.onSuccess(responseMessage);
+            } else {
+                listener.onFailure(responseMessage);
+            }
         } catch (JSONException e) {
             Log.d(TAG, task + " 剖析失敗：欄位不存在");
             e.printStackTrace();

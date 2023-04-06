@@ -81,6 +81,8 @@ public class ApiUrl {
     public static final String booking_fixmotor = "ticketec/api/booking_fixmotor.php";
     // 33.	取得紅利點數歷史紀錄
     public static final String fetch_pointhistory = "ticketec/api/fetch_pointhistory.php";
+    // 34.	使用者刪除
+    public static final String user_del = "ticketec/api/user_del.php";
     // 35.	查詢會員預約服務列表
     public static final String fixmotor_list = "ticketec/api/booking_fixmotor_list.php";
     // 36.	會員取消預約服務
@@ -109,6 +111,7 @@ public class ApiUrl {
     public static final String get_newmember_coupon = "ticketec/api/get_newmember_coupon.php";
     //49.	新會員好禮核銷(領取)
     public static final String newmember_coupon_confirm = "ticketec/api/newmember_coupon_confirm.php";
+
 
 
 
