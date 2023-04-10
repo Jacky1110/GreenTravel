@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -175,6 +176,10 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
     }
 
     private void checkBundle() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            bundle = this.getIntent().getExtras();
+        }
+
         if (bundle != null) {
             String destination = bundle.getString("destination_to", "");
 

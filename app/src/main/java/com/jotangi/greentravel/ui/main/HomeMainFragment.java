@@ -64,7 +64,7 @@ public class HomeMainFragment extends ProjConstraintFragment implements View.OnC
             "機車租賃",
             "精品配件"
     ));
-    private Bundle bundle;
+    private Bundle bundle = null;
 
     private HomePageAdapter.ItemClickListener click = (view, position) -> {
         Log.d(TAG, "position: " + position);

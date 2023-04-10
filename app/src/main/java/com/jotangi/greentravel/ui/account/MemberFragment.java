@@ -76,7 +76,7 @@ public class MemberFragment extends ProjConstraintFragment {
     private SharedPreferences pref;
     private Bundle bundle;
     private AlertDialog dialog = null;
-    private boolean isFromRilink = false, isFirst = false;
+    private boolean isFromRilink = false, isFirst = true;
 
     public static MemberFragment newInstance() {
         MemberFragment fragment = new MemberFragment();
@@ -91,7 +91,7 @@ public class MemberFragment extends ProjConstraintFragment {
         bundle = getActivity().getIntent().getExtras();
 
         if (bundle != null) {
-            isFirst = pref.getBoolean(KEY_IS_FIRST, true);
+            isFirst = true;
             isFromRilink = bundle.getBoolean("from_rilink_rent", false);
         }
     }
@@ -318,12 +318,10 @@ public class MemberFragment extends ProjConstraintFragment {
         if (bundle != null) {
             String destination = bundle.getString("destination_to");
 
-            if (destination.equals("my_coupon_list")) {
-                if (isFromRilink && isFirst) {
-                    pref.edit().putBoolean(KEY_IS_FIRST, false).commit();
-
-                    navigateToCoupon();
-                }
+            if (destination.equals("my_coupon_list") && isFromRilink && isFirst) {
+                pref.edit().putBoolean(KEY_IS_FIRST, false).commit();
+                isFirst = pref.getBoolean(KEY_IS_FIRST, false);
+                navigateToCoupon();
             }
         }
     }
