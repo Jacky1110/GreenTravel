@@ -68,7 +68,10 @@ class StoreTabFragment : ProjConstraintFragment(), AdapterView.OnItemSelectedLis
 
         /*確保登入後才能查詢上方動態列表*/
         if (!istrue) {
-            bundle = requireActivity().intent.extras
+            if (bundle != null) {
+                bundle = null
+            }
+            bundle = requireActivity().intent.getBundleExtra("bundleD")
 
             if (lists.isNotEmpty()) {
                 lists.clear()

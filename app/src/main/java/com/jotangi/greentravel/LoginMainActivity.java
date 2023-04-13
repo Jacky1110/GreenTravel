@@ -64,7 +64,7 @@ public class LoginMainActivity extends AppCompatActivity {
 
     private void initData() {
         AccountLoginFragment accountLoginFragment= new AccountLoginFragment();
-        Bundle bundle = this.getIntent().getExtras();
+        Bundle bundle = this.getIntent().getBundleExtra("bundle");
 
         if (bundle != null) {
             accountLoginFragment.setArguments(bundle);

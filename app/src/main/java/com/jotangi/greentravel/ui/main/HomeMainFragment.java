@@ -98,7 +98,10 @@ public class HomeMainFragment extends ProjConstraintFragment implements View.OnC
     public void onStart() {
         super.onStart();
         activityTitleRid = R.string.account_listitem_front;
-        bundle = getActivity().getIntent().getExtras();
+        if (bundle != null) {
+            bundle = null;
+        }
+        bundle = getActivity().getIntent().getBundleExtra("bundle");
 
         if (bundle != null) {
             boolean isBundle = false;

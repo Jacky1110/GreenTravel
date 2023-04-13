@@ -68,13 +68,16 @@ public class WelcomeActivity extends AppCompatActivity {
     {
         SharedPreferences isGetLogin = getSharedPreferences("loginInfo", MODE_PRIVATE);
         boolean loginresult = isGetLogin.getBoolean("isLogin", false);
-        Bundle bundle = this.getIntent().getExtras();
+        Bundle bundle = this.getIntent().getBundleExtra("bundle");
         Intent intent = new Intent(
                 this,
                 LoginMainActivity.class
         );
         if (bundle != null) {
-            intent.putExtras(bundle);
+            intent.putExtra(
+                    "bundle",
+                    bundle
+            );
         }
         if (loginresult) {
             MemberBean.store_acc = isGetLogin.getString("storeAccount", "");

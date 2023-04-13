@@ -87,11 +87,14 @@ public class MemberFragment extends ProjConstraintFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if (bundle != null) {
+            bundle = null;
+        }
+        bundle = getActivity().getIntent().getBundleExtra("bundle");
         pref = requireActivity().getSharedPreferences(REG_PREF_NAME, MODE_PRIVATE);
-        bundle = getActivity().getIntent().getExtras();
 
         if (bundle != null) {
-            isFirst = true;
+//            isFirst = pref.getBoolean(KEY_IS_FIRST, false);
             isFromRilink = bundle.getBoolean("from_rilink_rent", false);
         }
     }

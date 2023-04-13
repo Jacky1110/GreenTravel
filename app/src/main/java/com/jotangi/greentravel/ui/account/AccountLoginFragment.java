@@ -76,7 +76,10 @@ public class AccountLoginFragment extends Fragment {
     }
 
     private void init() {
-        bundle = getActivity().getIntent().getExtras();
+        if (bundle != null) {
+            bundle = null;
+        }
+        bundle = getActivity().getIntent().getBundleExtra("bundle");
         pref = requireActivity().getSharedPreferences(REG_PREF_NAME, MODE_PRIVATE);
 
         apiEnqueue = new ApiEnqueue();
@@ -221,7 +224,10 @@ public class AccountLoginFragment extends Fragment {
             Intent intent = new Intent(requireActivity(), MainActivity.class);
 
             if (bundle != null) {
-                intent.putExtras(bundle);
+                intent.putExtra(
+                        "bundle",
+                        bundle
+                );
             }
 
             startActivity(intent);
@@ -244,13 +250,15 @@ public class AccountLoginFragment extends Fragment {
                     ""
             );
 
-            boolean isAccPwdSame = (MemberBean.member_id.equals(rentAcc)) &&
-                    (MemberBean.member_pwd.equals(rentPwd));
+            boolean isAccPwdSame = (MemberBean.member_id != null && MemberBean.member_id.equals(rentAcc)) &&
+                    (MemberBean.member_pwd != null && MemberBean.member_pwd.equals(rentPwd));
             pref.edit()
                     .putBoolean(
                             KEY_IS_ACCOUNT_SAME,
                             isAccPwdSame
                     ).commit();
+
+
         }
     }
 

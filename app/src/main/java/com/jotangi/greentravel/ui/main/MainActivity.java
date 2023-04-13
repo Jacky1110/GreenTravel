@@ -72,7 +72,10 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        bundle = this.getIntent().getExtras();
+        if (bundle != null) {
+            bundle = null;
+        }
+        bundle = this.getIntent().getBundleExtra("bundle");
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
@@ -177,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements MyBaseFragment.Fr
 
     private void checkBundle() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            bundle = this.getIntent().getExtras();
+            bundle = this.getIntent().getBundleExtra("bundle");
         }
 
         if (bundle != null) {
