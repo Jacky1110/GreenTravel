@@ -22,7 +22,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 
-public class NoticeFragment extends Fragment {
+public class NoticeFragment extends ProjConstraintFragment {
 
     private String TAG = NoticeFragment.class.getSimpleName() + "(TAG)";
     ApiEnqueue apiEnqueue;
@@ -46,6 +46,13 @@ public class NoticeFragment extends Fragment {
         initView(view);
         getNoticeApi();
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        activityTitleRid = R.string.main_Push;
     }
 
     private void initView(View view) {
