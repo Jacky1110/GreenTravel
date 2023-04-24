@@ -176,12 +176,17 @@ public class SignupActivity3 extends BaseActivity implements View.OnClickListene
             tvCategoryView.setText(typeName.get(which));
 
             switch (typeName.get(which)) {
-                case "租車":
+                case "異業合作":
+
+                    MemberBean.storetype_id = "4";
+
+                    break;
+                case "機車租賃":
 
                     MemberBean.storetype_id = "2";
 
                     break;
-                case "購車維修保養":
+                case "購車預約維修":
 
                     MemberBean.storetype_id = "1";
 
@@ -263,6 +268,42 @@ public class SignupActivity3 extends BaseActivity implements View.OnClickListene
                 case 3:
 
                     MemberBean.storeId = storeId[3];
+                    break;
+                case 4:
+
+                    MemberBean.storeId = storeId[4];
+                    break;
+                case 5:
+
+                    MemberBean.storeId = storeId[5];
+                    break;
+                case 6:
+
+                    MemberBean.storeId = storeId[6];
+                    break;
+                case 7:
+
+                    MemberBean.storeId = storeId[7];
+                    break;
+                case 8:
+
+                    MemberBean.storeId = storeId[8];
+                    break;
+                case 9:
+
+                    MemberBean.storeId = storeId[9];
+                    break;
+                case 10:
+
+                    MemberBean.storeId = storeId[10];
+                    break;
+                case 11:
+
+                    MemberBean.storeId = storeId[11];
+                    break;
+                case 12:
+
+                    MemberBean.storeId = storeId[12];
                     break;
             }
 
