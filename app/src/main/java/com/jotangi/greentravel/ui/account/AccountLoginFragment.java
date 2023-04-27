@@ -95,7 +95,9 @@ public class AccountLoginFragment extends Fragment {
             pref.edit().putBoolean(KEY_IS_FROM_RENT, true).commit();
 
             rentAcc = bundle.getString("rilink_rent_id", "");
+            Log.d(TAG, "rentAcc: " + rentAcc);
             rentPwd = bundle.getString("rilink_password", "");
+            Log.d(TAG, "rentPwd: " + rentPwd);
         }
     }
 
@@ -245,6 +247,8 @@ public class AccountLoginFragment extends Fragment {
                     "rilink_rent_id",
                     ""
             );
+
+            Log.d(TAG, "rentAcc: " + rentAcc);
             rentPwd = bundle.getString(
                     "rilink_password",
                     ""
