@@ -61,10 +61,12 @@ public class ChooseAdapter extends RecyclerView.Adapter<ChooseAdapter.ViewHolder
         holder.txtTime.setText(mData.get(position).time);
 
         if (remaining > 0) {
+            holder.txtChange.setVisibility(View.VISIBLE);
+            holder.txtFull.setVisibility(View.GONE);
             holder.txtChange.setOnClickListener(view -> {
                 clickListener.onItemClick(position);
             });
-        }else {
+        } else {
             holder.txtChange.setVisibility(View.GONE);
             holder.txtFull.setVisibility(View.VISIBLE);
         }

@@ -1,5 +1,7 @@
 package com.jotangi.greentravel.ui.main;
 
+import static com.jotangi.greentravel.ProjBaseFragment.setBnv;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -26,10 +28,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jotangi.greentravel.AccountCustomerFragment;
 import com.jotangi.greentravel.Api.ApiUrl;
 import com.jotangi.greentravel.CarFixFragment;
+import com.jotangi.greentravel.MainCouponFragment;
 import com.jotangi.greentravel.MallPayFragment;
 import com.jotangi.greentravel.MyBaseFragment;
 import com.jotangi.greentravel.NoticeFragment;
 import com.jotangi.greentravel.PagerStore.CouponListFragment;
+import com.jotangi.greentravel.PagerStore.UsePageFragment;
 import com.jotangi.greentravel.PayDataFragment;
 import com.jotangi.greentravel.ProjBaseFragment;
 import com.jotangi.greentravel.ProjSharePreference;

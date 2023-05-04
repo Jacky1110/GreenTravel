@@ -34,6 +34,7 @@ class StoreListAdapter(private val mData: List<Store_List?>) :
             store_address.text = data?.store_address
             store_id = data?.store_id.toString()
             store_picture = data?.store_picture.toString()
+            store_phone.text = data?.store_phone.toString()
 
             Picasso.get().load(ProUrl + "ticketec/" + data?.store_picture).into(pic)
             itemView.setOnClickListener {
@@ -45,6 +46,7 @@ class StoreListAdapter(private val mData: List<Store_List?>) :
     inner class myViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         var store_name: TextView = v.findViewById(R.id.storeName)
         var store_address: TextView = v.findViewById(R.id.storeAddress)
+        var store_phone: TextView = v.findViewById(R.id.store_phone_textView)
 
         var pic: ImageView = v.findViewById(R.id.pdIV)
         lateinit var store_picture: String

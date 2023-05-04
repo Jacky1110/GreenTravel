@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -113,12 +114,22 @@ class StoreTabFragment : ProjConstraintFragment(), AdapterView.OnItemSelectedLis
     override fun onStart() {
         super.onStart()
         activityTitleRid = R.string.title_store
+        bundle = activity?.intent?.getBundleExtra("bundle")
 
-        val isSame = checkAccountSame()
-        if (isSame == false) {
-            showDialog("提醒", "請注意！此登入帳號與 Rilink 為不相同使用者")
+//        val isSame = checkAccountSame()
+//        if (isSame == false) {
+//            showDialog("提醒", "請注意！此登入帳號與 Rilink 為不相同使用者")
+//        }
+        if (bundle != null) {
+            if (MemberBean.member_id != MemberBean.rilink_rent_id) {
+                showDialog("提醒", "請注意！此登入帳號與 Rilink 為不相同使用者")
+                Log.d(TAG, "onStart123: " + MemberBean.member_id)
+                Log.d(TAG, "onStart12345: " + MemberBean.rilink_rent_id)
+            }
         }
+
     }
+
     override fun onResume() {
         super.onResume()
 

@@ -136,8 +136,9 @@ public class TimeSlotAppointmentFragment extends ProjConstraintFragment {
                                 model.time = jsonObject.getString("duration");
                                 Log.d(TAG, "model.time: " + model.time);
                                 model.quota = jsonObject.getString("quota");
+                                Log.d(TAG, "quota: " + model.quota);
                                 model.used = jsonObject.getString("used");
-//
+                                Log.d(TAG, "used: " + model.used);
                                 processList(
                                         jsonObject.getString("bookingdate")
                                                 + " " +

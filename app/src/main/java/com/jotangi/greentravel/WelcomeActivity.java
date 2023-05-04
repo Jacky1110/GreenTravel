@@ -74,6 +74,12 @@ public class WelcomeActivity extends AppCompatActivity {
                 LoginMainActivity.class
         );
         if (bundle != null) {
+
+            MemberBean.rilink_rent_id = bundle.getString("rilink_rent_id", "");
+            Log.d("TAG", "MemberBean.rilink_rent_id: " + MemberBean.rilink_rent_id);
+            MemberBean.rilink_password = bundle.getString("rilink_password","");
+
+
             intent.putExtra(
                     "bundle",
                     bundle

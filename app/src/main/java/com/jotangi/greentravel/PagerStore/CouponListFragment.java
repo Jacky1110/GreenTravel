@@ -25,6 +25,7 @@ import com.jotangi.greentravel.ProjConstraintFragment;
 import com.jotangi.greentravel.R;
 import com.jotangi.greentravel.RegisterCouponFragment;
 import com.jotangi.greentravel.ui.account.AccountLoginFragment;
+import com.jotangi.greentravel.ui.hPayMall.MemberBean;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -122,9 +123,15 @@ public class CouponListFragment extends ProjConstraintFragment {
         super.onStart();
         loadCouponData();
 
-        boolean isSame = checkAccountSame();
-        if (!isSame) {
+//        boolean isSame = checkAccountSame();
+//        if (!isSame) {
+//            showDialog("提醒", "請注意！此登入帳號與 Rilink 為不相同使用者");
+//        }
+
+        if (MemberBean.member_id != MemberBean.rilink_rent_id) {
             showDialog("提醒", "請注意！此登入帳號與 Rilink 為不相同使用者");
+            Log.d(TAG, "onStart123: " + MemberBean.member_id);
+            Log.d(TAG, "onStart321: " + MemberBean.rilink_rent_id);
         }
     }
 

@@ -322,6 +322,7 @@ public class MemberFragment extends ProjConstraintFragment {
     private void checkBundle() {
         if (bundle != null) {
             String destination = bundle.getString("destination_to");
+            Log.d(TAG, "destination: " + destination);
 
             if (destination.equals("my_coupon_list") && !isFirst) {
                 pref.edit().putBoolean(KEY_IS_FIRST, true).apply();

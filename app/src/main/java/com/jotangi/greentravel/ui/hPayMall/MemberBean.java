@@ -119,6 +119,10 @@ public class MemberBean {
 
     public static String storeId;
 
+    public static String rilink_rent_id;
+
+    public static String rilink_password;
+
 
     public static String getPw() {
         return pw;
