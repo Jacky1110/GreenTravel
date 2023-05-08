@@ -171,6 +171,7 @@ public class CarFixFragment extends ProjConstraintFragment {
                                     adapter.setData(data);
                                     recyView.setAdapter(adapter);
                                     adapter.setClickListener(clickListener);
+                                    adapter.setClick(clickList);
                                     adapter.notifyDataSetChanged();
                                 });
                                 if (carFixModelArrayList == null) {
@@ -233,6 +234,15 @@ public class CarFixFragment extends ProjConstraintFragment {
                 });
             }
         });
+    }
+
+    private CarFixAdapter.ItemClick clickList = this::handlePic;
+
+    private void handlePic(int position) {
+        adapter.setData(data);
+        recyView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
     }
 
     private void showDialog(String title, String message, DialogInterface.OnClickListener listener) {

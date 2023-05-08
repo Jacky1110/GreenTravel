@@ -1,6 +1,7 @@
 package com.jotangi.greentravel;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jotangi.greentravel.PagerStore.NewPageAdapter;
@@ -24,7 +26,9 @@ public class CarFixAdapter extends RecyclerView.Adapter<CarFixAdapter.ViewHolder
     private String TAG = NewPageAdapter.class.getSimpleName() + "(TAG)";
     private List<CarFixModel> mData = new ArrayList<>();
     private ItemClickListener clickListener;
+    private ItemClick itemClick;
     private int opened = -1;
+
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -45,12 +49,9 @@ public class CarFixAdapter extends RecyclerView.Adapter<CarFixAdapter.ViewHolder
             txtCarName = itemView.findViewById(R.id.tv_carName);
             txtCarPhone = itemView.findViewById(R.id.tv_carPhone);
             btnReserve = itemView.findViewById(R.id.btn_Reserve);
-            imgUp = itemView.findViewById(R.id.img_up);
-            imgUp.setVisibility(View.VISIBLE);
-            imgUp.setOnClickListener(this);
             imgDown = itemView.findViewById(R.id.img_down);
             imgDown.setOnClickListener(this);
-            conLayout = itemView.findViewById(R.id.constraintLayout);
+            conLayout = itemView.findViewById(R.id.cl_fixCar);
             llItem = itemView.findViewById(R.id.ll_item);
 
         }
@@ -76,11 +77,79 @@ public class CarFixAdapter extends RecyclerView.Adapter<CarFixAdapter.ViewHolder
 //            }
         }
 
-        public void bindView(int pos, CarFixModel carFixModel) {
-            if (pos == opened) {
+        public void bindView(int position, CarFixModel carFixModel) {
+
+            if (carFixModel.isOpen) {
+                imgDown.setImageDrawable(ContextCompat.getDrawable(imgDown.getContext(), R.drawable.ic_baseline_expand_less));
                 conLayout.setVisibility(View.VISIBLE);
             } else {
+                imgDown.setImageDrawable(ContextCompat.getDrawable(imgDown.getContext(), R.drawable.ic_baseline_expand_more));
                 conLayout.setVisibility(View.GONE);
+            }
+
+            txtContent.setText(carFixModel.motorNo + " " + carFixModel.bookingDate + " " + carFixModel.duration);
+            txtStoreName.setText(carFixModel.storeName);
+            txtCarNumber.setText(carFixModel.motorNo);
+            txtCarModel.setText(carFixModel.motorType);
+            txtCarType.setText(carFixModel.fixType);
+            txtCarCondition.setText(carFixModel.description);
+            txtCarName.setText(carFixModel.name);
+            txtCarPhone.setText(carFixModel.phone);
+
+            imgDown.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Log.d(TAG, "isOpen: " + carFixModel.isOpen);
+
+                    if (carFixModel.isOpen) {
+
+                        mData.get(position).isOpen = false;
+                        imgDown.setImageDrawable(ContextCompat.getDrawable(imgDown.getContext(), R.drawable.ic_baseline_expand_more));
+                        Log.d(TAG, "GONE: ");
+                        conLayout.setVisibility(View.GONE);
+                        notifyItemChanged(position);
+                        itemClick.onItemClick(position);
+
+                    } else {
+
+                        mData.get(position).isOpen = true;
+                        imgDown.setImageDrawable(ContextCompat.getDrawable(imgDown.getContext(), R.drawable.ic_baseline_expand_less));
+                        Log.d(TAG, "VISIBLE: ");
+                        conLayout.setVisibility(View.VISIBLE);
+                        notifyItemChanged(position);
+                        itemClick.onItemClick(position);
+                    }
+                }
+            });
+
+
+            if (carFixModel.cancel.equals("0") && carFixModel.canCancel.equals("1")) {
+                btnReserve.setText("取消預約");
+                btnReserve.setBackgroundColor(btnReserve.getContext().getResources().getColor(R.color.orangeButton));
+                btnReserve.setEnabled(true);
+                btnReserve.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        clickListener.onItemClick(position);
+                    }
+                });
+
+            }
+            if (carFixModel.cancel.equals("1") && carFixModel.canCancel.equals("0")) {
+                btnReserve.setText("已取消預約");
+                btnReserve.setBackgroundColor(btnReserve.getContext().getResources().getColor(R.color.lightGray));
+                btnReserve.setEnabled(false);
+            }
+            if (carFixModel.cancel.equals("1") && carFixModel.canCancel.equals("1")) {
+                btnReserve.setText("已取消預約");
+                btnReserve.setBackgroundColor(btnReserve.getContext().getResources().getColor(R.color.lightGray));
+                btnReserve.setEnabled(false);
+            }
+            if (carFixModel.cancel.equals("0") && carFixModel.canCancel.equals("0")) {
+                btnReserve.setText("取消預約");
+                btnReserve.setBackgroundColor(btnReserve.getContext().getResources().getColor(R.color.lightGray));
+                btnReserve.setEnabled(false);
             }
         }
     }
@@ -89,8 +158,16 @@ public class CarFixAdapter extends RecyclerView.Adapter<CarFixAdapter.ViewHolder
         void onItemClick(int position);
     }
 
+    public interface ItemClick {
+        void onItemClick(int position);
+    }
+
     public void setClickListener(ItemClickListener listener) {
         this.clickListener = listener;
+    }
+
+    public void setClick(ItemClick listener) {
+        this.itemClick = listener;
     }
 
     @NonNull
@@ -103,92 +180,15 @@ public class CarFixAdapter extends RecyclerView.Adapter<CarFixAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull CarFixAdapter.ViewHolder holder, int position) {
-        holder.txtContent.setText(mData.get(position).motorNo + " " + mData.get(position).bookingDate + " " + mData.get(position).duration);
-        holder.txtStoreName.setText(mData.get(position).storeName);
-        holder.txtCarNumber.setText(mData.get(position).motorNo);
-        holder.txtCarModel.setText(mData.get(position).motorType);
-        holder.txtCarType.setText(mData.get(position).fixType);
-        holder.txtCarCondition.setText(mData.get(position).description);
-        holder.txtCarName.setText(mData.get(position).name);
-        holder.txtCarPhone.setText(mData.get(position).phone);
-//        holder.conLayout.setVisibility(View.GONE);
+
+
         holder.bindView(position, mData.get(position));
-
-        holder.imgUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (opened == position) {
-                    //当点击的item已经被展开了, 就关闭.
-                    opened = -1;
-                    holder.imgUp.setVisibility(View.INVISIBLE);
-                    holder.imgDown.setVisibility(View.VISIBLE);
-                    notifyItemChanged(position);
-                } else {
-                    int oldOpened = opened;
-                    holder.imgUp.setVisibility(View.VISIBLE);
-                    holder.imgDown.setVisibility(View.INVISIBLE);
-                    opened = position;
-                    notifyItemChanged(oldOpened);
-                    notifyItemChanged(opened);
-                }
-            }
-        });
-
-        holder.imgDown.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (opened == position) {
-                    //当点击的item已经被展开了, 就关闭.
-                    opened = -1;
-                    holder.imgUp.setVisibility(View.INVISIBLE);
-                    holder.imgDown.setVisibility(View.VISIBLE);
-                    notifyItemChanged(position);
-                } else {
-                    int oldOpened = opened;
-                    holder.imgUp.setVisibility(View.VISIBLE);
-                    holder.imgDown.setVisibility(View.INVISIBLE);
-                    opened = position;
-                    notifyItemChanged(oldOpened);
-                    notifyItemChanged(opened);
-                }
-            }
-        });
-
-
-        if (mData.get(position).cancel.equals("0") && mData.get(position).canCancel.equals("1")) {
-            holder.btnReserve.setText("取消預約");
-            holder.btnReserve.setBackgroundColor(holder.btnReserve.getContext().getResources().getColor(R.color.orangeButton));
-            holder.btnReserve.setEnabled(true);
-            holder.btnReserve.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    clickListener.onItemClick(position);
-                }
-            });
-
-        }
-        if (mData.get(position).cancel.equals("1") && mData.get(position).canCancel.equals("0")) {
-            holder.btnReserve.setText("已取消預約");
-            holder.btnReserve.setBackgroundColor(holder.btnReserve.getContext().getResources().getColor(R.color.lightGray));
-            holder.btnReserve.setEnabled(false);
-        }
-        if (mData.get(position).cancel.equals("1") && mData.get(position).canCancel.equals("1")) {
-            holder.btnReserve.setText("已取消預約");
-            holder.btnReserve.setBackgroundColor(holder.btnReserve.getContext().getResources().getColor(R.color.lightGray));
-            holder.btnReserve.setEnabled(false);
-        }
-        if (mData.get(position).cancel.equals("0") && mData.get(position).canCancel.equals("0")) {
-            holder.btnReserve.setText("取消預約");
-            holder.btnReserve.setBackgroundColor(holder.btnReserve.getContext().getResources().getColor(R.color.lightGray));
-            holder.btnReserve.setEnabled(false);
-        }
 
     }
 
 
     public void setData(List<CarFixModel> data) {
         mData = data;
-        notifyDataSetChanged();
     }
 
     @Override
@@ -223,6 +223,8 @@ class CarFixModel {
     String bookingDate = "";
     // 是否可被取消
     String canCancel = "";
+
+    Boolean isOpen = false;
 
 
 }
