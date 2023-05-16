@@ -1,12 +1,12 @@
 package com.jotangi.greentravel.Api;
 
 public class ApiUrl {
-    public static final String API_URL = "https://rilink.com.tw/"; //正式機
-//        public static final String API_URL = "https://rilink.jotangi.com.tw:11074/"; // 測試機
-//    public static final String payUrl = "https://rilink.jotangi.com.tw:11074/ticketec/ecpay/ecpayindex.php?orderid="; //測試
-    public static final String payUrl = "https://rilink.com.tw/ticketec/ecpay/ecpayindex.php?orderid="; //正式
-    public static final String API_URL2 = "https://rilink.com.tw/api/v1"; // 正式
-//        public static final String API_URL2 = "https://rilink.jotangi.com.tw:11074/api/v1"; // 測試
+//    public static final String API_URL = "https://rilink.com.tw/"; //正式機
+        public static final String API_URL = "https://rilink.jotangi.com.tw:11074/"; // 測試機
+    public static final String payUrl = "https://rilink.jotangi.com.tw:11074/ticketec/ecpay/ecpayindex.php?orderid="; //測試
+//    public static final String payUrl = "https://rilink.com.tw/ticketec/ecpay/ecpayindex.php?orderid="; //正式
+//    public static final String API_URL2 = "https://rilink.com.tw/api/v1"; // 正式
+        public static final String API_URL2 = "https://rilink.jotangi.com.tw:11074/api/v1"; // 測試
     public static final String MEMBER_IMG_URL = API_URL2 + "/personimages/";
 
     //會員密碼變更

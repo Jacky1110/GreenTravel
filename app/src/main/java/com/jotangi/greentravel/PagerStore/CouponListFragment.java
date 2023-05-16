@@ -46,6 +46,7 @@ public class CouponListFragment extends ProjConstraintFragment {
     private UnPageAdapter unpageAdapter;
     private int singleSize;
     private String product, qrconfirm;
+    private Bundle bundle;
 
     // 在可使用列表的首頁
     boolean isMainView;
@@ -122,16 +123,24 @@ public class CouponListFragment extends ProjConstraintFragment {
     public void onStart() {
         super.onStart();
         loadCouponData();
+        bundle = requireActivity().getIntent().getBundleExtra("bundle");
 
 //        boolean isSame = checkAccountSame();
 //        if (!isSame) {
 //            showDialog("提醒", "請注意！此登入帳號與 Rilink 為不相同使用者");
 //        }
 
-        if (MemberBean.member_id != MemberBean.rilink_rent_id) {
-            showDialog("提醒", "請注意！此登入帳號與 Rilink 為不相同使用者");
-            Log.d(TAG, "onStart123: " + MemberBean.member_id);
-            Log.d(TAG, "onStart321: " + MemberBean.rilink_rent_id);
+        if (bundle != null) {
+
+            String id = MemberBean.member_id;
+            String rent_id = MemberBean.rilink_rent_id;
+
+            if (!id.equals(rent_id)) {
+                showDialog("提醒", "請注意！此登入帳號與 Rilink 為不相同使用者");
+                Log.d(TAG, "onStart: " + "true");
+                Log.d(TAG, "onStart123: " + MemberBean.member_id);
+                Log.d(TAG, "onStart321: " + MemberBean.rilink_rent_id);
+            }
         }
     }
 

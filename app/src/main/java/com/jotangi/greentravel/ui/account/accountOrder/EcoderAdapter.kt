@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.jotangi.greentravel.Ecorder_list
 import com.jotangi.greentravel.R
@@ -41,7 +42,36 @@ class EcoderAdapter(private val mData: List<Ecorder_list>) :
             date.text = data.order_date
             dollar.text = data.order_amount
             status.text = data.pay_status
-            pay.visibility = (if (data.IsPay) View.INVISIBLE else View.INVISIBLE)
+
+            when {
+                (data.order_status.equals("0")) -> {
+                    pay.visibility = View.INVISIBLE
+                    pay.setBackgroundDrawable(
+                        ContextCompat.getDrawable(
+                            pay.context,
+                            R.drawable.shape_round_orange_white
+                        )
+                    )
+                    pay.setTextColor(pay.resources.getColor(R.color.colorPrimary))
+                    pay.text = "立即付款"
+                    pay.setOnClickListener { payClick.invoke(data) }
+                }
+
+                (data.order_status.equals("2")) -> {
+                    pay.visibility = View.INVISIBLE
+                    pay.setBackgroundDrawable(
+                        ContextCompat.getDrawable(
+                            pay.context,
+                            R.drawable.shape_round_orange_gray
+                        )
+                    )
+                    pay.setTextColor(pay.resources.getColor(R.color.gray_60))
+                    pay.text = "逾期取消"
+                }
+
+            }
+//            pay.visibility =
+//                View.INVISIBLE
             Log.d("tag", "" + data.order_status.toBoolean())
             when {
 
@@ -57,14 +87,14 @@ class EcoderAdapter(private val mData: List<Ecorder_list>) :
                     if (data.assigntype.equals("1")) {
                         status.text = "店家派發"
                         pay.visibility = View.INVISIBLE
-                    } else if (data.assigntype.equals("0")){
+                    } else if (data.assigntype.equals("0")) {
                         status.text = "付款完成"
                         pay.visibility = View.INVISIBLE
                     }
                 }
             }
+
             view.setOnClickListener { EcoderClick.invoke(data) }
-            pay.setOnClickListener { payClick.invoke(data) }
 
         }
 

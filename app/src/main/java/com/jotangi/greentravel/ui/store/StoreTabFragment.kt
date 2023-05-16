@@ -72,7 +72,7 @@ class StoreTabFragment : ProjConstraintFragment(), AdapterView.OnItemSelectedLis
             if (bundle != null) {
                 bundle = null
             }
-            bundle = requireActivity().intent.getBundleExtra("bundleD")
+            bundle = requireActivity().intent.getBundleExtra("bundle")
 
             if (lists.isNotEmpty()) {
                 lists.clear()
