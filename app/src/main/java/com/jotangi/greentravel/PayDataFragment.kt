@@ -431,7 +431,7 @@ class PayDataFragment : ProjConstraintFragment() {
                                 fra.arguments = data
                                 val transaction: FragmentTransaction =
                                     requireActivity().supportFragmentManager
-                                        .beginTransaction();
+                                        .beginTransaction()
                                 transaction.replace(
                                     R.id.nav_host_fragment_activity_main,
                                     fra
